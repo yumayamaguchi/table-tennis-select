@@ -3,9 +3,14 @@ body {
     padding: 0;
 }
 
-header {
+.header {
     border-bottom: solid 1px black;
     margin-top: 20px;
+}
+
+.tt {
+    color: red;
+    margin-right: 20px;
 }
 
 @media (min-width: 768px) {
@@ -13,6 +18,8 @@ header {
     text-align: right;
 }
 }
+
+
 
 header ul {
     list-style: none;
@@ -22,6 +29,11 @@ header ul {
 header ul li{
     display: inline-block;
     margin-right: 30px;
+}
+
+.head_image{
+    text-align: center;
+    margin-top: 50px;
 }
 
 .center {
@@ -51,7 +63,7 @@ header ul li{
         margin: 2em .5em;
         font-weight: bold;
         background: #FFF;
-        border: solid 1px black;
+        border: solid 1px #dddddd;
     }
 }
 
@@ -71,4 +83,104 @@ header ul li{
 
 #side_bar ul li a {
     text-decoration: none;
+}
+
+.main_visual {
+    margin-top: 100px;
+}
+
+.products {
+    margin-top: 50px;
+}
+
+.products p {
+    border-bottom: 1px solid #dddddd;
+    font-weight: 800;
+}
+
+.image_1 {
+    width: 233px;
+    height: 315px;
+    border: solid 1px #dddddd;
+}
+
+
+.images div {
+    margin: 10px 10px;
+    font-size: smaller;
+}
+
+footer {
+    margin-top: 150px;
+    text-align: center;
+    border-top: 1px solid #dddddd;
+    background-color: blanchedalmond;
+}
+
+footer p {
+    margin-bottom: 0;
+    height: 100px;
+    margin: 55px 0 0 0;
+
+}
+
+/* ここからcreate.php */
+
+.content {
+    margin-top: 100px;
+}
+
+.new {
+    font-size: 40px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.entry {
+    width: 480px;
+    border: .5px solid #dddddd;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.title {
+    margin: 10px 0 10px 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.entry .type input {
+    height: 40px;
+    width: 450px;
+    font-size: 18px;
+    border: none;
+    border-bottom: 1px solid #dddddd;
+    background-color: #f7f4f4;
+}
+
+.submit {
+    margin-top: 30px;
+}
+
+.error {
+    font-size: 15px;
+    color: red;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* check.php */
+
+.bt input {
+    font-size: 20px;
+    margin-right: 70px;
+}
+
+.type textarea {
+    height: 100px;
+    width: 450px;
+    font-size: 18px;
+    border: none;
+    border-bottom: 1px solid #dddddd;
+    background-color: #f7f4f4;
 }
