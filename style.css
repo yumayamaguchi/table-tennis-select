@@ -3,9 +3,25 @@ body {
     padding: 0;
 }
 
+a:hover {
+    color: white;
+}
+
+
 .header {
     border-bottom: solid 1px black;
-    margin-top: 20px;
+    background-color: #0c4da2;
+    padding: 20px;
+}
+
+.head p {
+    font-family: 'Dela Gothic One', cursive;
+    font-size: 30px;
+}
+
+.head p a {
+    color: white;
+    text-decoration: none;
 }
 
 .tt {
@@ -23,12 +39,22 @@ body {
 
 header ul {
     list-style: none;
+    margin-top: 10px;
     padding: 0;
 }
 
 header ul li{
     display: inline-block;
     margin-right: 30px;
+}
+
+header ul li a {
+    color: white;
+}
+
+header ul li a:hover {
+    color: #87888e;
+    text-decoration: none;
 }
 
 .head_image{
@@ -47,13 +73,18 @@ header ul li{
     margin-top: 50px;
 }
 
-#main_bar ul li {
-    display: inline-block;
+#main_bar ul a {
+    font-weight: bold;
+    border: solid 1px black;
     padding: 0.5em 4em;
     margin: 2em 1em;
+    text-decoration: none;
+}
+
+#main_bar ul a li {
+    display: inline-block;
     font-weight: bold;
-    background: #FFF;
-    border: solid 1px black;
+    color: black;
 }
 
 @media (max-width: 950px) {
@@ -67,8 +98,10 @@ header ul li{
     }
 }
 
+
+
 #side_bar {
-    margin: 0;
+    margin-top: 50px;
     padding: 0;
 }
 
@@ -83,6 +116,7 @@ header ul li{
 
 #side_bar ul li a {
     text-decoration: none;
+    color: black;
 }
 
 .main_visual {
@@ -104,23 +138,28 @@ header ul li{
     border: solid 1px #dddddd;
 }
 
+.image_1 a:hover {
+    text-decoration: none;
+}
 
 .images div {
     margin: 10px 10px;
     font-size: smaller;
+    color: black;
 }
 
 footer {
     margin-top: 150px;
     text-align: center;
     border-top: 1px solid #dddddd;
-    background-color: blanchedalmond;
+    background-color: #0c4da2;
 }
 
 footer p {
     margin-bottom: 0;
     height: 100px;
     margin: 55px 0 0 0;
+    color: white;
 
 }
 

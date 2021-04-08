@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -137,78 +139,6 @@
                         </div>
                     </div>
 
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/36991.jpg" alt="張本智和 インナーフォース ALC" height="230" width="230">
-                                <div>張本智和 インナーフォース ALC<br>19,800円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/37021.jpg" alt="張本智和 インナーフォース SUPER ZLC" height="230" width="230">
-                                <div>張本智和 インナーフォース SUPER ZLC<br>41,800円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/37031.jpg" alt="張本智和 インナーフォース ZLC" height="230" width="230">
-                                <div>張本智和 インナーフォース ZLC<br>27,500円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/36541.jpg" alt="張継科 SUPER ZLC" height="230" width="230">
-                                <div>張継科 SUPER ZLC<br>41,800円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/36551.jpg" alt="張継科 ZLC" height="230" width="230">
-                                <div>張継科 ZLC<br>27,500円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/36561.jpg" alt="張継科 ALC" height="230" width="230">
-                                <div>張継科 ALC<br>19,800円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/36571.jpg" alt="張継科 T5000" height="230" width="230">
-                                <div>張継科 T5000<br>19,800円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/37041.jpg" alt="林高遠 ALC" height="230" width="230">
-                                <div>林高遠 ALC<br>19,800円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
                 </div>
             </div>
             <div class="products">
@@ -267,22 +197,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/37001.jpg" alt="TB5α" height="230" width="230">
-                                <div>TB5α<br>4,950円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/37011.jpg" alt="エクスター5" height="230" width="230">
-                                <div>エクスター5<br>3,850円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
 

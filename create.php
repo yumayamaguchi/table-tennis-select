@@ -37,80 +37,85 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
 
 <!DOCTYPE html>
 <html lang="ja">
-    
+
 
 <head>
     <meta charset="utf-8">
     <title>会員登録</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+</head>
 </head>
 
 <body>
-    <header class="create_head">
-        <div class="container-fluid">
+    <header>
+        <div class="container-fluid header">
             <div class="row">
                 <div class="head col-md-6">
-                    <p><a href="index.php">卓球ツール</a></p>
+                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="index.php">卓球ツール</a></p>
                 </div>
                 <div class="head_1 col-md-6">
                     <ul>
-                        <li>会員登録</li>
-                        <li>ログイン</li>
+                        <li><a href="create.php">会員登録</a></li>
+                        <li><a href="">ログイン</a></li>
+                        <li><a href="">ログアウト</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </header>
     <div class="content">
-        
-            <p class="new">新規会員登録</p>
-            <form action="" method="post" enctype="multipart/form-data">
-                <div class="entry">
-                    <div class="type">
-                        <div>
-                            <p class="title">ニックネーム</p>
-                            <input type="text" name="name" size="35" maxlength="255" value="<?php print(htmlspecialchars($_POST['name'], ENT_QUOTES)); ?>" placeholder="" />
-                            <?php if ($error['name'] === 'blank') : ?>
-                                <p class="error">ニックネームを入力してください</p>
-                            <?php endif; ?>
-                        </div>
-                        <div>
-                            <p class="title">メールアドレス</p>
-                            <input type="text" name="email" size="35" maxlength="255" value="<?php print(htmlspecialchars($_POST['email'], ENT_QUOTES)); ?>" placeholder="xxx@example.com">
-                            <?php if ($error['email'] === 'blank') : ?>
-                                <p class="error">メールアドレスを入力してください</p>
-                            <?php endif; ?>
-                        </div>
-                        <div>
-                            <p class="title">パスワード</p>
-                            <input type="password" name="password" size="10" maxlength="20" value="<?php print(htmlspecialchars($_POST['password'], ENT_QUOTES)); ?>" placeholder="4文字以上" />
-                            <?php if ($error['password'] === 'length') : ?>
-                                <p class="error">パスワードは4文字以上で入力してください。</p>
-                            <?php endif; ?>
-                            <?php if ($error['password'] === 'blank') : ?>
-                                <p class="error">パスワードを入力してください</p>
-                            <?php endif; ?>
-                        </div>
+
+        <p class="new">新規会員登録</p>
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="entry">
+                <div class="type">
+                    <div>
+                        <p class="title">ニックネーム</p>
+                        <input type="text" name="name" size="35" maxlength="255" value="<?php print(htmlspecialchars($_POST['name'], ENT_QUOTES)); ?>" placeholder="" />
+                        <?php if ($error['name'] === 'blank') : ?>
+                            <p class="error">ニックネームを入力してください</p>
+                        <?php endif; ?>
                     </div>
                     <div>
-                        <p class="title">写真など</p>
-                        <input type="file" name="image" size="35" value="test" />
-                        <?php if ($error['image'] === 'type') : ?>
-                            <p class="error">写真などは「.gif」「.jpg」「.png」の画像を指定してください。</p>
-                        <?php endif; ?>
-                        <?php if (!empty($error)) : ?>
-                            <p class="error">恐れ入りますが、画像を改めて指定してください。</p>
+                        <p class="title">メールアドレス</p>
+                        <input type="text" name="email" size="35" maxlength="255" value="<?php print(htmlspecialchars($_POST['email'], ENT_QUOTES)); ?>" placeholder="xxx@example.com">
+                        <?php if ($error['email'] === 'blank') : ?>
+                            <p class="error">メールアドレスを入力してください</p>
                         <?php endif; ?>
                     </div>
-                    <div class="submit">
-                        <input type="submit" value="入力内容を確認する" />
+                    <div>
+                        <p class="title">パスワード</p>
+                        <input type="password" name="password" size="10" maxlength="20" value="<?php print(htmlspecialchars($_POST['password'], ENT_QUOTES)); ?>" placeholder="4文字以上" />
+                        <?php if ($error['password'] === 'length') : ?>
+                            <p class="error">パスワードは4文字以上で入力してください。</p>
+                        <?php endif; ?>
+                        <?php if ($error['password'] === 'blank') : ?>
+                            <p class="error">パスワードを入力してください</p>
+                        <?php endif; ?>
                     </div>
                 </div>
-            </form>
-        
+                <div>
+                    <p class="title">写真など</p>
+                    <input type="file" name="image" size="35" value="test" />
+                    <?php if ($error['image'] === 'type') : ?>
+                        <p class="error">写真などは「.gif」「.jpg」「.png」の画像を指定してください。</p>
+                    <?php endif; ?>
+                    <?php if (!empty($error)) : ?>
+                        <p class="error">恐れ入りますが、画像を改めて指定してください。</p>
+                    <?php endif; ?>
+                </div>
+                <div class="submit">
+                    <input type="submit" value="入力内容を確認する" />
+                </div>
+            </div>
+        </form>
+
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
 </body>
 
 </html>
