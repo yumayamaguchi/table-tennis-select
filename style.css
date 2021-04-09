@@ -53,7 +53,7 @@ header ul li a {
 }
 
 header ul li a:hover {
-    color: #87888e;
+    color: #c1c1c7;
     text-decoration: none;
 }
 
@@ -119,6 +119,10 @@ header ul li a:hover {
     color: black;
 }
 
+#side_bar ul li :hover {
+    color: rgb(189, 183, 183);
+}
+
 .main_visual {
     margin-top: 100px;
 }
@@ -136,10 +140,16 @@ header ul li a:hover {
     width: 233px;
     height: 315px;
     border: solid 1px #dddddd;
+    transition: transform 0.5s;
+}
+
+.image_1:hover {
+    transform: scale(1.1);
 }
 
 .image_1 a:hover {
     text-decoration: none;
+    
 }
 
 .images div {
@@ -155,12 +165,19 @@ footer {
     background-color: #0c4da2;
 }
 
-footer p {
+.page_top {
     margin-bottom: 0;
     height: 100px;
     margin: 55px 0 0 0;
-    color: white;
+}
 
+.page_top a {
+    color: white;
+}
+
+.page_top a:hover {
+    text-decoration: none;
+    color: #c1c1c7;
 }
 
 /* ここからcreate.php */

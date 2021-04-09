@@ -1,3 +1,5 @@
+<!-- 新規会員登録確認画面 -->
+
 <?php
 session_start();
 require('./dbconnect.php');

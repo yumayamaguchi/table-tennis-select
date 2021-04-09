@@ -50,14 +50,14 @@
     <div class="center">
         <div id="side_bar">
             <ul>
-                <li><a href=""><i class="far fa-check-circle"></i>攻撃用シェーク</a></li>|
-                <li><a href=""><i class="far fa-check-circle"></i>守備用シェーク</a></li>|
-                <li><a href=""><i class="far fa-check-circle"></i>合板シェーク</a></li>|
-                <li><a href=""><i class="far fa-check-circle"></i>日本式ペン</a></li>|
-                <li><a href=""><i class="far fa-check-circle"></i>中国式ペン</a></li>|
-                <li><a href=""><i class="far fa-check-circle"></i>反転式ペン</a></li>|
-                <li><a href=""><i class="far fa-check-circle"></i>単板ペン</a></li>|
-                <li><a href=""><i class="far fa-check-circle"></i>合板ペン</a></li>|
+                <li class="racket_1"><a href=""><i class="far fa-check-circle"></i>攻撃用シェーク</a></li>|
+                <li class="racket_2"><a href=""><i class="far fa-check-circle"></i>守備用シェーク</a></li>|
+                <li class="racket_3"><a href=""><i class="far fa-check-circle"></i>合板シェーク</a></li>|
+                <li class="racket_4"><a href=""><i class="far fa-check-circle"></i>日本式ペン</a></li>|
+                <li class="racket_5"><a href=""><i class="far fa-check-circle"></i>中国式ペン</a></li>|
+                <li class="racket_6"><a href=""><i class="far fa-check-circle"></i>反転式ペン</a></li>|
+                <li class="racket_7"><a href=""><i class="far fa-check-circle"></i>単板ペン</a></li>|
+                <li class="racket_8"><a href=""><i class="far fa-check-circle"></i>合板ペン</a></li>|
             </ul>
         </div>
         <!-- side_barここまで -->
@@ -65,7 +65,7 @@
         <div class="main_visual container-fluid">
 
             <div class="products">
-                <p>攻撃用シェーク</p>
+                <p class="rackets_1">攻撃用シェーク</p>
                 <div class="row">
                     <div class="images col-md-3">
                         <div class="image_1">
@@ -142,7 +142,7 @@
                 </div>
             </div>
             <div class="products">
-                <p>守備用シェーク</p>
+                <p class="rackets_2">守備用シェーク</p>
                 <div class="row">
                     <div class="images col-md-3">
                         <div class="image_1">
@@ -163,7 +163,7 @@
                 </div>
             </div>
             <div class="products">
-                <p>合板シェーク</p>
+                <p class="rackets_3">合板シェーク</p>
                 <div class="row">
                     <div class="images col-md-3">
                         <div class="image_1">
@@ -206,11 +206,13 @@
     <!-- main_visualここまで -->
     <!-- フッターここから -->
     <footer>
-        <p>PAGE TOP</p>
+        <p class="page_top"><a href="">PAGE TOP</a></p>
     </footer>
     <!-- フッターここまで -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>
