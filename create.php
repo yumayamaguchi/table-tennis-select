@@ -1,5 +1,8 @@
+<!-- 新規会員登録画面 -->
+
 <?php
 session_start();
+require('./dbconnect.php');
 if (!empty($_POST)) {
     if ($_POST['name'] === '') {
         $error['name'] = 'blank';
@@ -13,13 +16,19 @@ if (!empty($_POST)) {
     if ($_POST['password'] === '') {
         $error['password'] = 'blank';
     }
-    $filename = $_FILES['image']['name'];
-    if (!empty($filename)) {
-        $ext = substr($filename, -3);
-        if ($ext != 'jpg' && $ext != 'gif' && $ext != 'png') {
-            $error['image'] = 'type';
+
+
+    // アカウントの重複チェック
+    if(empty($error)) {
+        $member = $db->prepare('SELECT COUNT(*) AS cnt FROM members WHERE email=?');
+        $member->execute(array($_POST['email']));
+        $record = $member->fetch();
+        if($record['cnt'] > 0) {
+            $error['email'] = 'duplicate';
         }
-    }
+    } 
+
+
     if (empty($error)) {
         $image = date('YmdHis') . $_FILES['image']['name'];
         move_uploaded_file($_FILES['image']['tmp_name'], 'member_picture/' . $image);
@@ -85,6 +94,9 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
                         <?php if ($error['email'] === 'blank') : ?>
                             <p class="error">メールアドレスを入力してください</p>
                         <?php endif; ?>
+                        <?php if ($error['email'] === 'duplicate') : ?>
+                            <p class="error">指定されたメールアドレスは、すでに登録されています。</p>
+                        <?php endif; ?>
                     </div>
                     <div>
                         <p class="title">パスワード</p>
@@ -97,16 +109,7 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
                         <?php endif; ?>
                     </div>
                 </div>
-                <div>
-                    <p class="title">写真など</p>
-                    <input type="file" name="image" size="35" value="test" />
-                    <?php if ($error['image'] === 'type') : ?>
-                        <p class="error">写真などは「.gif」「.jpg」「.png」の画像を指定してください。</p>
-                    <?php endif; ?>
-                    <?php if (!empty($error)) : ?>
-                        <p class="error">恐れ入りますが、画像を改めて指定してください。</p>
-                    <?php endif; ?>
-                </div>
+                
                 <div class="submit">
                     <input type="submit" value="入力内容を確認する" />
                 </div>
