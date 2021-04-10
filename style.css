@@ -205,7 +205,7 @@ footer {
     font-weight: 800;
 }
 
-.entry .type input {
+.entry .type div input {
     height: 40px;
     width: 450px;
     font-size: 18px;

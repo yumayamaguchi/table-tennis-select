@@ -68,7 +68,7 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
                 <div class="head_1 col-md-6">
                     <ul>
                         <li><a href="create.php">会員登録</a></li>
-                        <li><a href="">ログイン</a></li>
+                        <li><a href="login.php">ログイン</a></li>
                         <li><a href="">ログアウト</a></li>
                     </ul>
                 </div>
