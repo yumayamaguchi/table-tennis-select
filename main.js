@@ -20,6 +20,19 @@ $('.racket_3').on('click', (e) => {
 });
 
 // ペンバージョンも組み込む
+$('.racket_4').on('click', (e) => {
+    e.preventDefault();
+    const rackets_4 = $('.rackets_4').offset().top;
+
+    $('html,body').animate({ scrollTop: rackets_4 }, 600);
+});
+
+$('.racket_5').on('click', (e) => {
+    e.preventDefault();
+    const rackets_5 = $('.rackets_5').offset().top;
+
+    $('html,body').animate({ scrollTop: rackets_5 }, 600);
+});
 
 $('.page_top').on('click', (e) => {
     e.preventDefault();
