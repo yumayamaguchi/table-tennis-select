@@ -55,9 +55,6 @@
                 <li class="racket_3"><a href=""><i class="far fa-check-circle"></i>合板シェーク</a></li>|
                 <li class="racket_4"><a href=""><i class="far fa-check-circle"></i>日本式ペン</a></li>|
                 <li class="racket_5"><a href=""><i class="far fa-check-circle"></i>中国式ペン</a></li>|
-                <li class="racket_6"><a href=""><i class="far fa-check-circle"></i>反転式ペン</a></li>|
-                <li class="racket_7"><a href=""><i class="far fa-check-circle"></i>単板ペン</a></li>|
-                <li class="racket_8"><a href=""><i class="far fa-check-circle"></i>合板ペン</a></li>|
             </ul>
         </div>
         <!-- side_barここまで -->
@@ -197,10 +194,84 @@
                             </a>
                         </div>
                     </div>
-                    
+
+                </div>
+            </div>
+            <div class="products">
+                <p class="rackets_4">日本式ペン</p>
+                <div class="row">
+                    <div class="images col-md-3">
+                        <div class="image_1">
+                            <a href="">
+                                <img src="images/23930.jpg" alt="サイプレスG-MAX" height="230" width="230">
+                                <div>サイプレスG-MAX<br>30,800円(税込)</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="images col-md-3">
+                        <div class="image_1">
+                            <a href="">
+                                <img src="images/23960.jpg" alt="サイプレスV-MAX" height="230" width="230">
+                                <div>サイプレスV-MAX<br>19,800円(税込)</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="images col-md-3">
+                        <div class="image_1">
+                            <a href="">
+                                <img src="images/23950.jpg" alt="サイプレスT-MAX" height="230" width="230">
+                                <div>サイプレスT-MAX<br>13,200円(税込)</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="images col-md-3">
+                        <div class="image_1">
+                            <a href="">
+                                <img src="images/23820.jpg" alt="ハッドロウJPV - S" height="230" width="230">
+                                <div>ハッドロウJPV - S<br>10,450円(税込)</div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+            <div class="products">
+                <p class="rackets_5">中国式ペン</p>
+                <div class="row">
+                    <div class="images col-md-3">
+                        <div class="image_1">
+                            <a href="">
+                                <img src="images/23990.jpg" alt="ティモボル CAF - CS" height="230" width="230">
+                                <div>ティモボル CAF - CS<br>8,250円(税込)</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="images col-md-3">
+                        <div class="image_1">
+                            <a href="">
+                                <img src="images/23920.jpg" alt="SKカーボン - CS" height="230" width="230">
+                                <div>SKカーボン - CS<br>8,580円(税込)</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="images col-md-3">
+                        <div class="image_1">
+                            <a href="">
+                                <img src="images/23910.jpg" alt="SK7クラシック - CS" height="230" width="230">
+                                <div>SK7クラシック - CS<br>7,480円(税込)</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="images col-md-3">
+                        <div class="image_1">
+                            <a href="">
+                                <img src="images/21760.jpg" alt="吉田海偉" height="230" width="230">
+                                <div>吉田海偉<br>6,820円(税込)</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- main_visualここまで -->
