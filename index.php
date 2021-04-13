@@ -34,10 +34,10 @@
     <!-- main_barここから -->
     <div id="main_bar">
         <ul>
-            <a href="">
+            <a href="index.php">
                 <li>ラケット</li>
             </a>
-            <a href="">
+            <a href="index_1.html" class="index_1">
                 <li>ラバー</li>
             </a>
             <a href="">
