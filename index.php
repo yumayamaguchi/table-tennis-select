@@ -2,6 +2,7 @@
 <html lang="ja">
 
 <head>
+    <title>racket</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -37,7 +38,7 @@
             <a href="index.php">
                 <li>ラケット</li>
             </a>
-            <a href="index_1.html" class="index_1">
+            <a class="index_1" href="index_1.html">
                 <li>ラバー</li>
             </a>
             <a href="">

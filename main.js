@@ -40,49 +40,98 @@ $('.page_top').on('click', (e) => {
     $('html,body').animate({ scrollTop: 0 }, 600);
 });
 
-window.addEventListener("load", () => {
-    //querySelectorAll("a")=>a要素に合致する全ての要素を取得
-    //「配列」の値を1つずつ「変数」へ代入してくれる
-    //for ( 変数 of 配列 ) {
 
-   // 繰り返しの処理を書く  }
-    for (const anchor of document.querySelectorAll(".index_1")) {
-        anchor.addEventListener("click", (e) => {
-            //同期処理を止める
-            e.preventDefault();
-
-            //非同期的に遷移先のページを取得
-            //オブジェクトの作成
-            const xhr = new XMLHttpRequest();
-            //通信状態が変化した時にイベントが発生
-            xhr.onreadystatechange = () => {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    //動的なHTML要素の作成
-                    const temporaryWrapper = document.createElement("div");
-                    //HTML要素の中身の変更
-                    //サーバーから受けとったテキストを返す
-                    temporaryWrapper.innerHTML = xhr.responseText;
-                    for (const ELEMENT_TO_REWRITING of ["title", ".main_visual"]) {
-                        //title,mainを取得
-                        document.querySelector(ELEMENT_TO_REWRITING).innerHTML = temporaryWrapper.querySelector(ELEMENT_TO_REWRITING).innerHTML;
-                    }
-                }
-            };
-            xhr.open("GET", anchor.href);
-            xhr.send();
-        }).then((result) => {
-
-            //現在のページをブラウザ履歴に追加
-            history.pushState(null, null, location.href);
-
-            //遷移後のページをURLに書き換え
-            history.resplaceState(null, null, anchor.href);
-
-            const temporaryWrapper = document.createElement("div");
-            temporaryWrapper.innerHTML = result;
-            for (const ELEMENT_TO_REWRITING of ["title", ".main_visual"]) {
-                document.querySelector(ELEMENT_TO_REWRITING).innerHTML = temporaryWrapper.querySelector(ELEMENT_TO_REWRITING).innerHTML;
-            }
-        });
+/**
+ * フェードインする関数です。
+ */
+ const fadein = () => {
+    const FADEIN_SECOND = 0.2;
+    const fadeinTarget = document.querySelector(".center");
+    fadeinTarget.style.transition = `all ${FADEIN_SECOND}s`;
+    fadeinTarget.style.opacity = 1;
+  };
+  
+  /**
+   * フェードアウトする関数です。
+   * @returns {Promise}
+   */
+  const fadeout = () => {
+    return new Promise((resolve) => {
+      const FADEOUT_SECOND = 0.1;
+      const fadeinTarget = document.querySelector(".center");
+      fadeinTarget.style.transition = `all ${FADEOUT_SECOND}s`;
+      fadeinTarget.style.opacity = 0;
+      setTimeout(() => {
+        resolve();
+      }, FADEOUT_SECOND * 1000);
+    });
+  };
+  
+  /**
+   * ファイルを取得する関数です。
+   * 取得するファイルは第1引数で指定してください。
+   * @param {String} filePath
+   * @returns {Promise}
+   */
+  const getFileByXMLHttpRequest = (filePath) => {
+    return new Promise((resolve) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          resolve(xhr.responseText);
+        }
+      };
+      xhr.open("GET", filePath);
+      xhr.send(); 
+    });
+  };
+  
+  /**
+   * 自サイトのURLかどうか判定する関数です。
+   * 自サイトならばtrueを返します。
+   * @param {String} URL
+   * @returns {Boolean}
+   */
+  
+  
+  /**
+   * Webページを書き換える関数です。
+   * 書き換え後のHTMLは第1引数で指定してください。
+   * @param {String} HTMLString
+   */
+  const rewritePage = (HTMLString) => {
+    const temporaryWrapper = document.createElement("div");
+    temporaryWrapper.innerHTML = HTMLString;
+    for (const ELEMENT_TO_REWRITING of ["title", ".center"]) {
+      document.querySelector(ELEMENT_TO_REWRITING).innerHTML = temporaryWrapper.querySelector(ELEMENT_TO_REWRITING).innerHTML;
     }
-});
+  };
+  
+  /**
+   * 非同期遷移処理です。
+   * @author tomomoss
+   */
+  
+  // <a>タグをクリックしたときの非同期遷移処理です。
+  window.addEventListener("load", () => {
+    for (const anchor of document.querySelectorAll(".index_1")) {
+      anchor.addEventListener("click", (event) => {
+        
+        event.preventDefault();
+        Promise.all([fadeout(), getFileByXMLHttpRequest(anchor.href)]).then((result) => {
+          history.pushState(null, null, location.href);
+          history.replaceState(null, null, anchor.href);
+          rewritePage(result);
+          fadein();
+        });
+      });
+    }
+  });
+  
+  // ブラウザの進む・戻る処理に対応した非同期遷移処理です。
+  window.addEventListener("popstate", () => {
+    Promise.all([fadeout(), getFileByXMLHttpRequest(location.href)]).then((result) => {
+      rewritePage(result);
+      fadein();
+    });
+  });
