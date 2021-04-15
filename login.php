@@ -1,26 +1,34 @@
 <?php
 session_start();
+//DBへ接続
 require('./dbconnect.php');
 
+//cookieにメールアドレスが入っていれば
 if ($_COOKIE['email'] !== '') {
     $email = $_COOKIE['email'];
 }
 
+//post(formタグ)が空でなければ
 if (!empty($_POST)) {
+    //postに入力があれば上書き
     $email = $_POST['email'];
+
+    // バリデーションに使う正規表現
+    $pattern = "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
+    
+    if (!preg_match($pattern, $_POST['email'])) {
+        $error['email'] = 'mismatch';
+    }
+    //メールアドレスが空であれば、エラー
     if ($_POST['email'] === '') {
         $error['email'] = 'failed';
     }
+    //passが空であれば、エラー
     if ($_POST['password'] === '') {
         $error['password'] = 'failed';
     }
 
     // バリデーションに使う正規表現
-    $pattern = "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
-
-    if (!preg_match($pattern, $_POST['email'])) {
-        $error['match'] = 'failed';
-    }
 
     if (empty($error)) {
         //prepareによる実行の準備、
@@ -29,16 +37,24 @@ if (!empty($_POST)) {
         //該当するデータを1行とってくる
         $member = $login->fetch();
 
+        //該当するデータが存在すればtrue
         if ($member) {
+
+            //セッションにDBのIDを代入
             $_SESSION['id'] = $member['id'];
+            //セッションに時間の代入
             $_SESSION['time'] = time();
 
+            //自動的にログインするチェックマークがはいっていれば
             if ($_POST['save'] === 'on') {
+                //クッキーにメールアドレスの保存
                 setcookie('email', $_POST['email'], time()+60*60*24*14);
             }
 
             header('Location: index.php');
             exit();
+
+            //アドレス、パスの該当がなければ実行
         } else {
             $error['login'] = 'failed';
         }
@@ -87,11 +103,11 @@ if (!empty($_POST)) {
                     <div>
                         <p class="title">メールアドレス</p>
                         <input type="text" name="email" size="35" maxlength="255" value="<?php echo htmlspecialchars($email, ENT_QUOTES); ?>" />
+                        <?php if ($error['email'] === 'mismatch') : ?>
+                            <p class="error">メールアドレスの形式が正しくありません</p>
+                        <?php endif; ?> 
                         <?php if ($error['email'] === 'failed') : ?>
                             <p class="error">メールアドレスをご記入ください</p>
-                        <?php endif; ?>
-                        <?php if ($error['match'] === 'failed') : ?>
-                            <p class="error">メールアドレスの形式が正しくありません</p>
                         <?php endif; ?>
                         <?php if ($error['login'] === 'failed') : ?>
                             <p class="error">ログインに失敗しました。正しくご記入ください</p>

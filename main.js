@@ -114,7 +114,7 @@ $('.page_top').on('click', (e) => {
   
   // <a>タグをクリックしたときの非同期遷移処理です。
   window.addEventListener("load", () => {
-    for (const anchor of document.querySelectorAll(".index_1")) {
+    for (const anchor of document.querySelectorAll(".index_1", ".index")) {
       anchor.addEventListener("click", (event) => {
         
         event.preventDefault();
@@ -135,3 +135,16 @@ $('.page_top').on('click', (e) => {
       fadein();
     });
   });
+
+//   racket.php
+
+$('.slick01').slick({
+    dots: true,
+    arrows: true,
+    slidesToShow: 3,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    prevArrow:'<div class="prev"><i class="fas fa-chevron-left"></i></div>',
+	nextArrow:'<div class="next"><i class="fas fa-chevron-right"></i></div>',
+});
+ 
