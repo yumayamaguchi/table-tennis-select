@@ -1,3 +1,20 @@
+<?php
+session_start();
+require('./dbconnect.php');
+if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+    //時間の上書き、最後のログインから1時間
+    $_SESSION['time'] = time();
+
+    $login['name'] = 'success';
+  
+    //ログインしているユーザーの情報を引き出す
+    $members = $db->prepare('SELECT * FROM members WHERE id=?');
+    $members->execute(array($_SESSION['id']));
+    $member = $members->fetch();
+  }
+?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -20,9 +37,12 @@
                 </div>
                 <div class="head_1 col-md-6">
                     <ul>
-                        <li><a href="create.php">会員登録</a></li>
-                        <li><a href="login.php">ログイン</a></li>
-                        <li><a href="">ログアウト</a></li>
+                        <li><a href="create.php">会員登録</a>|</li>
+                        <li><a href="login.php">ログイン</a>|</li>
+                        <li><a href="logout.php">ログアウト</a>|</li>
+                        <li><a href=""><?php if($login['name'] = 'success') {
+                            print($member['name'] + 'さん、こんにちは！');
+                        } ?></a></li>
                     </ul>
                 </div>
             </div>
@@ -35,7 +55,7 @@
     <!-- main_barここから -->
     <div id="main_bar">
         <ul>
-            <a href="index.php">
+            <a class="index" href="index.php">
                 <li>ラケット</li>
             </a>
             <a class="index_1" href="index_1.html">
