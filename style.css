@@ -65,7 +65,7 @@ header ul li a:hover {
 }
 
 .center {
-    width: 1150px;
+    width: 1149px;
     margin: 0 auto;
 }
 
@@ -258,16 +258,26 @@ footer {
     line-height: 100px;
 }
 
+/* スリック機能 */
+
 .slick01 {
     margin: 0;
     padding: 0;
     width: 100%;
 }
 
-.slick01 img {
-    width: auto;
-    height: 600px;
+.slick01 > li {
+    width: 100%;
+    height: 500px;
 }
+
+.slick01 img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+/* スリック矢印 */
 
 .slick01{
 	position: relative;
@@ -294,6 +304,8 @@ footer {
 	z-index: 1;
     font-size: 40px;
 }
+
+/* スリック点 */
 
 .slick-dots {
     text-align: center;
@@ -327,3 +339,70 @@ footer {
     opacity: 0.25;
   }
 
+/* スリック機能ここまで */
+
+/* タブ機能 */
+
+.tabs-menu {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.tabs-menu li {
+    float: left;
+    width: 383px;
+    padding: 0;
+    margin: 0 0 -1px 0;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    /* 透明の指定 */
+    border-color: transparent;
+    border-radius: 4px 4px 0 0;
+    /* 各プロパティをふわっと変える演出 */
+    transition: all .15s;
+}
+
+.tabs-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: #557F95;
+    text-decoration: none;
+}
+
+/* :not(セレクタ) → ()に一致しない要素を選択 */
+.tabs-menu li:not(.active):hover {
+    border-color: #f0f0f0 #f0f0f0 #999;
+    background-color: #f0f0f0;
+}
+
+.tabs-menu .active {
+    border-color: #999 #999 transparent #999;
+    background-color: #fff;
+}
+
+.tabs-menu .active a {
+    color: #3F4548;
+}
+
+.tabs-content {
+    /* 回り込みの解除 */
+    clear: both;
+    border: 1px solid #999;
+    border-radius: 0 4px 4px 4px;
+    padding: 10px;
+}
+
+.tabs-content > div {
+    display: none;
+}
+
+/* 383 */
+.tables {
+    border-bottom: 1px solid black;
+}
+
+.tables th, .tables td {
+    padding: 20px 0;
+}

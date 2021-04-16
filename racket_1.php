@@ -58,17 +58,66 @@
             カーボンとZLファイバーを高密度に編み込んだスーパーZLカーボン搭載ラケットは、打球の威力を引き出す弾みの良さと、広い高反発エリアによる安定性が特徴です。
             類いまれな打球感覚を持つ中華台北の新星・林昀儒選手は、高めの振動特性を持つ威力重視のこのラケットを駆使し、鋭いチキータや質の高いカウンターを生み出しています。グリップに採用された彼の好みのカラーと、名前の頭文字で構成されたウイングマークは、若さと将来の成功を感じさせます。
         </p>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <table>
-                        <tr>
+        <ul class="tabs-menu">
+            <li><a href=".tabs-1">性能</a></li>
+            <li><a href=".tabs-2">口コミ</a></li>
+            <li><a href=".tabs-3">使用選手</a></li>
+        </ul>
+        <div class="tabs-content">
+
+            <!-- 性能 -->
+            <div class="tabs-1 container">
+                <div class="row">
+                    <table class="col-md-5">
+                        <tr class="tables">
                             <th>商品名</th>
                             <td>林昀儒 SUPER ZLC</td>
+                        </tr>
+                        <tr class="tables">
+                            <th>価格</th>
+                            <td>41,800円</td>
+                        </tr>
+                        <tr class="tables">
+                            <th>発売日</th>
+                            <td>2021年3月1日</td>
+                        </tr>
+                        <tr class="tables">
+                            <th>タイプ</th>
+                            <td>攻撃用シェーク</td>
+                        </tr>
+                        <tr class="tables">
+                            <th>反発特性</th>
+                            <td>12.3</td>
+                        </tr>
+                        <tr class="tables">
+                            <th>振動特性</th>
+                            <td>11.1</td>
+                        </tr>
+                    </table>
+                    <table class="offset-md-2 col-md-5">
+                        <tr class="tables">
+                            <th>商品名</th>
+                            <td>林昀儒 SUPER ZLC</td>
+                        </tr>
+                        <tr class="tables">
+                            <th>aaa</th>
+                            <td>bbb</td>
                         </tr>
                     </table>
                 </div>
             </div>
+
+            <!-- 性能ここまで -->
+            <!-- お勧め組み合わせ -->
+            <div class="tabs-2">
+                <p>おすすめ</p>
+            </div>
+            <!-- お勧め組み合わせここまで -->
+            <!-- 使用選手 -->
+            <div class="tabs-3">
+                <p>使用選手</p>
+            </div>
+            <!-- 使用選手ここまで -->
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

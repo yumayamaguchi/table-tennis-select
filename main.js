@@ -145,6 +145,41 @@ $('.slick01').slick({
     autoplay: true,
     autoplaySpeed: 5000,
     prevArrow:'<div class="prev"><i class="fas fa-chevron-left"></i></div>',
-	nextArrow:'<div class="next"><i class="fas fa-chevron-right"></i></div>',
+    nextArrow: '<div class="next"><i class="fas fa-chevron-right"></i></div>',
+    responsive: [{
+        breakpoint: 768,
+          settings: {
+            slidesToShow: 2,
+        }
+      }
+      ]
 });
  
+
+// racket.phpのタブに関するプログラム
+
+const showTab = (selector) => {
+    console.log(selector);
+
+    // 一旦activeクラスの削除
+    $('.tabs-menu > li').removeClass('active');
+
+    $('.tabs-content > div').hide();
+
+    //selectorに該当するものだけactive要素を追加
+    $(`.tabs-menu a[href="${selector}"]`)
+        .parent('li')
+        .addClass('active');
+    
+    // selectorに該当するものだけを表示
+    $(selector).show();
+};
+$('.tabs-menu a').on('click', (e) => {
+    e.preventDefault();
+
+    //クリックされたhref要素の取得
+    const selector = $(e.target).attr('href');
+    showTab(selector);
+});
+
+showTab('.tabs-1');
