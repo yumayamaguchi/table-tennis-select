@@ -260,6 +260,7 @@ footer {
 
 .slick01 {
     margin: 0;
+    padding: 0;
     width: 100%;
 }
 
@@ -273,25 +274,25 @@ footer {
 }
 .slick01 .prev{
 	position: absolute;
-	top: 500px;
+	top: 590px;
 	bottom: 0;
-	left: 0;
+	left: 640px;
 	margin: auto;
 	width: 30px;
 	height: 30px;
+    font-size: 40px;
 	z-index: 1;
 }
 .slick01 .next{
 	position: absolute;
-	top: 500px;
-	right: 300px;
+	top: 590px;
+	right: 600px;
 	bottom: 0;
 	margin: auto;
 	width: 30px;
 	height: 30px;
 	z-index: 1;
-    font-size: 60px;
-    color: violet;
+    font-size: 40px;
 }
 
 .slick-dots {
@@ -300,13 +301,18 @@ footer {
 
 .slick-dots li {
     display: inline-block;
-    margin: 0 15px;
+    margin-top: 30px;
 }
 
 .slick-dots li button {
     background: transparent;   
     border:0;   
     font-size: 0pt; 
+    outline: none;
+}
+
+.slick-dots .slick-active button::before {
+    color: red;
 }
 
 .slick-dots li button::before {
@@ -314,9 +320,10 @@ footer {
     width: 20px;
     height: 20px;
     font-family: "slick";
-    font-size: 6px;
+    font-size: 100px;
     line-height: 20px;
     text-align: center;
     color: black;
     opacity: 0.25;
   }
+

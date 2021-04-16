@@ -49,8 +49,27 @@
             <li><img alt="画像3" src="images/37131_03.jpg" /></li>
         </ul>
     </div>
-    <div class="side_bar">
+    <!-- <div class="side_bar">
+    </div> -->
 
+    <div class="center">
+        <h3>林昀儒選手の使用モデル</h3>
+        <p>
+            カーボンとZLファイバーを高密度に編み込んだスーパーZLカーボン搭載ラケットは、打球の威力を引き出す弾みの良さと、広い高反発エリアによる安定性が特徴です。
+            類いまれな打球感覚を持つ中華台北の新星・林昀儒選手は、高めの振動特性を持つ威力重視のこのラケットを駆使し、鋭いチキータや質の高いカウンターを生み出しています。グリップに採用された彼の好みのカラーと、名前の頭文字で構成されたウイングマークは、若さと将来の成功を感じさせます。
+        </p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <table>
+                        <tr>
+                            <th>商品名</th>
+                            <td>林昀儒 SUPER ZLC</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
