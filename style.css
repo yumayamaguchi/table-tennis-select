@@ -392,6 +392,8 @@ footer {
     border: 1px solid #999;
     border-radius: 0 4px 4px 4px;
     padding: 10px;
+    width: 1149px;
+    height: 500px;
 }
 
 .tabs-content > div {
@@ -405,4 +407,8 @@ footer {
 
 .tables th, .tables td {
     padding: 20px 0;
+}
+
+.tabs-2 {
+    text-align: center;
 }

@@ -1,3 +1,20 @@
+<?php
+session_start();
+require('dbconnect.php');
+
+if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+    //最後のログインから1時間有効
+    $_SESSION['time'] = time();
+
+    $members = $db->prepare('SELECT * FROM members WHERE id=?');
+    $members->execute(array($_SESSION['id']));
+    $member = $members->fetch();
+} else {
+    header('Location: login.php');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,8 +127,12 @@
             <!-- 性能ここまで -->
             <!-- お勧め組み合わせ -->
             <div class="tabs-2">
-                <p>おすすめ</p>
-                <a href="racket_1_post.php">投稿する</a>
+                <form action="" method="post">
+                    <textarea name="message" rows="7" cols="80" placeholder="口コミを入れてください"></textarea>
+                    <p>
+                        <input type="submit" value="投稿する" />
+                    </p>
+                </form>
             </div>
             <!-- お勧め組み合わせここまで -->
             <!-- 使用選手 -->
