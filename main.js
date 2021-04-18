@@ -183,3 +183,5 @@ $('.tabs-menu a').on('click', (e) => {
 });
 
 showTab('.tabs-1');
+
+$('.tokyo').raty();

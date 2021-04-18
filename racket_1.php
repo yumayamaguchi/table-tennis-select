@@ -1,3 +1,27 @@
+<?php
+session_start();
+require('dbconnect.php');
+
+
+
+if (!empty($_POST)) {
+    if ($_POST['message'] !== '') {
+
+        $members = $db->prepare('SELECT * FROM members WHERE id=?');
+        $members->execute(array($_SESSION['id']));
+        $member = $members->fetch();
+
+        $message = $db->prepare('INSERT INTO posts SET member_id=?, message=?, created=NOW()');
+        $message->execute(array($member['id'], $_POST['message']));
+
+        header('Location: racket_1.php');
+        exit();
+    }
+}
+
+$posts = $db->query('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.member_id ORDER BY p.created DESC');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,7 +134,27 @@
             <!-- 性能ここまで -->
             <!-- お勧め組み合わせ -->
             <div class="tabs-2">
-                <p>おすすめ</p>
+                <table class="comment">
+                    <tr class="line">
+                        <th>投稿者</th>
+                        <th>採点</th>
+                        <th>投稿された日付</th>
+                    </tr>
+
+                    <?php foreach ($posts as $post) : ?>
+                        <tr>
+                            <td width="270px"><?php print(htmlspecialchars($post['name'], ENT_QUOTES)); ?></td>
+                            <td width="370px"></td>
+                            <td width="470px"><?php print(htmlspecialchars($post['created'], ENT_QUOTES)); ?></td>
+                            <td></td>
+                        </tr>
+                        <tr class="comment_2">
+                            <td></td>
+                            <td><?php print(htmlspecialchars($post['message'], ENT_QUOTES)); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+
+                </table>
                 <a href="racket_1_post.php">投稿する</a>
             </div>
             <!-- お勧め組み合わせここまで -->
@@ -127,6 +171,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="jquery.raty.js"></script>
     <script src="main.js"></script>
 </body>
 

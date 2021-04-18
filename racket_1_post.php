@@ -22,11 +22,14 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link href="./raty-3.0.0/lib/jquery.raty.css" rel="stylesheet"/>
+    
     <title>林昀儒 SUPER ZLC｜卓球製品情報｜バタフライ卓球用品</title>
 </head>
 
@@ -127,7 +130,8 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <!-- 性能ここまで -->
             <!-- お勧め組み合わせ -->
             <div class="tabs-2">
-                <form action="" method="post">
+            <div class="tokyo"></div>
+                <form action="racket_1.php" method="post">
                     <textarea name="message" rows="7" cols="80" placeholder="口コミを入れてください"></textarea>
                     <p>
                         <input type="submit" value="投稿する" />
@@ -148,6 +152,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="./raty-3.0.0/lib/jquery.raty.js"></script>
     <script src="main.js"></script>
 </body>
 
