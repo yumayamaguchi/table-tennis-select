@@ -87,7 +87,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                 <div class="row">
                     <div class="images col-md-3">
                         <div class="image_1">
-                            <a href="">
+                            <a href="racket_1.php">
                                 <img src="images/37131.jpg" alt="林昀儒 SUPER ZLC" height="230" width="230">
                                 <div>林昀儒 SUPER ZLC<br>41,800円(税込)</div>
                             </a>
@@ -304,6 +304,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="jquery.raty.js"></script>
     <script src="main.js"></script>
 </body>
 

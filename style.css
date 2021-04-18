@@ -412,3 +412,17 @@ footer {
 .tabs-2 {
     text-align: center;
 }
+
+/* コメント一覧 */
+.comment {
+    width: 1110px;
+    text-align: left;
+}
+
+.line {
+    border-bottom: 1px solid black;
+}
+
+.comment_2 td {
+    padding: 0 0 50px;
+}
