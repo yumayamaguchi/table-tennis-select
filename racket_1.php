@@ -19,7 +19,25 @@ if (!empty($_POST)) {
     }
 }
 
-$posts = $db->query('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.member_id ORDER BY p.created DESC');
+//ページネーション
+$page = $_REQUEST['page'];
+if ($page == '') {
+    $page = 1;
+}
+$page = max($page,1);
+
+$counts = $db->query('SELECT COUNT(*) AS cnt FROM posts');
+$cnt = $counts->fetch();
+$max_page = ceil($cnt['cnt'] / 3);
+$page = min($page, $max_page);
+
+$start = ($page - 1) * 3;
+
+//LIMIT句、1の場合2件目から数える
+$posts = $db->prepare('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.member_id ORDER BY p.created DESC LIMIT ?,3');
+//1は?の位置を指定、$startはバインドする変数を指定
+$posts->bindParam(1, $start, PDO::PARAM_INT);
+$posts->execute();
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +103,7 @@ $posts = $db->query('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.mem
         <ul class="tabs-menu">
             <li><a href=".tabs-1">性能</a></li>
             <li><a href=".tabs-2">口コミ</a></li>
-            <li><a href=".tabs-3">使用選手</a></li>
+            <li><a href=".tabs-3">お勧め組み合わせラバー</a></li>
         </ul>
         <div class="tabs-content">
 
@@ -139,14 +157,17 @@ $posts = $db->query('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.mem
                         <th>投稿者</th>
                         <th>採点</th>
                         <th>投稿された日付</th>
+                        <th></th>
                     </tr>
 
                     <?php foreach ($posts as $post) : ?>
                         <tr>
                             <td width="270px"><?php print(htmlspecialchars($post['name'], ENT_QUOTES)); ?></td>
                             <td width="370px"></td>
-                            <td width="470px"><?php print(htmlspecialchars($post['created'], ENT_QUOTES)); ?></td>
-                            <td></td>
+                            <td width="370px"><?php print(htmlspecialchars($post['created'], ENT_QUOTES)); ?></td>
+                            <?php if ($_SESSION['id'] == $post['member_id']) : ?>
+                                <td width="100px"><a href="delete.php?id=<?php print(htmlspecialchars($post['id'])); ?>">削除</a></td>
+                            <?php endif; ?>
                         </tr>
                         <tr class="comment_2">
                             <td></td>
@@ -155,12 +176,38 @@ $posts = $db->query('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.mem
                     <?php endforeach; ?>
 
                 </table>
+                <?php
+                if ($page > 1) {
+                    print('<a class="figure" href="racket_1.php?page=' . ($page-1) .'">前へ</a>');
+                } else {
+                    print('<span class="figure">前へ</span>');
+                }
+
+                 for ($i = 1; $i <= $max_page; $i++){
+                    if ($i == $page) {
+                    print('<span class="figure">' . $page . '</span>'); 
+                    } else {
+                    print('<a class="figure" href="racket_1.php?page=' .$i .'">' .$i .'</a>');
+                    }
+                }
+
+                if ($page < $max_page) {
+                    print('<a class="figure" href="racket_1.php?page=' . ($page+1) .'">次へ</a>');
+                } else {
+                    print('<span class="figure">次へ</span>');
+                }
+                ?>
+                <p>
                 <a href="racket_1_post.php">投稿する</a>
+                </p>
             </div>
             <!-- お勧め組み合わせここまで -->
             <!-- 使用選手 -->
             <div class="tabs-3">
-                <p>使用選手</p>
+                <p>お勧め組み合わせラバー</p>
+                <div class="chart">
+                <canvas id="myChart"></canvas>
+                </div>
             </div>
             <!-- 使用選手ここまで -->
         </div>
@@ -172,6 +219,7 @@ $posts = $db->query('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.mem
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="jquery.raty.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js" integrity="sha512-RGbSeD/jDcZBWNsI1VCvdjcDULuSfWTtIva2ek5FtteXeSjLfXac4kqkDRHVGf1TwsXCAqPTF7/EYITD0/CTqw==" crossorigin="anonymous"></script>
     <script src="main.js"></script>
 </body>
 
