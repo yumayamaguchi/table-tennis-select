@@ -24,7 +24,7 @@ $page = $_REQUEST['page'];
 if ($page == '') {
     $page = 1;
 }
-$page = max($page,1);
+$page = max($page, 1);
 
 $counts = $db->query('SELECT COUNT(*) AS cnt FROM posts');
 $cnt = $counts->fetch();
@@ -178,35 +178,65 @@ $posts->execute();
                 </table>
                 <?php
                 if ($page > 1) {
-                    print('<a class="figure" href="racket_1.php?page=' . ($page-1) .'">前へ</a>');
+                    print('<a class="figure" href="racket_1.php?page=' . ($page - 1) . '">前へ</a>');
                 } else {
                     print('<span class="figure">前へ</span>');
                 }
 
-                 for ($i = 1; $i <= $max_page; $i++){
+                for ($i = 1; $i <= $max_page; $i++) {
                     if ($i == $page) {
-                    print('<span class="figure">' . $page . '</span>'); 
+                        print('<span class="figure">' . $page . '</span>');
                     } else {
-                    print('<a class="figure" href="racket_1.php?page=' .$i .'">' .$i .'</a>');
+                        print('<a class="figure" href="racket_1.php?page=' . $i . '">' . $i . '</a>');
                     }
                 }
 
                 if ($page < $max_page) {
-                    print('<a class="figure" href="racket_1.php?page=' . ($page+1) .'">次へ</a>');
+                    print('<a class="figure" href="racket_1.php?page=' . ($page + 1) . '">次へ</a>');
                 } else {
                     print('<span class="figure">次へ</span>');
                 }
                 ?>
                 <p>
-                <a href="racket_1_post.php">投稿する</a>
+                    <a href="racket_1_post.php">投稿する</a>
                 </p>
             </div>
             <!-- お勧め組み合わせここまで -->
             <!-- 使用選手 -->
             <div class="tabs-3">
-                <p>お勧め組み合わせラバー</p>
-                <div class="chart">
-                <canvas id="myChart"></canvas>
+                <div class="tabs-3-2">
+                    <div class="tabs-3-1">
+                        <img src="images/37131.jpg" alt="林昀儒 SUPER ZLC" height="200" width="200">
+                        <div>林昀儒 SUPER ZLC<br>41,800円(税込)</div>
+                    </div>
+                    <div class="tabs-3-1">
+                        <img src="images/06090.jpg" alt="テナジー19" height="200" width="200">
+                        <div>テナジー19<br>円(税込)</div>
+                    </div>
+                    <div class="tabs-3-1">
+                        <img src="images/05810.jpg" alt="テナジー25" height="200" width="200">
+                        <div>テナジー25<br>円(税込)</div>
+                    </div>
+                    <div class="chart">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <div class="tabs-3-1">
+                        <img src="images/37131.jpg" alt="林昀儒 SUPER ZLC" height="200" width="200">
+                        <div>林昀儒 SUPER ZLC<br>41,800円(税込)</div>
+                    </div>
+                    <div class="tabs-3-1">
+                        <img src="images/06090.jpg" alt="テナジー19" height="200" width="200">
+                        <div>テナジー19<br>円(税込)</div>
+                    </div>
+                    <div class="tabs-3-1">
+                        <img src="images/05810.jpg" alt="テナジー25" height="200" width="200">
+                        <div>テナジー25<br>円(税込)</div>
+                    </div>
+                    <div class="chart">
+                        <canvas id="myChart-1"></canvas>
+                    </div>
                 </div>
             </div>
             <!-- 使用選手ここまで -->

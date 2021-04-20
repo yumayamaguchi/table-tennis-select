@@ -184,6 +184,8 @@ $('.tabs-menu a').on('click', (e) => {
 
 showTab('.tabs-1');
 
+$('.star1').raty()
+
 
 
 const ctx = document.getElementById('myChart').getContext('2d');
@@ -191,13 +193,20 @@ const ctx = document.getElementById('myChart').getContext('2d');
 const myRadarChart = new Chart(ctx, {
   type: 'radar',
   data: {
-    labels: ['反発性', 'スピード', 'スピン', '安定'],
+    labels: ['スピード', 'スピン', '安定', '価格'],
     datasets: [{
-      label: '得票数',
+      label: 'フォア',
       data: [100, 13, 14, 15],
-      borderColor: 'rgba(75, 192, 192)',
-      backgroundColor: 'rgba(10,10,10)',
+      borderColor: 'red',
+      backgroundColor: 'rgba(255,0,0,0.2)',
       borderWidth: '1px',
+    },
+      {
+        label: 'バック',
+        data: [100, 90, 90, 90],
+        borderColor: 'blue',
+        backgroundColor: 'rgba(12,77,162,0.2)',
+        borderWidth: '1px',
     }]
   },
   options: {
@@ -208,8 +217,34 @@ const myRadarChart = new Chart(ctx, {
   }
 });
 
+const ctx_1 = document.getElementById('myChart-1').getContext('2d');
 
-
+const myRadarChart_1 = new Chart(ctx_1, {
+  type: 'radar',
+  data: {
+    labels: ['スピード', 'スピン', '安定', '価格'],
+    datasets: [{
+      label: 'フォア',
+      data: [100, 13, 14, 15],
+      borderColor: 'red',
+      backgroundColor: 'rgba(255,0,0,0.2)',
+      borderWidth: '1px',
+    },
+      {
+        label: 'バック',
+        data: [100, 90, 90, 90],
+        borderColor: 'blue',
+        backgroundColor: 'rgba(12,77,162,0.2)',
+        borderWidth: '1px',
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: '線グラフの例'
+    }
+  }
+});
 
 
 

@@ -130,7 +130,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <!-- 性能ここまで -->
             <!-- お勧め組み合わせ -->
             <div class="tabs-2">
-            <div class="tokyo"></div>
+            <div class="star1"></div>
                 <form action="racket_1.php" method="post">
                     <textarea name="message" rows="7" cols="80" placeholder="口コミを入れてください"></textarea>
                     <p>
@@ -152,7 +152,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="./raty-3.0.0/lib/jquery.raty.js"></script>
+    <script src="jquery.raty.js"></script>
     <script src="main.js"></script>
 </body>
 
