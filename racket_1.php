@@ -101,9 +101,9 @@ $posts->execute();
             類いまれな打球感覚を持つ中華台北の新星・林昀儒選手は、高めの振動特性を持つ威力重視のこのラケットを駆使し、鋭いチキータや質の高いカウンターを生み出しています。グリップに採用された彼の好みのカラーと、名前の頭文字で構成されたウイングマークは、若さと将来の成功を感じさせます。
         </p>
         <ul class="tabs-menu">
-            <li><a href=".tabs-1">性能</a></li>
-            <li><a href=".tabs-2">口コミ</a></li>
-            <li><a href=".tabs-3">お勧め組み合わせラバー</a></li>
+            <li class="tab"><a href=".tabs-1">性能</a></li>
+            <li class="tab"><a href=".tabs-2">口コミ</a></li>
+            <li class="tab"><a href=".tabs-3">お勧め組み合わせラバー</a></li>
         </ul>
         <div class="tabs-content">
 
