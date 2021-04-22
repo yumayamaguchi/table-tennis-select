@@ -6,12 +6,12 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $_SESSION['time'] = time();
 
     $login['name'] = 'success';
-  
+
     //ログインしているユーザーの情報を引き出す
     $members = $db->prepare('SELECT * FROM members WHERE id=?');
     $members->execute(array($_SESSION['id']));
     $member = $members->fetch();
-  }
+}
 ?>
 
 
@@ -37,12 +37,14 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                 </div>
                 <div class="head_1 col-md-6">
                     <ul>
-                        <li><a href="create.php">会員登録</a>|</li>
-                        <li><a href="login.php">ログイン</a>|</li>
-                        <li><a href="logout.php">ログアウト</a>|</li>
-                        <li><a href=""><?php if($login['name'] = 'success') {
-                            print($member['name'] + 'さん、こんにちは！');
-                        } ?></a></li>
+                        <?php if ($login['name'] === 'success'): ?>
+                            <li><a href="logout.php">ログアウト</a>|</li>
+                            <li><a href="my-page.php">マイページ</a>|</li>
+                            <li><?php print($member['name']); ?>さん、こんにちは！</li>
+                        <?php else: ?>
+                            <li><a href="create.php">会員登録</a>|</li>
+                            <li><a href="login.php">ログイン</a>|</li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>

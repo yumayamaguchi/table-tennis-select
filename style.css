@@ -349,7 +349,7 @@ footer {
     list-style-type: none;
 }
 
-.tabs-menu li {
+.tabs-menu .tab {
     float: left;
     width: 383px;
     padding: 0;
@@ -446,4 +446,53 @@ footer {
 
 .tabs-3-2 {
     margin-bottom: 40px;
+}
+
+/* マイページのタブ */
+.tabs-menu .my_page {
+    display: inline-block;
+    width: 300px;
+    padding: 0;
+    margin: 0 0 -1px 0;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    /* 透明の指定 */
+    border-color: transparent;
+    border-radius: 4px 4px 0 0;
+    /* 各プロパティをふわっと変える演出 */
+    transition: all .15s;
+}
+
+.user_name {
+    clear: both;
+    display: inline-block;
+}
+
+.my_page_1 {
+    height: 400px;
+}
+
+.tabs-content .setting {
+    display: flex;
+}
+
+.setting_1 {
+    flex-grow: 1;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.setting_2 {
+    flex-grow: 1;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.setting_3 {
+    margin-bottom: 30px;
+}
+
+.setting_3 label {
+    width: 200px;
 }

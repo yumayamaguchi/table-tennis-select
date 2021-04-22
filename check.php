@@ -67,13 +67,8 @@ if (!isset($_SESSION['join'])) {
                         <p>表示されません</p>
                     </div>
                 </div>
-                <div>
-                    <?php if ($_SESSION['join']['image'] !== '') : ?>
-                        <img src="member_picture/<?php print(htmlspecialchars($_SESSION['join']['image'], ENT_QUOTES)); ?>" alt="<?php print($_SESSION['join']['image']); ?>">
-                    <?php endif; ?>
-                </div>
                 <div class="submit">
-                    <div class="bt"><input type="button" onclick="location.href='index.php?action=rewrite'" value="書き直す"><input type="submit" value="登録する" /></div>
+                    <div class="bt"><input type="button" onclick="location.href='create.php?action=rewrite'" value="書き直す"><input type="submit" value="登録する" /></div>
                 </div>
             </form>
         </div>
