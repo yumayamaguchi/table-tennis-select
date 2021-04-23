@@ -60,7 +60,7 @@ $posts->execute();
         <div class="container-fluid header">
             <div class="row">
                 <div class="head col-md-6">
-                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="index.php">卓球ツール</a></p>
+                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="index.php">卓プロ</a></p>
                 </div>
                 <div class="head_1 col-md-6">
                     <ul>
@@ -94,22 +94,24 @@ $posts->execute();
     <!-- <div class="side_bar">
     </div> -->
 
-    <div class="center">
-        <h3>林昀儒選手の使用モデル</h3>
-        <p>
-            カーボンとZLファイバーを高密度に編み込んだスーパーZLカーボン搭載ラケットは、打球の威力を引き出す弾みの良さと、広い高反発エリアによる安定性が特徴です。
-            類いまれな打球感覚を持つ中華台北の新星・林昀儒選手は、高めの振動特性を持つ威力重視のこのラケットを駆使し、鋭いチキータや質の高いカウンターを生み出しています。グリップに採用された彼の好みのカラーと、名前の頭文字で構成されたウイングマークは、若さと将来の成功を感じさせます。
-        </p>
-        <ul class="tabs-menu">
-            <li class="tab"><a href=".tabs-1">性能</a></li>
-            <li class="tab"><a href=".tabs-2">口コミ</a></li>
-            <li class="tab"><a href=".tabs-3">お勧め組み合わせラバー</a></li>
-        </ul>
+    <div id="center">
+        <div class="version">
+            <h3>林昀儒選手の使用モデル</h3>
+            <p>
+                カーボンとZLファイバーを高密度に編み込んだスーパーZLカーボン搭載ラケットは、打球の威力を引き出す弾みの良さと、広い高反発エリアによる安定性が特徴です。
+                類いまれな打球感覚を持つ中華台北の新星・林昀儒選手は、高めの振動特性を持つ威力重視のこのラケットを駆使し、鋭いチキータや質の高いカウンターを生み出しています。グリップに採用された彼の好みのカラーと、名前の頭文字で構成されたウイングマークは、若さと将来の成功を感じさせます。
+            </p>
+        </div>
+            <ul class="tabs-menu">
+                <li class="tab"><a href=".tabs-1">性能</a></li>
+                <li class="tab"><a href=".tabs-2">口コミ</a></li>
+                <li class="tab"><a href=".tabs-3">お勧め組み合わせラバー</a></li>
+            </ul>
         <div class="tabs-content">
 
             <!-- 性能 -->
             <div class="tabs-1 container">
-                <div class="row">
+                <div class="row tabs-1-1">
                     <table class="col-md-5">
                         <tr class="tables">
                             <th>商品名</th>
@@ -161,7 +163,7 @@ $posts->execute();
                     </tr>
 
                     <?php foreach ($posts as $post) : ?>
-                        <tr>
+                        <tr class="line-1">
                             <td width="270px"><?php print(htmlspecialchars($post['name'], ENT_QUOTES)); ?></td>
                             <td width="370px"></td>
                             <td width="370px"><?php print(htmlspecialchars($post['created'], ENT_QUOTES)); ?></td>

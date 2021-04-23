@@ -36,7 +36,7 @@ if (!isset($_SESSION['join'])) {
         <div class="container-fluid header">
             <div class="row">
                 <div class="head col-md-6">
-                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="index.php">卓球ツール</a></p>
+                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="index.php">卓プロ</a></p>
                 </div>
                 <div class="head_1 col-md-6">
                     <ul>
