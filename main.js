@@ -138,18 +138,7 @@ $('.page_top').on('click', (e) => {
 //   });
 // });
 
-//非同期通信
-var ajax = new XMLHttpRequest();
-ajax.open('GET', 'index_1.html', true);
-ajax.onload = function(e) {
-  if (ajax.readyState === 4) {
-    if (ajax.status === 200) {
-      var json = ajax.responseText;
-      console.log(json);
-    }
-  }
-}
-ajax.send(null);
+
 
 //   racket.php
 

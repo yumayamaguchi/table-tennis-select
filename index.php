@@ -33,15 +33,15 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         <div class="container-fluid header">
             <div class="row">
                 <div class="head col-md-6">
-                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="index.php">卓球ツール</a></p>
+                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="index.php">卓プロ</a></p>
                 </div>
                 <div class="head_1 col-md-6">
                     <ul>
-                        <?php if ($login['name'] === 'success'): ?>
+                        <?php if ($login['name'] === 'success') : ?>
                             <li><a href="logout.php">ログアウト</a>|</li>
                             <li><a href="my-page.php">マイページ</a>|</li>
                             <li><?php print($member['name']); ?>さん、こんにちは！</li>
-                        <?php else: ?>
+                        <?php else : ?>
                             <li><a href="create.php">会員登録</a>|</li>
                             <li><a href="login.php">ログイン</a>|</li>
                         <?php endif; ?>
@@ -60,7 +60,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <a class="index" href="index.php">
                 <li>ラケット</li>
             </a>
-            <a class="index_1" href="index_1.html">
+            <a id="index_1" href="index_1.html">
                 <li>ラバー</li>
             </a>
             <a href="">
@@ -70,7 +70,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     </div>
     <!-- main_barここまで -->
     <!-- side_barここから -->
-    <div class="center">
+    <div id="center">
         <div id="side_bar">
             <ul>
                 <li class="racket_1"><a href=""><i class="far fa-check-circle"></i>攻撃用シェーク</a></li>|
@@ -306,7 +306,27 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="main.js"></script>
+    <script type="text/javascript">
+        //非同期通信
+        rubber = document.getElementById('index_1');
+
+        rubber.addEventListener('click', (e) => {
+            e.preventDefault();
+            var ajax = new XMLHttpRequest();
+            ajax.open('GET', 'index_1.html', true);
+            ajax.onload = function(e) {
+                if (ajax.readyState === 4) {
+                    if (ajax.status === 200) {
+                        var json = ajax.responseText;
+                        document.getElementById('center').innerHTML = json;
+
+                    }
+                }
+            };
+            ajax.send(null);
+
+        });
+    </script>
 </body>
 
 </html>
