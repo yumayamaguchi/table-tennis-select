@@ -2,8 +2,8 @@
 session_start();
 //DBへ接続
 require('./dbconnect.php');
-
 //cookieにメールアドレスが入っていれば
+var_dump($_SERVER['HTTP_REFERER']);
 if ($_COOKIE['email'] !== '') {
     $email = $_COOKIE['email'];
 }
@@ -15,7 +15,7 @@ if (!empty($_POST)) {
 
     // バリデーションに使う正規表現
     $pattern = "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
-    
+
     if (!preg_match($pattern, $_POST['email'])) {
         $error['email'] = 'mismatch';
     }
@@ -48,11 +48,17 @@ if (!empty($_POST)) {
             //自動的にログインするチェックマークがはいっていれば
             if ($_POST['save'] === 'on') {
                 //クッキーにメールアドレスの保存
-                setcookie('email', $_POST['email'], time()+60*60*24*14);
+                setcookie('email', $_POST['email'], time() + 60 * 60 * 24 * 14);
             }
-
-            header('Location: index.php');
-            exit();
+            
+            
+            if ($_SERVER['HTTP_REFERER'] === 'http://localhost:8888/table_tennis_tool/racket_1.php') {
+                header('Location: racket_1_post.php');
+                exit();
+            } else {
+                header('Location: index.php');
+                exit();
+            }
 
             //アドレス、パスの該当がなければ実行
         } else {
@@ -105,7 +111,7 @@ if (!empty($_POST)) {
                         <input type="text" name="email" size="35" maxlength="255" value="<?php echo htmlspecialchars($email, ENT_QUOTES); ?>" />
                         <?php if ($error['email'] === 'mismatch') : ?>
                             <p class="error">メールアドレスの形式が正しくありません</p>
-                        <?php endif; ?> 
+                        <?php endif; ?>
                         <?php if ($error['email'] === 'failed') : ?>
                             <p class="error">メールアドレスをご記入ください</p>
                         <?php endif; ?>

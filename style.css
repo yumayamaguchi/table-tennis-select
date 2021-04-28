@@ -140,6 +140,7 @@ header ul li a:hover {
 }
 
 .image_1 {
+    display: inline-block;
     width: 233px;
     height: 315px;
     border: solid 1px #dddddd;
@@ -158,6 +159,24 @@ header ul li a:hover {
 .images div {
     margin: 10px 10px;
     font-size: smaller;
+    color: black;
+}
+
+.images-1 {
+    display: inline-block;
+    margin: 10px 20px;
+    font-size: smaller;
+    color: black;
+}
+
+/* jsonリスト */
+.product-list {
+    text-align: center;
+}
+
+.product-list p {
+    text-align: left;
+    margin: 10px 0 0 10px;
     color: black;
 }
 
@@ -397,7 +416,6 @@ footer {
     border-radius: 0 4px 4px 4px;
     padding: 10px;
     width: 1149px;
-    height: 700px;
 }
 
 .tabs-content > div {

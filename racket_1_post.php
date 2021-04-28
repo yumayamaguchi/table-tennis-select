@@ -28,8 +28,8 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link href="./raty-3.0.0/lib/jquery.raty.css" rel="stylesheet"/>
-    
+    <link href="./raty-3.0.0/lib/jquery.raty.css" rel="stylesheet" />
+
     <title>林昀儒 SUPER ZLC｜卓球製品情報｜バタフライ卓球用品</title>
 </head>
 
@@ -72,16 +72,18 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     <!-- <div class="side_bar">
     </div> -->
 
-    <div class="center">
-        <h3>林昀儒選手の使用モデル</h3>
-        <p>
-            カーボンとZLファイバーを高密度に編み込んだスーパーZLカーボン搭載ラケットは、打球の威力を引き出す弾みの良さと、広い高反発エリアによる安定性が特徴です。
-            類いまれな打球感覚を持つ中華台北の新星・林昀儒選手は、高めの振動特性を持つ威力重視のこのラケットを駆使し、鋭いチキータや質の高いカウンターを生み出しています。グリップに採用された彼の好みのカラーと、名前の頭文字で構成されたウイングマークは、若さと将来の成功を感じさせます。
-        </p>
+    <div id="center">
+        <div class="version">
+            <h3>林昀儒選手の使用モデル</h3>
+            <p>
+                カーボンとZLファイバーを高密度に編み込んだスーパーZLカーボン搭載ラケットは、打球の威力を引き出す弾みの良さと、広い高反発エリアによる安定性が特徴です。
+                類いまれな打球感覚を持つ中華台北の新星・林昀儒選手は、高めの振動特性を持つ威力重視のこのラケットを駆使し、鋭いチキータや質の高いカウンターを生み出しています。グリップに採用された彼の好みのカラーと、名前の頭文字で構成されたウイングマークは、若さと将来の成功を感じさせます。
+            </p>
+        </div>
         <ul class="tabs-menu">
-            <li><a href=".tabs-1">性能</a></li>
-            <li><a href=".tabs-2">口コミ</a></li>
-            <li><a href=".tabs-3">使用選手</a></li>
+            <li class="tab"><a href=".tabs-1">性能</a></li>
+            <li class="tab"><a href=".tabs-2">口コミ</a></li>
+            <li class="tab"><a href=".tabs-3">使用選手</a></li>
         </ul>
         <div class="tabs-content">
 
@@ -130,7 +132,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <!-- 性能ここまで -->
             <!-- お勧め組み合わせ -->
             <div class="tabs-2">
-            <div class="star1"></div>
+                <div class="star1"></div>
                 <form action="racket_1.php" method="post">
                     <textarea name="message" rows="7" cols="80" placeholder="口コミを入れてください"></textarea>
                     <p>

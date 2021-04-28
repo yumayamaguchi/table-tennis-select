@@ -70,7 +70,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     </div>
     <!-- main_barここまで -->
     <!-- side_barここから -->
-    <div id="center">
+    <div>
         <div id="side_bar">
             <ul>
                 <li class="racket_1"><a href=""><i class="far fa-check-circle"></i>攻撃用シェーク</a></li>|
@@ -82,7 +82,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         </div>
         <!-- side_barここまで -->
         <!-- main_visualここから -->
-        <div class="main_visual container-fluid">
+        <div id="center" class="main_visual container-fluid">
 
             <div class="products">
                 <p class="rackets_1">攻撃用シェーク</p>
@@ -303,9 +303,22 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         <p class="page_top"><a href="">PAGE TOP</a></p>
     </footer>
     <!-- フッターここまで -->
+
+    <div id="product-template" style="display: none;">
+        <div class="images-1">
+            <div class="image_1">
+                <a href="">
+                    <img class="product-image" src="" alt="吉田海偉" height="230" width="230">
+                    <p><span class="product-name"></span><br><span class="product-price"></span></p>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="main.js"></script>
     <script type="text/javascript">
         //非同期通信
         rubber = document.getElementById('index_1');
@@ -313,12 +326,14 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         rubber.addEventListener('click', (e) => {
             e.preventDefault();
             var ajax = new XMLHttpRequest();
-            ajax.open('GET', 'index_1.html', true);
+            ajax.open('GET', 'index_1.json', true);
             ajax.onload = function(e) {
                 if (ajax.readyState === 4) {
                     if (ajax.status === 200) {
                         var json = ajax.responseText;
-                        document.getElementById('center').innerHTML = json;
+                        //jsonをjavascriptオブジェクトに変換
+                        //html() html要素の上書き
+                        $('#center').html(createListHtml(JSON.parse(json)));
 
                     }
                 }
@@ -326,6 +341,23 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             ajax.send(null);
 
         });
+
+        function createListHtml(list) {
+            
+            var result = $('<div class="product-list">');
+            for (var i = 0; i < list.length; i++) {
+                //jsonの配列を代入
+                var product = list[i];
+                var element = $('#product-template').find('.images-1').clone();
+                //.product-nameにjsonのnameを入力
+                element.find('.product-name').text(product.name);
+                element.find('.product-price').text(product.price);
+                element.find('.product-image').attr('src', product.image);
+                //選手の名前を追加
+                result.append(element);
+            }
+            return result;
+        }
     </script>
 </body>
 
