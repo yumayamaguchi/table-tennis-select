@@ -266,11 +266,15 @@ footer {
 /* racket.php */
 
 .head_image_1 {
+    margin: 10px auto;
     text-align: center;
     height: 100px;
+    width: 400px;
     font-size: 30px;
-    background-color: blueviolet;
-    color: white;
+    color: black;
+    border-radius: 3px;
+    font-family: serif;
+    font-style: oblique;
 }
 
 .head_image_1 p {
@@ -291,8 +295,9 @@ footer {
 }
 
 .slick01 img {
-    width: 100%;
-    max-width: 100%;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 80%;
     height: auto;
 }
 
@@ -302,10 +307,11 @@ footer {
 	position: relative;
 }
 .slick01 .prev{
+    display: block;
 	position: absolute;
-	top: 590px;
+	top: 80%;
 	bottom: 0;
-	left: 640px;
+	left: 35%;
 	margin: auto;
 	width: 30px;
 	height: 30px;
@@ -314,7 +320,7 @@ footer {
 }
 .slick01 .next{
 	position: absolute;
-	top: 590px;
+	top: 460px;
 	right: 600px;
 	bottom: 0;
 	margin: auto;
@@ -394,13 +400,18 @@ footer {
     text-decoration: none;
 }
 
-/* :not(セレクタ) → ()に一致しない要素を選択 */
-.tabs-menu li:not(.active):hover {
-    border-color: #f0f0f0 #f0f0f0 #999;
-    background-color: #f0f0f0;
+.tabs-menu .tab-1 a:hover {
+    text-decoration: none;
 }
 
-.tabs-menu .active {
+
+.tabs-menu .tab-2 a:hover {
+    border-color: #f0f0f0 #f0f0f0 #999;
+    background-color: #f0f0f0;
+    text-decoration: none;
+}
+
+.tabs-menu .tab-1 {
     border-color: #999 #999 transparent #999;
     background-color: #fff;
 }
@@ -418,13 +429,11 @@ footer {
     width: 1149px;
 }
 
-.tabs-content > div {
-    display: none;
-}
+
 
 /* 383 */
 .tables {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #ededed;
     /* marginきかない */
 }
 
@@ -527,4 +536,32 @@ footer {
 
 .setting_3 label {
     width: 200px;
+}
+
+/* 口コミ投稿画面 */
+
+.star1 {
+    display: inline-block;
+}
+
+
+
+.tabs-3 div {
+    margin: 10px 0 20px 10px;
+}
+
+.evaluation {
+    margin: 0 130px 0 17px;
+}
+
+
+
+.tabs-3 p {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.tabs-2 p {
+    text-align: center;
+    margin-top: 50px;
 }
