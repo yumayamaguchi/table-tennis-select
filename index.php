@@ -89,7 +89,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                 <div class="row">
                     <div class="images col-md-3">
                         <div class="image_1">
-                            <a href="racket_1.php">
+                            <a href="./racket-1/racket_1.php">
                                 <img src="images/37131.jpg" alt="林昀儒 SUPER ZLC" height="230" width="230">
                                 <div>林昀儒 SUPER ZLC<br>41,800円(税込)</div>
                             </a>
