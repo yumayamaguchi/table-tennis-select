@@ -39,7 +39,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                     <ul>
                         <?php if ($login['name'] === 'success') : ?>
                             <li><a href="logout.php">ログアウト</a>|</li>
-                            <li><a href="my-page.php">マイページ</a>|</li>
+                            <li><a href="./my-page/my-page.php">マイページ</a>|</li>
                             <li><?php print($member['name']); ?>さん、こんにちは！</li>
                         <?php else : ?>
                             <li><a href="create.php">会員登録</a>|</li>
