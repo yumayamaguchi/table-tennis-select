@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('dbconnect.php');
+require('../dbconnect.php');
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     //時間の上書き、最後のログインから1時間
@@ -24,7 +24,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
 <head>
     <title>racket</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
@@ -37,7 +37,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         <div class="container-fluid header">
             <div class="row">
                 <div class="head col-md-6">
-                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="index.php">卓プロ</a></p>
+                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="../index.php">卓プロ</a></p>
                 </div>
                 <div class="head_1 col-md-6">
                     <ul>
@@ -53,18 +53,24 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                 </div>
             </div>
         </div>
-        <div class="head_image">
-            <img src="images/banner_category_blade.jpg" alt="">
+        <div class="head_image mypage_head">
+            <img src="../images/header_table_equipment_lg.jpg" alt="">
+            <p>マイページ</p>
         </div>
     </header>
-    <div class="center">
+    <div id="center">
         <!-- ユーザー画像と名前 -->
-        <ul class="tabs-menu">
+        <!-- <ul class="tabs-menu">
             <img src="">
             <div class="user_name">ユーザーネーム</div>
             <li class="my_page"><a href=".tabs-1">トップ</a></li>
             <li class="my_page"><a href=".tabs-2">口コミ</a></li>
             <li class="my_page"><a href=".tabs-3">設定</a></li>
+        </ul> -->
+        <ul class="tabs-menu">
+            <li class="tab tab-1"><a href="my-page.php">トップ</a></li>
+            <li class="tab tab-2"><a href="my-page-word.php">口コミ</a></li>
+            <li class="tab tab-2"><a href="my-page-set.php">設定</a></li>
         </ul>
         <div class="tabs-content my_page_1">
             <div class="tabs-1">おおお</div>
@@ -103,7 +109,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     </footer>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         const showTab = (selector) => {
             console.log(selector);
 
@@ -129,5 +135,5 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         });
 
         showTab('.tabs-1');
-    </script>
+    </script> -->
 </body>

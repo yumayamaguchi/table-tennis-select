@@ -18,13 +18,16 @@ session_start();
 require('dbconnect.php');
 
 $id = $_SESSION['id'];
+$name = $_SESSION['join']['name'];
+$email = $_SESSION['join']['email'];
+$new_pass = $_SESSION['join']['new-pass'];
 $statement = $db->prepare('UPDATE members SET name=?, email=?, password=? WHERE id=?');
-$statement->execute(array($_POST['name'], $_POST['email'], sha1($_POST['new_pass']), $id));
+$statement->execute(array($name, $email, sha1($new_pass), $id));
 ?>
 
 
 <div id="content">
-<p>登録内容を変更しました</p>
+<p><?php print($_POST['name']); ?>登録内容を変更しました</p>
 <p><a href="login.php">ログインする</a></p>
 </div>
 

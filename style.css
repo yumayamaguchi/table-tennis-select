@@ -473,11 +473,11 @@ footer {
     margin: 10px 20px;
 }
 
-.chart {
+.tabs-3 .chart {
     display: inline-block;
     height: 250px;
     width: 250px;
-    margin: 20px 0 10px 120px;
+    margin-left: 150px;
 }
 
 .tabs-3-1 {
@@ -519,15 +519,15 @@ footer {
 }
 
 .setting_1 {
-    flex-grow: 1;
+    flex-grow: 3;
     text-align: center;
     margin-top: 30px;
 }
 
 .setting_2 {
-    flex-grow: 1;
+    flex-grow: 10;
     margin-top: 30px;
-    text-align: center;
+    
 }
 
 .setting_3 {
@@ -564,4 +564,30 @@ footer {
 .tabs-2 p {
     text-align: center;
     margin-top: 50px;
+}
+
+/* マイページのヘッド */
+
+.mypage_head {
+    position: relative;
+}
+
+.mypage_head img {
+    width: 900px;
+    height: 200px;
+    margin-bottom: 100px;
+    border-radius: 5px;
+}
+
+.mypage_head p {
+    position: absolute;
+    top:60px;
+    left: 770px;
+    color: white;
+    font-size: 50px;
+}
+
+.button {
+    margin-top: 80px;
+    text-align: center;
 }
