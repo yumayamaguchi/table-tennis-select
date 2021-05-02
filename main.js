@@ -92,7 +92,13 @@ $('.slick01').slick({
 
 // // showTab('.tabs-1');
 
-$('.star1').raty()
+$('.star1').raty({
+  click: function (score, evt) {
+    $.post('racket_1_post.php', { score: score, url: evt.currentTarget.baseURI });
+  }
+});
+
+
 
 // グラフchart.jsに関するプログラム
 

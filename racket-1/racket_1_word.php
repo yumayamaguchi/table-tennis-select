@@ -11,11 +11,8 @@ if (!empty($_POST)) {
         $members->execute(array($_SESSION['id']));
         $member = $members->fetch();
 
-        $message = $db->prepare('INSERT INTO posts SET member_id=?, message=?, created=NOW()');
-        $message->execute(array($member['id'], $_POST['message']));
-
-        header('Location: racket_1.php');
-        exit();
+        $message = $db->prepare('INSERT INTO posts SET member_id=?, message=?, score=?, created=NOW()');
+        $message->execute(array($member['id'], $_POST['message'], $_POST['score']));
     }
 }
 
@@ -41,7 +38,7 @@ $posts->execute();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -121,7 +118,13 @@ $posts->execute();
                     <?php foreach ($posts as $post) : ?>
                         <tr class="line-1">
                             <td width="270px"><?php print(htmlspecialchars($post['name'], ENT_QUOTES)); ?></td>
-                            <td width="370px"></td>
+                            <td width="370px">
+                                <div class="star2">
+                                    <?php $score = $post['score']; 
+                                    print($score);
+                                    ?>
+                                </div>
+                            </td>
                             <td width="370px"><?php print(htmlspecialchars($post['created'], ENT_QUOTES)); ?></td>
                             <?php if ($_SESSION['id'] == $post['member_id']) : ?>
                                 <td width="100px"><a class="btn btn-danger" href="delete.php?id=<?php print(htmlspecialchars($post['id'])); ?>">削除</a></td>
@@ -173,6 +176,12 @@ $posts->execute();
     <script src="../jquery.raty.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js" integrity="sha512-RGbSeD/jDcZBWNsI1VCvdjcDULuSfWTtIva2ek5FtteXeSjLfXac4kqkDRHVGf1TwsXCAqPTF7/EYITD0/CTqw==" crossorigin="anonymous"></script>
     <script src="../main.js"></script>
+    <script>
+        $('.star2').raty({
+            readOnly: true,
+            score: <?php print($score); ?>
+        });
+    </script>
 </body>
 
 </html>

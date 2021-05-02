@@ -86,7 +86,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         <div class="tabs-content">
             <!-- 口コミ投稿 -->
             <div class="tabs-3">
-                <form action="racket_1.php" method="post">
+                <form action="racket_1_word.php" method="post">
                     <div>
                         <label class="evaluation">5段階評価：</label>
                         <div class="star1"></div>
