@@ -142,7 +142,7 @@ header ul li a:hover {
 .image_1 {
     display: inline-block;
     width: 233px;
-    height: 315px;
+    height: 350px;
     border: solid 1px #dddddd;
     transition: transform 0.5s;
 }

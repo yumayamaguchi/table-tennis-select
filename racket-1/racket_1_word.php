@@ -119,10 +119,7 @@ $posts->execute();
                         <tr class="line-1">
                             <td width="270px"><?php print(htmlspecialchars($post['name'], ENT_QUOTES)); ?></td>
                             <td width="370px">
-                                <div class="star2">
-                                    <?php $score = $post['score']; 
-                                    print($score);
-                                    ?>
+                                <div class="star2" data-score="<?php echo $post['score']; ?>">
                                 </div>
                             </td>
                             <td width="370px"><?php print(htmlspecialchars($post['created'], ENT_QUOTES)); ?></td>
@@ -177,10 +174,14 @@ $posts->execute();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js" integrity="sha512-RGbSeD/jDcZBWNsI1VCvdjcDULuSfWTtIva2ek5FtteXeSjLfXac4kqkDRHVGf1TwsXCAqPTF7/EYITD0/CTqw==" crossorigin="anonymous"></script>
     <script src="../main.js"></script>
     <script>
-        $('.star2').raty({
-            readOnly: true,
-            score: <?php print($score); ?>
-        });
+        $('.star2').each(
+            function(index, element) {
+                $(element).raty({
+                    readOnly: true,
+                    score: $(element).data('score')
+                });
+            }
+        );
     </script>
 </body>
 

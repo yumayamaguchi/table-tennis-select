@@ -87,16 +87,21 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <div class="products">
                 <p class="rackets_1">攻撃用シェーク</p>
                 <div class="row">
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="./racket-1/racket_1.php">
-                                <img src="images/37131.jpg" alt="林昀儒 SUPER ZLC" height="230" width="230">
-                                <div>林昀儒 SUPER ZLC<br>41,800円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
+                    <?php foreach ($db->query('select * from racket') as $racket) {
+                        if ($racket['number'] > 8) {
+                            break;
+                        }
+                        print('<div class="images col-md-3">');
+                        print('<div class="image_1">');
+                        print('<a href="./racket-' . $racket['number'] . '/racket_' . $racket['number'] . '.php">');
+                        print('<img src="images/racket' . $racket['number'] . '.jpg" alt="' . $racket['name'] . '" height="230" width="230">');
+                        print('<div>' . $racket['name'] . '<br>価格：' . $racket['price'] . '円(税込)<br>反発性：' . $racket['repulsion'] . '<br>振動特性：' . $racket['vibration'] . '</div>');
+                        print('</a>');
+                        print('</div>');
+                        print('</div>');
+                    } ?>
 
-                    <div class="images col-md-3">
+                    <!-- <div class="images col-md-3">
                         <div class="image_1">
                             <a href="">
                                 <img src="images/37091.jpg" alt="オフチャロフ インナーフォース ALC" height="230" width="230">
@@ -157,14 +162,31 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                                 <div>水谷隼 ZLC<br>27,500円(税込)</div>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
             <div class="products">
                 <p class="rackets_2">守備用シェーク</p>
                 <div class="row">
-                    <div class="images col-md-3">
+                    <?php foreach ($db->query('select * from racket') as $racket) {
+                        if($racket['number'] < 9) {
+                            continue;
+                        }
+                        if($racket['number'] > 10) {
+                            break;
+                        }
+                        print('<div class="images col-md-3">');
+                        print('<div class="image_1">');
+                        print('<a href="./racket-' . $racket['number'] . '/racket_' . $racket['number'] . '.php">');
+                        print('<img src="images/racket' . $racket['number'] . '.jpg" alt="' . $racket['name'] . '" height="230" width="230">');
+                        print('<div>' . $racket['name'] . '<br>価格：' . $racket['price'] . '円(税込)<br>反発性：' . $racket['repulsion'] . '<br>振動特性：' . $racket['vibration'] . '</div>');
+                        print('</a>');
+                        print('</div>');
+                        print('</div>');
+                    } ?>
+
+                    <!-- <div class="images col-md-3">
                         <div class="image_1">
                             <a href="">
                                 <img src="images/36691.jpg" alt="インナーシールド レイヤー ZLF" height="230" width="230">
@@ -179,13 +201,29 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                                 <div>ダイオードＶ<br>7,700円(税込)</div>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="products">
                 <p class="rackets_3">合板シェーク</p>
                 <div class="row">
-                    <div class="images col-md-3">
+                <?php foreach ($db->query('select * from racket') as $racket) {
+                        if($racket['number'] < 11) {
+                            continue;
+                        }
+                        if($racket['number'] > 14) {
+                            break;
+                        }
+                        print('<div class="images col-md-3">');
+                        print('<div class="image_1">');
+                        print('<a href="./racket-' . $racket['number'] . '/racket_' . $racket['number'] . '.php">');
+                        print('<img src="images/racket' . $racket['number'] . '.jpg" alt="' . $racket['name'] . '" height="230" width="230">');
+                        print('<div>' . $racket['name'] . '<br>価格：' . $racket['price'] . '円(税込)<br>反発性：' . $racket['repulsion'] . '<br>振動特性：' . $racket['vibration'] . '</div>');
+                        print('</a>');
+                        print('</div>');
+                        print('</div>');
+                    } ?>
+                    <!-- <div class="images col-md-3">
                         <div class="image_1">
                             <a href="">
                                 <img src="images/37141.jpg" alt="メイス アドバンス" height="230" width="230">
@@ -216,14 +254,30 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                                 <div>ティモボルJ<br>5,280円(税込)</div>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
             <div class="products">
                 <p class="rackets_4">日本式ペン</p>
                 <div class="row">
-                    <div class="images col-md-3">
+                <?php foreach ($db->query('select * from racket') as $racket) {
+                        if($racket['number'] < 15) {
+                            continue;
+                        }
+                        if($racket['number'] > 18) {
+                            break;
+                        }
+                        print('<div class="images col-md-3">');
+                        print('<div class="image_1">');
+                        print('<a href="./racket-' . $racket['number'] . '/racket_' . $racket['number'] . '.php">');
+                        print('<img src="images/racket' . $racket['number'] . '.jpg" alt="' . $racket['name'] . '" height="230" width="230">');
+                        print('<div>' . $racket['name'] . '<br>価格：' . $racket['price'] . '円(税込)<br>反発性：' . $racket['repulsion'] . '<br>振動特性：' . $racket['vibration'] . '</div>');
+                        print('</a>');
+                        print('</div>');
+                        print('</div>');
+                    } ?>
+                    <!-- <div class="images col-md-3">
                         <div class="image_1">
                             <a href="">
                                 <img src="images/23930.jpg" alt="サイプレスG-MAX" height="230" width="230">
@@ -254,14 +308,27 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                                 <div>ハッドロウJPV - S<br>10,450円(税込)</div>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
             <div class="products">
                 <p class="rackets_5">中国式ペン</p>
                 <div class="row">
-                    <div class="images col-md-3">
+                <?php foreach ($db->query('select * from racket') as $racket) {
+                        if($racket['number'] < 19) {
+                            continue;
+                        }
+                        print('<div class="images col-md-3">');
+                        print('<div class="image_1">');
+                        print('<a href="./racket-' . $racket['number'] . '/racket_' . $racket['number'] . '.php">');
+                        print('<img src="images/racket' . $racket['number'] . '.jpg" alt="' . $racket['name'] . '" height="230" width="230">');
+                        print('<div>' . $racket['name'] . '<br>価格：' . $racket['price'] . '円(税込)<br>反発性：' . $racket['repulsion'] . '<br>振動特性：' . $racket['vibration'] . '</div>');
+                        print('</a>');
+                        print('</div>');
+                        print('</div>');
+                    } ?>
+                    <!-- <div class="images col-md-3">
                         <div class="image_1">
                             <a href="">
                                 <img src="images/23990.jpg" alt="ティモボル CAF - CS" height="230" width="230">
@@ -292,7 +359,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                                 <div>吉田海偉<br>6,820円(税込)</div>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -343,7 +410,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         });
 
         function createListHtml(list) {
-            
+
             var result = $('<div class="product-list">');
             for (var i = 0; i < list.length; i++) {
                 //jsonの配列を代入
