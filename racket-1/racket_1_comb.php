@@ -2,46 +2,29 @@
 session_start();
 require('../dbconnect.php');
 
+$rackets = $db->query('SELECT * FROM racket WHERE number=1');
+$racket = $rackets->fetch();
+$number = $racket['number'];
+$name = $racket['name'];
+$price = $racket['price'];
+$repulsion = $racket['repulsion'];
+$vibration = $racket['vibration'];
 
+if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+    //時間の上書き、最後のログインから1時間
+    $_SESSION['time'] = time();
 
-if (!empty($_POST)) {
-    if ($_POST['message'] !== '') {
+    $login['name'] = 'success';
 
-        $members = $db->prepare('SELECT * FROM members WHERE id=?');
-        $members->execute(array($_SESSION['id']));
-        $member = $members->fetch();
-
-        $message = $db->prepare('INSERT INTO posts SET member_id=?, message=?, created=NOW()');
-        $message->execute(array($member['id'], $_POST['message']));
-
-        header('Location: racket_1.php');
-        exit();
-    }
-}
-
-//ページネーション
-$page = $_REQUEST['page'];
-if ($page == '') {
-    $page = 1;
-}
-$page = max($page, 1);
-
-$counts = $db->query('SELECT COUNT(*) AS cnt FROM posts');
-$cnt = $counts->fetch();
-$max_page = ceil($cnt['cnt'] / 3);
-$page = min($page, $max_page);
-
-$start = ($page - 1) * 3;
-
-//LIMIT句、1の場合2件目から数える
-$posts = $db->prepare('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.member_id ORDER BY p.created DESC LIMIT ?,3');
-//1は?の位置を指定、$startはバインドする変数を指定
-$posts->bindParam(1, $start, PDO::PARAM_INT);
-$posts->execute();
+    //ログインしているユーザーの情報を引き出す
+    $members = $db->prepare('SELECT * FROM members WHERE id=?');
+    $members->execute(array($_SESSION['id']));
+    $member = $members->fetch();
+} 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -64,16 +47,14 @@ $posts->execute();
                 </div>
                 <div class="head_1 col-md-6">
                     <ul>
-                        <li><a href="create.php">会員登録</a>|</li>
-                        <li><a href="login.php">ログイン</a>|</li>
-                        <li><a href="logout.php">ログアウト</a>|</li>
-                        <li>
-                            <a href="">
-                                <?php if ($login['name'] = 'success') {
-                                    print($member['name'] + 'さん、こんにちは！');
-                                } ?>
-                            </a>
-                        </li>
+                        <?php if ($login['name'] === 'success') : ?>
+                            <li><a href="../logout.php">ログアウト</a>|</li>
+                            <li><a href="../my-page/my-page.php">マイページ</a>|</li>
+                            <li><?php print($member['name']); ?>さん、こんにちは！</li>
+                        <?php else : ?>
+                            <li><a href="../create.php">会員登録</a>|</li>
+                            <li><a href="../login.php">ログイン</a>|</li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
@@ -84,11 +65,11 @@ $posts->execute();
     </header>
     <div class="main_bar">
         <ul class="slick01">
-            <li><img alt="画像1" src="../images/37131_01.jpg" /></li>
-            <li><img alt="画像2" src="../images/37131_02.jpg" /></li>
-            <li><img alt="画像3" src="../images/37131_03.jpg" /></li>
-            <li><img alt="画像3" src="../images/37131_03.jpg" /></li>
-            <li><img alt="画像3" src="../images/37131_03.jpg" /></li>
+            <li><img alt="画像1" src="../images/racket1.jpg" /></li>
+            <li><img alt="画像2" src="../images/racket1-1.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket1-2.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket1-3.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket1-4.jpg" /></li>
         </ul>
     </div>
     <!-- <div class="side_bar">
@@ -112,8 +93,8 @@ $posts->execute();
             <div class="tabs-3">
                 <div class="tabs-3-2">
                     <div class="tabs-3-1">
-                        <img src="../images/37131.jpg" alt="林昀儒 SUPER ZLC" height="200" width="200">
-                        <div>林昀儒 SUPER ZLC<br>41,800円(税込)</div>
+                        <img src="../images/racket<?php print($number); ?>.jpg" alt="林昀儒 SUPER ZLC" height="200" width="200">
+                        <div><?php print($name); ?><br><?php print($price); ?>円（税込）<br>反発特性：<?php print($repulsion); ?><br>振動特性：<?php print($vibration); ?></div>
                     </div>
                     <div class="tabs-3-1">
                         <img src="../images/06090.jpg" alt="テナジー19" height="200" width="200">

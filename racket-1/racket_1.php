@@ -79,11 +79,11 @@ $posts->execute();
     </header>
     <div class="main_bar">
         <ul class="slick01">
-            <li><img alt="画像1" src="../images/37131_01.jpg" /></li>
-            <li><img alt="画像2" src="../images/37131_02.jpg" /></li>
-            <li><img alt="画像3" src="../images/37131_03.jpg" /></li>
-            <li><img alt="画像3" src="../images/37131_03.jpg" /></li>
-            <li><img alt="画像3" src="../images/37131_03.jpg" /></li>
+            <li><img alt="画像1" src="../images/racket1.jpg" /></li>
+            <li><img alt="画像2" src="../images/racket1-1.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket1-2.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket1-3.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket1-4.jpg" /></li>
         </ul>
     </div>
     <!-- <div class="side_bar">

@@ -2,6 +2,9 @@
 session_start();
 require('../dbconnect.php');
 
+$posts = $db->prepare('SELECT * FROM posts WHERE member_id=?');
+$posts->execute(array($_SESSION['id']));
+
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     //時間の上書き、最後のログインから1時間
     $_SESSION['time'] = time();
@@ -59,21 +62,40 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         </div>
     </header>
     <div id="center">
-        <!-- ユーザー画像と名前 -->
-        <!-- <ul class="tabs-menu">
-            <img src="">
-            <div class="user_name">ユーザーネーム</div>
-            <li class="my_page"><a href=".tabs-1">トップ</a></li>
-            <li class="my_page"><a href=".tabs-2">口コミ</a></li>
-            <li class="my_page"><a href=".tabs-3">設定</a></li>
-        </ul> -->
         <ul class="tabs-menu">
             <li class="tab tab-2"><a href="my-page.php">トップ</a></li>
             <li class="tab tab-1"><a href="my-page-word.php">口コミ</a></li>
             <li class="tab tab-2"><a href="my-page-set.php">設定</a></li>
         </ul>
         <div class="tabs-content my_page_1">
-            <div class="tabs-2">ｗｗｗ</div>
+            <div class="tabs-2">
+                <table class="comment">
+                    <tr class="line">
+                        <th>種類</th>
+                        <th>採点</th>
+                        <th>タイトル</th>
+                        <th>投稿された日付</th>
+                        <th></th>
+                    </tr>
+                    <?php foreach ($posts as $post) : ?>
+                        <tr class="line-1">
+                            <td width="200px"><?php print(htmlspecialchars($pos['name'], ENT_QUOTES)); ?></td>
+                            <td width="200px">
+                                <div class="star2" data-score="<?php echo $post['score']; ?>">
+                                </div>
+                            </td>
+                            <td width="360px"><?php print(htmlspecialchars($post['title'], ENT_QUOTES)); ?></td>
+                            <td width="250px"><?php print(htmlspecialchars($post['created'], ENT_QUOTES)); ?></td>
+
+                            <td width="100px"><a class="btn btn-danger" href="../delete.php?id=<?php print(htmlspecialchars($post['id'])); ?>">削除</a></td>
+                        </tr>
+                        <tr class="comment_2">
+                            <td></td>
+                            <td colspan="3"><?php print(htmlspecialchars($post['message'], ENT_QUOTES)); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
         </div>
     </div>
     <!-- フッターここから -->

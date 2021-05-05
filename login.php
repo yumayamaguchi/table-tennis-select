@@ -90,7 +90,6 @@ if (!empty($_POST)) {
                     <ul>
                         <li><a href="create.php">会員登録</a></li>
                         <li><a href="login.php">ログイン</a></li>
-                        <li><a href="">ログアウト</a></li>
                     </ul>
                 </div>
             </div>
