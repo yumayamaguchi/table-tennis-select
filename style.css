@@ -464,8 +464,14 @@ footer {
     padding: 30px 0 0 0;
 }
 
+.comment_2 {
+    width: 1110px;
+    border-bottom: 1px solid #dddddd;
+}
+
 .comment_2 td {
     padding: 0 0 50px;
+    border-bottom: 1px solid #dddddd;
 }
 
 /* ページネーション機能 */
@@ -483,6 +489,11 @@ footer {
 .tabs-3-1 {
     display: inline-block;
     margin: 20px 20px 10px 10px;
+    border: 1px solid #dddddd;
+}
+
+.tabs-3-1 div {
+    font-size: 15px;
 }
 
 .tabs-3-2 {

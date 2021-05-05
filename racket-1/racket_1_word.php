@@ -2,6 +2,17 @@
 session_start();
 require('../dbconnect.php');
 
+if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+    //時間の上書き、最後のログインから1時間
+    $_SESSION['time'] = time();
+
+    $login['name'] = 'success';
+
+    //ログインしているユーザーの情報を引き出す
+    $members = $db->prepare('SELECT * FROM members WHERE id=?');
+    $members->execute(array($_SESSION['id']));
+    $member = $members->fetch();
+}
 
 
 if (!empty($_POST)) {
@@ -11,8 +22,8 @@ if (!empty($_POST)) {
         $members->execute(array($_SESSION['id']));
         $member = $members->fetch();
 
-        $message = $db->prepare('INSERT INTO posts SET member_id=?, message=?, score=?, created=NOW()');
-        $message->execute(array($member['id'], $_POST['message'], $_POST['score']));
+        $message = $db->prepare('INSERT INTO posts SET title=?, member_id=?, message=?, score=?, created=NOW()');
+        $message->execute(array($_POST['title'], $member['id'], $_POST['message'], $_POST['score']));
     }
 }
 
@@ -61,16 +72,14 @@ $posts->execute();
                 </div>
                 <div class="head_1 col-md-6">
                     <ul>
-                        <li><a href="create.php">会員登録</a>|</li>
-                        <li><a href="login.php">ログイン</a>|</li>
-                        <li><a href="logout.php">ログアウト</a>|</li>
-                        <li>
-                            <a href="">
-                                <?php if ($login['name'] = 'success') {
-                                    print($member['name'] + 'さん、こんにちは！');
-                                } ?>
-                            </a>
-                        </li>
+                        <?php if ($login['name'] === 'success') : ?>
+                            <li><a href="../logout.php">ログアウト</a>|</li>
+                            <li><a href="../my-page/my-page.php">マイページ</a>|</li>
+                            <li><?php print($member['name']); ?>さん、こんにちは！</li>
+                        <?php else : ?>
+                            <li><a href="../create.php">会員登録</a>|</li>
+                            <li><a href="../login.php">ログイン</a>|</li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
@@ -81,11 +90,11 @@ $posts->execute();
     </header>
     <div class="main_bar">
         <ul class="slick01">
-            <li><img alt="画像1" src="../images/37131_01.jpg" /></li>
-            <li><img alt="画像2" src="../images/37131_02.jpg" /></li>
-            <li><img alt="画像3" src="../images/37131_03.jpg" /></li>
-            <li><img alt="画像3" src="../images/37131_03.jpg" /></li>
-            <li><img alt="画像3" src="../images/37131_03.jpg" /></li>
+            <li><img alt="画像1" src="../images/racket1.jpg" /></li>
+            <li><img alt="画像2" src="../images/racket1-1.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket1-2.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket1-3.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket1-4.jpg" /></li>
         </ul>
     </div>
     <!-- <div class="side_bar">
@@ -111,25 +120,27 @@ $posts->execute();
                     <tr class="line">
                         <th>投稿者</th>
                         <th>採点</th>
+                        <th>タイトル</th>
                         <th>投稿された日付</th>
                         <th></th>
                     </tr>
 
                     <?php foreach ($posts as $post) : ?>
                         <tr class="line-1">
-                            <td width="270px"><?php print(htmlspecialchars($post['name'], ENT_QUOTES)); ?></td>
-                            <td width="370px">
+                            <td width="200px"><?php print(htmlspecialchars($post['name'], ENT_QUOTES)); ?></td>
+                            <td width="200px">
                                 <div class="star2" data-score="<?php echo $post['score']; ?>">
                                 </div>
                             </td>
-                            <td width="370px"><?php print(htmlspecialchars($post['created'], ENT_QUOTES)); ?></td>
+                            <td width="360px"><?php print(htmlspecialchars($post['title'], ENT_QUOTES)); ?></td>
+                            <td width="250px"><?php print(htmlspecialchars($post['created'], ENT_QUOTES)); ?></td>
                             <?php if ($_SESSION['id'] == $post['member_id']) : ?>
-                                <td width="100px"><a class="btn btn-danger" href="delete.php?id=<?php print(htmlspecialchars($post['id'])); ?>">削除</a></td>
+                                <td width="100px"><a class="btn btn-danger" href="../delete.php?id=<?php print(htmlspecialchars($post['id'])); ?>">削除</a></td>
                             <?php endif; ?>
                         </tr>
                         <tr class="comment_2">
                             <td></td>
-                            <td><?php print(htmlspecialchars($post['message'], ENT_QUOTES)); ?></td>
+                            <td colspan="3"><?php print(htmlspecialchars($post['message'], ENT_QUOTES)); ?></td>
                         </tr>
                     <?php endforeach; ?>
 

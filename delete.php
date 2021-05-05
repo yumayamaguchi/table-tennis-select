@@ -15,7 +15,7 @@ if (isset($_SESSION['id'])) {
     }
 }
 
-header('Location: racket_1.php');
+header('Location: ./racket-1/racket_1_word.php');
 exit();
 
 ?>

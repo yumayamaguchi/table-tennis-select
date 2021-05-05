@@ -6,6 +6,8 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     //最後のログインから1時間有効
     $_SESSION['time'] = time();
 
+    $login['name'] = 'success';
+
     $members = $db->prepare('SELECT * FROM members WHERE id=?');
     $members->execute(array($_SESSION['id']));
     $member = $members->fetch();
@@ -44,7 +46,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                     <ul>
                         <?php if ($login['name'] === 'success') : ?>
                             <li><a href="../logout.php">ログアウト</a>|</li>
-                            <li><a href="../my-page.php">マイページ</a>|</li>
+                            <li><a href="../my-page/my-page.php">マイページ</a>|</li>
                             <li><?php print($member['name']); ?>さん、こんにちは！</li>
                         <?php else : ?>
                             <li><a href="../create.php">会員登録</a>|</li>
@@ -60,11 +62,11 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     </header>
     <div class="main_bar">
         <ul class="slick01">
-            <li><img alt="画像1" src="../images/37131_01.jpg" /></li>
-            <li><img alt="画像2" src="../images/37131_02.jpg" /></li>
-            <li><img alt="画像3" src="../images/37131_03.jpg" /></li>
-            <li><img alt="画像3" src="../images/37131_03.jpg" /></li>
-            <li><img alt="画像3" src="../images/37131_03.jpg" /></li>
+            <li><img alt="画像1" src="../images/racket1.jpg" /></li>
+            <li><img alt="画像2" src="../images/racket1-1.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket1-2.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket1-3.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket1-4.jpg" /></li>
         </ul>
     </div>
     <!-- <div class="side_bar">
