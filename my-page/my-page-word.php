@@ -2,8 +2,27 @@
 session_start();
 require('../dbconnect.php');
 
-$posts = $db->prepare('SELECT * FROM posts WHERE member_id=?');
-$posts->execute(array($_SESSION['id']));
+//ページネーション
+$page = $_REQUEST['page'];
+if ($page == '') {
+    $page = 1;
+}
+//$pageが1より小さければ、1になる
+$page = max($page, 1);
+
+$counts = $db->prepare('SELECT COUNT(*) AS cnt FROM posts WHERE member_id=?');
+$counts->execute(array($_SESSION['id']));
+$cnt = $counts->fetch();
+
+$max_page = ceil($cnt['cnt'] / 3);
+$page = min($page, $max_page);
+
+$start = ($page - 1) * 3;
+
+$posts = $db->prepare('SELECT * FROM posts, tool WHERE member_id=? AND posts.number = tool.number ORDER BY posts.created DESC LIMIT ?,3');
+$posts->bindValue(1, $_SESSION['id']);
+$posts->bindParam(2, $start, PDO::PARAM_INT);
+$posts->execute();
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     //時間の上書き、最後のログインから1時間
@@ -45,12 +64,12 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                 <div class="head_1 col-md-6">
                     <ul>
                         <?php if ($login['name'] === 'success') : ?>
-                            <li><a href="logout.php">ログアウト</a>|</li>
+                            <li><a href="../logout.php">ログアウト</a>|</li>
                             <li><a href="my-page.php">マイページ</a>|</li>
                             <li><?php print($member['name']); ?>さん、こんにちは！</li>
                         <?php else : ?>
-                            <li><a href="create.php">会員登録</a>|</li>
-                            <li><a href="login.php">ログイン</a>|</li>
+                            <li><a href="../create.php">会員登録</a>|</li>
+                            <li><a href="../login.php">ログイン</a>|</li>
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -71,7 +90,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <div class="tabs-2">
                 <table class="comment">
                     <tr class="line">
-                        <th>種類</th>
+                        <th>ツール</th>
                         <th>採点</th>
                         <th>タイトル</th>
                         <th>投稿された日付</th>
@@ -79,7 +98,12 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                     </tr>
                     <?php foreach ($posts as $post) : ?>
                         <tr class="line-1">
-                            <td width="200px"><?php print(htmlspecialchars($pos['name'], ENT_QUOTES)); ?></td>
+                            <td width="200px">
+                                <div class="tool">
+                                    <img src="../images/racket<?php print(htmlspecialchars($post['number'], ENT_QUOTES)); ?>.jpg" alt="林昀儒 SUPER ZLC" height="100" width="100">
+                                    <div><?php print(htmlspecialchars($post['name'], ENT_QUOTES)); ?></div>
+                                </div>
+                            </td>
                             <td width="200px">
                                 <div class="star2" data-score="<?php echo $post['score']; ?>">
                                 </div>
@@ -95,6 +119,27 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                         </tr>
                     <?php endforeach; ?>
                 </table>
+                <?php
+                if ($page > 1) {
+                    print('<a class="figure" href="my-page-word.php?page=' . ($page - 1) . '">前へ</a>');
+                } else {
+                    print('<span class="figure">前へ</span>');
+                }
+
+                for ($i = 1; $i <= $max_page; $i++) {
+                    if ($i == $page) {
+                        print('<span class="figure">' . $page . '</span>');
+                    } else {
+                        print('<a class="figure" href="my-page-word.php?page=' . $i . '">' . $i . '</a>');
+                    }
+                }
+
+                if ($page < $max_page) {
+                    print('<a class="figure" href="my-page-word.php?page=' . ($page + 1) . '">次へ</a>');
+                } else {
+                    print('<span class="figure">次へ</span>');
+                }
+                ?>
             </div>
         </div>
     </div>
@@ -104,6 +149,20 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     </footer>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="../jquery.raty.js"></script>
+    <script src="../main.js"></script>
+    <script>
+        //繰り返し処理
+        $('.star2').each(
+            //番号と要素
+            function(index, element) {
+                $(element).raty({
+                    readOnly: true,
+                    score: $(element).data('score')
+                });
+            }
+        );
+    </script>
     <!-- <script type="text/javascript">
         const showTab = (selector) => {
             console.log(selector);

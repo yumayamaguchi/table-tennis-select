@@ -22,8 +22,9 @@ if (!empty($_POST)) {
         $members->execute(array($_SESSION['id']));
         $member = $members->fetch();
 
-        $message = $db->prepare('INSERT INTO posts SET title=?, member_id=?, message=?, score=?, created=NOW()');
+        $message = $db->prepare('INSERT INTO posts SET title=?, member_id=?, number=1, message=?, score=?, created=NOW()');
         $message->execute(array($_POST['title'], $member['id'], $_POST['message'], $_POST['score']));
+        header('Location: ./racket_1_word.php');
     }
 }
 
@@ -140,7 +141,7 @@ $posts->execute();
                         </tr>
                         <tr class="comment_2">
                             <td></td>
-                            <td colspan="3"><?php print(htmlspecialchars($post['message'], ENT_QUOTES)); ?></td>
+                            <td colspan="3" width="500px"><?php print(htmlspecialchars($post['message'], ENT_QUOTES)); ?></td>
                         </tr>
                     <?php endforeach; ?>
 
@@ -187,6 +188,7 @@ $posts->execute();
     <script>
         $('.star2').each(
             function(index, element) {
+                console.log(element);
                 $(element).raty({
                     readOnly: true,
                     score: $(element).data('score')
