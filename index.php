@@ -87,15 +87,15 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <div class="products">
                 <p class="rackets_1">攻撃用シェーク</p>
                 <div class="row">
-                    <?php foreach ($db->query('select * from racket') as $racket) {
-                        if ($racket['number'] > 8) {
+                    <?php foreach ($db->query('select * from tool') as $tool) {
+                        if ($tool['number'] > 8) {
                             break;
                         }
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $racket['number'] . '/racket_' . $racket['number'] . '.php">');
-                        print('<img src="images/racket' . $racket['number'] . '.jpg" alt="' . $racket['name'] . '" height="230" width="230">');
-                        print('<div>' . $racket['name'] . '<br>価格：' . $racket['price'] . '円(税込)<br>反発性：' . $racket['repulsion'] . '<br>振動特性：' . $racket['vibration'] . '</div>');
+                        print('<a href="./racket-' . $tool['number'] . '/racket_' . $tool['number'] . '.php">');
+                        print('<img src="images/racket' . $tool['number'] . '.jpg" alt="' . $tool['name'] . '" height="230" width="230">');
+                        print('<div>' . $tool['name'] . '<br>価格：' . $tool['price'] . '円(税込)<br>反発性：' . $tool['repulsion'] . '<br>振動特性：' . $tool['vibration'] . '</div>');
                         print('</a>');
                         print('</div>');
                         print('</div>');
@@ -169,18 +169,18 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <div class="products">
                 <p class="rackets_2">守備用シェーク</p>
                 <div class="row">
-                    <?php foreach ($db->query('select * from racket') as $racket) {
-                        if($racket['number'] < 9) {
+                    <?php foreach ($db->query('select * from tool') as $tool) {
+                        if($tool['number'] < 9) {
                             continue;
                         }
-                        if($racket['number'] > 10) {
+                        if($tool['number'] > 10) {
                             break;
                         }
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $racket['number'] . '/racket_' . $racket['number'] . '.php">');
-                        print('<img src="images/racket' . $racket['number'] . '.jpg" alt="' . $racket['name'] . '" height="230" width="230">');
-                        print('<div>' . $racket['name'] . '<br>価格：' . $racket['price'] . '円(税込)<br>反発性：' . $racket['repulsion'] . '<br>振動特性：' . $racket['vibration'] . '</div>');
+                        print('<a href="./racket-' . $tool['number'] . '/racket_' . $tool['number'] . '.php">');
+                        print('<img src="images/racket' . $tool['number'] . '.jpg" alt="' . $tool['name'] . '" height="230" width="230">');
+                        print('<div>' . $tool['name'] . '<br>価格：' . $tool['price'] . '円(税込)<br>反発性：' . $tool['repulsion'] . '<br>振動特性：' . $tool['vibration'] . '</div>');
                         print('</a>');
                         print('</div>');
                         print('</div>');
@@ -207,18 +207,18 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <div class="products">
                 <p class="rackets_3">合板シェーク</p>
                 <div class="row">
-                <?php foreach ($db->query('select * from racket') as $racket) {
-                        if($racket['number'] < 11) {
+                <?php foreach ($db->query('select * from tool') as $tool) {
+                        if($tool['number'] < 11) {
                             continue;
                         }
-                        if($racket['number'] > 14) {
+                        if($tool['number'] > 14) {
                             break;
                         }
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $racket['number'] . '/racket_' . $racket['number'] . '.php">');
-                        print('<img src="images/racket' . $racket['number'] . '.jpg" alt="' . $racket['name'] . '" height="230" width="230">');
-                        print('<div>' . $racket['name'] . '<br>価格：' . $racket['price'] . '円(税込)<br>反発性：' . $racket['repulsion'] . '<br>振動特性：' . $racket['vibration'] . '</div>');
+                        print('<a href="./racket-' . $tool['number'] . '/racket_' . $tool['number'] . '.php">');
+                        print('<img src="images/racket' . $tool['number'] . '.jpg" alt="' . $tool['name'] . '" height="230" width="230">');
+                        print('<div>' . $tool['name'] . '<br>価格：' . $tool['price'] . '円(税込)<br>反発性：' . $tool['repulsion'] . '<br>振動特性：' . $tool['vibration'] . '</div>');
                         print('</a>');
                         print('</div>');
                         print('</div>');
@@ -261,18 +261,18 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <div class="products">
                 <p class="rackets_4">日本式ペン</p>
                 <div class="row">
-                <?php foreach ($db->query('select * from racket') as $racket) {
-                        if($racket['number'] < 15) {
+                <?php foreach ($db->query('select * from tool') as $tool) {
+                        if($tool['number'] < 15) {
                             continue;
                         }
-                        if($racket['number'] > 18) {
+                        if($tool['number'] > 18) {
                             break;
                         }
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $racket['number'] . '/racket_' . $racket['number'] . '.php">');
-                        print('<img src="images/racket' . $racket['number'] . '.jpg" alt="' . $racket['name'] . '" height="230" width="230">');
-                        print('<div>' . $racket['name'] . '<br>価格：' . $racket['price'] . '円(税込)<br>反発性：' . $racket['repulsion'] . '<br>振動特性：' . $racket['vibration'] . '</div>');
+                        print('<a href="./racket-' . $tool['number'] . '/racket_' . $tool['number'] . '.php">');
+                        print('<img src="images/racket' . $tool['number'] . '.jpg" alt="' . $tool['name'] . '" height="230" width="230">');
+                        print('<div>' . $tool['name'] . '<br>価格：' . $tool['price'] . '円(税込)<br>反発性：' . $tool['repulsion'] . '<br>振動特性：' . $tool['vibration'] . '</div>');
                         print('</a>');
                         print('</div>');
                         print('</div>');
@@ -315,15 +315,15 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <div class="products">
                 <p class="rackets_5">中国式ペン</p>
                 <div class="row">
-                <?php foreach ($db->query('select * from racket') as $racket) {
-                        if($racket['number'] < 19) {
+                <?php foreach ($db->query('select * from tool') as $tool) {
+                        if($tool['number'] < 19) {
                             continue;
                         }
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $racket['number'] . '/racket_' . $racket['number'] . '.php">');
-                        print('<img src="images/racket' . $racket['number'] . '.jpg" alt="' . $racket['name'] . '" height="230" width="230">');
-                        print('<div>' . $racket['name'] . '<br>価格：' . $racket['price'] . '円(税込)<br>反発性：' . $racket['repulsion'] . '<br>振動特性：' . $racket['vibration'] . '</div>');
+                        print('<a href="./racket-' . $tool['number'] . '/racket_' . $tool['number'] . '.php">');
+                        print('<img src="images/racket' . $tool['number'] . '.jpg" alt="' . $tool['name'] . '" height="230" width="230">');
+                        print('<div>' . $tool['name'] . '<br>価格：' . $tool['price'] . '円(税込)<br>反発性：' . $tool['repulsion'] . '<br>振動特性：' . $tool['vibration'] . '</div>');
                         print('</a>');
                         print('</div>');
                         print('</div>');

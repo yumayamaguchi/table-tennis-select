@@ -521,10 +521,6 @@ footer {
     display: inline-block;
 }
 
-.my_page_1 {
-    height: 400px;
-}
-
 .tabs-content .setting {
     display: flex;
 }
@@ -601,4 +597,13 @@ footer {
 .button {
     margin-top: 80px;
     text-align: center;
+}
+
+.tool {
+    border: 1px solid #dddddd;
+    width: 102px;
+}
+
+.tool div {
+    font-size: 15px;
 }

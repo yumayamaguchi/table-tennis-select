@@ -2,13 +2,13 @@
 session_start();
 require('../dbconnect.php');
 
-$rackets = $db->query('SELECT * FROM racket WHERE number=1');
-$racket = $rackets->fetch();
-$number = $racket['number'];
-$name = $racket['name'];
-$price = $racket['price'];
-$repulsion = $racket['repulsion'];
-$vibration = $racket['vibration'];
+$tools = $db->query('SELECT * FROM tool WHERE number=1');
+$tool = $tools->fetch();
+$number = $tool['number'];
+$name = $tool['name'];
+$price = $tool['price'];
+$repulsion = $tool['repulsion'];
+$vibration = $tool['vibration'];
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     //時間の上書き、最後のログインから1時間
@@ -93,7 +93,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <div class="tabs-3">
                 <div class="tabs-3-2">
                     <div class="tabs-3-1">
-                        <img src="../images/racket<?php print($number); ?>.jpg" alt="林昀儒 SUPER ZLC" height="200" width="200">
+                        <img src="../images/racket<?php print($number); ?>.jpg" alt="<?php print($name); ?>" height="200" width="200">
                         <div><?php print($name); ?><br><?php print($price); ?>円（税込）<br>反発特性：<?php print($repulsion); ?><br>振動特性：<?php print($vibration); ?></div>
                     </div>
                     <div class="tabs-3-1">
