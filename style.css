@@ -366,10 +366,6 @@ footer {
 
 /* スリック機能ここまで */
 
-.version {
-    margin: 80px 0;
-}
-
 /* タブ機能 */
 
 .tabs-menu {
@@ -606,4 +602,12 @@ footer {
 
 .tool div {
     font-size: 15px;
+}
+
+/* お気に入り追加ボタン */
+#center .favorite {
+    font-size: 15px;
+    font-weight: 900;
+    text-align: right;
+    margin-bottom: 30px;
 }

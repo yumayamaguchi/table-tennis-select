@@ -80,10 +80,11 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                 類いまれな打球感覚を持つ中華台北の新星・林昀儒選手は、高めの振動特性を持つ威力重視のこのラケットを駆使し、鋭いチキータや質の高いカウンターを生み出しています。グリップに採用された彼の好みのカラーと、名前の頭文字で構成されたウイングマークは、若さと将来の成功を感じさせます。
             </p>
         </div>
+        <a href="../favorite.php"><div class="favorite btn btn-warning"><i class="far fa-star"></i><span>お気に入りに追加</span></div></a>
         <ul class="tabs-menu">
-            <li class="tab tab-2"><a href="racket_1.php">性能</a></li>
-            <li class="tab tab-1"><a href="racket_1_word.php">口コミ</a></li>
-            <li class="tab tab-2"><a href="racket_1_comb.php">お勧め組み合わせラバー</a></li>
+            <li class="tab tab-2"><a href="racket_1.php?number=<?php print($number); ?>">性能</a></li>
+            <li class="tab tab-1"><a href="racket_1_word.php?number=<?php print($number); ?>">口コミ</a></li>
+            <li class="tab tab-2"><a href="racket_1_comb.php?number=<?php print($number); ?>">お勧め組み合わせラバー</a></li>
         </ul>
         <div class="tabs-content">
             <!-- 口コミ投稿 -->

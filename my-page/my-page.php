@@ -12,6 +12,9 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $members = $db->prepare('SELECT * FROM members WHERE id=?');
     $members->execute(array($_SESSION['id']));
     $member = $members->fetch();
+
+    $favorites = $db->prepare('SELECT * FROM tool, favorite WHERE favorite.member_id=? AND tool_number = tool.number');
+    $favorites->execute(array($_SESSION['id']));
 } else {
     header('Location: login.php');
     exit();
@@ -42,12 +45,12 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                 <div class="head_1 col-md-6">
                     <ul>
                         <?php if ($login['name'] === 'success') : ?>
-                            <li><a href="logout.php">ログアウト</a>|</li>
+                            <li><a href="../logout.php">ログアウト</a>|</li>
                             <li><a href="my-page.php">マイページ</a>|</li>
                             <li><?php print($member['name']); ?>さん、こんにちは！</li>
                         <?php else : ?>
-                            <li><a href="create.php">会員登録</a>|</li>
-                            <li><a href="login.php">ログイン</a>|</li>
+                            <li><a href="../create.php">会員登録</a>|</li>
+                            <li><a href="../login.php">ログイン</a>|</li>
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -73,34 +76,16 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <li class="tab tab-2"><a href="my-page-set.php">設定</a></li>
         </ul>
         <div class="tabs-content my_page_1">
-            <div class="tabs-1">おおお</div>
-            <div class="tabs-2">ｗｗｗ</div>
-            <div class="tabs-3 setting">
-                <div class="setting_1"><i class="fas fa-user-cog"></i>設定</div>
-                <div class="setting_2">
-                    <form action="update.php" method="post">
-                        <div class="setting_3">
-                            <label>ニックネーム</label>
-                            <input type="text" name="name" value="<?php print(htmlspecialchars($member['name'])); ?>">
-                        </div>
-                        <div class="setting_3">
-                            <label>メールアドレス</label>
-                            <input type="text" name="email" value="<?php print(htmlspecialchars($member['email'])); ?>">
-                        </div>
-                        <div class="setting_3">
-                            <label>新しいパスワード</label>
-                            <input type="password" name="new-pass">
-                        </div>
-                        <div class="setting_3">
-                            <label>現在のパスワード</label>
-                            <input type="password" name="pass">
-                        </div>
-                    <div class="">
-                        <button type="submit">登録内容を変更する</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
+            <?php foreach ($favorites as $tool) {
+                print('<div class="images col-md-3">');
+                print('<div class="image_1">');
+                print('<a href="../racket-' . $tool['number'] . '/racket_' . $tool['number'] . '.php?number=' . $tool['number'] . '">');
+                print('<img src="../images/racket' . $tool['number'] . '.jpg" alt="' . $tool['name'] . '" height="230" width="230">');
+                print('<div>' . $tool['name'] . '<br>価格：' . $tool['price'] . '円(税込)<br>反発性：' . $tool['repulsion'] . '<br>振動特性：' . $tool['vibration'] . '</div>');
+                print('</a>');
+                print('</div>');
+                print('</div>');
+            } ?>
         </div>
     </div>
     <!-- フッターここから -->
