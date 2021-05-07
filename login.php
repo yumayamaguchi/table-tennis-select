@@ -3,7 +3,15 @@ session_start();
 //DBへ接続
 require('./dbconnect.php');
 //cookieにメールアドレスが入っていれば
-var_dump($_SERVER['HTTP_REFERER']);
+ var_dump($_SERVER['HTTP_REFERER']);
+
+// $url = parse_url($_SERVER['HTTP_REFERER']);
+
+// var_dump($url);
+
+// $host = $url['path'];
+
+// var_dump($host);
 if ($_COOKIE['email'] !== '') {
     $email = $_COOKIE['email'];
 }
@@ -50,22 +58,17 @@ if (!empty($_POST)) {
                 //クッキーにメールアドレスの保存
                 setcookie('email', $_POST['email'], time() + 60 * 60 * 24 * 14);
             }
-            
-            
-            if ($_SERVER['HTTP_REFERER'] === 'http://localhost:8888/table_tennis_tool/racket_1.php') {
-                header('Location: racket_1_post.php');
-                exit();
-            } else {
-                header('Location: index.php');
-                exit();
-            }
 
+                header('Location:'. $_SESSION['path']);
+                exit();
             //アドレス、パスの該当がなければ実行
         } else {
             $error['login'] = 'failed';
         }
     }
 }
+$url = parse_url($_SERVER['HTTP_REFERER']);
+$_SESSION['path'] = $url['path'];
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

@@ -91,9 +91,10 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                         if ($tool['number'] > 8) {
                             break;
                         }
+                        
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $tool['number'] . '/racket_' . $tool['number'] . '.php">');
+                        print('<a href="./racket-' . $tool['number'] . '/racket_' . $tool['number'] . '.php?number='.$tool['number'].'">');
                         print('<img src="images/racket' . $tool['number'] . '.jpg" alt="' . $tool['name'] . '" height="230" width="230">');
                         print('<div>' . $tool['name'] . '<br>価格：' . $tool['price'] . '円(税込)<br>反発性：' . $tool['repulsion'] . '<br>振動特性：' . $tool['vibration'] . '</div>');
                         print('</a>');
