@@ -60,20 +60,7 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
 
 <body>
     <header>
-        <div class="container-fluid header">
-            <div class="row">
-                <div class="head col-md-6">
-                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="index.php">卓球ツール</a></p>
-                </div>
-                <div class="head_1 col-md-6">
-                    <ul>
-                        <li><a href="create.php">会員登録</a></li>
-                        <li><a href="login.php">ログイン</a></li>
-                        <li><a href="">ログアウト</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    <?php require('./header.php')?>
     </header>
     <div class="content">
 

@@ -7,7 +7,6 @@ a:hover {
     color: white;
 }
 
-
 .header {
     border-bottom: solid 1px black;
     background-color: #0c4da2;
@@ -30,12 +29,10 @@ a:hover {
 }
 
 @media (min-width: 768px) {
-.head_1 {
-    text-align: right;
+    .head_1 {
+        text-align: right;
+    }
 }
-}
-
-
 
 header ul {
     list-style: none;
@@ -43,7 +40,7 @@ header ul {
     padding: 0;
 }
 
-header ul li{
+header ul li {
     display: inline-block;
     font-size: 17px;
     color: white;
@@ -59,7 +56,7 @@ header ul li a:hover {
     text-decoration: none;
 }
 
-.head_image{
+.head_image {
     text-align: center;
     margin-top: 50px;
 }
@@ -99,8 +96,6 @@ header ul li a:hover {
         border: solid 1px #dddddd;
     }
 }
-
-
 
 #side_bar {
     text-align: center;
@@ -153,7 +148,6 @@ header ul li a:hover {
 
 .image_1 a:hover {
     text-decoration: none;
-    
 }
 
 .images div {
@@ -169,7 +163,9 @@ header ul li a:hover {
     color: black;
 }
 
+
 /* jsonリスト */
+
 .product-list {
     text-align: center;
 }
@@ -201,6 +197,7 @@ footer {
     text-decoration: none;
     color: #c1c1c7;
 }
+
 
 /* ここからcreate.php */
 
@@ -247,6 +244,7 @@ footer {
     margin-bottom: 0;
 }
 
+
 /* check.php */
 
 .bt input {
@@ -262,6 +260,7 @@ footer {
     border-bottom: 1px solid #dddddd;
     background-color: #f7f4f4;
 }
+
 
 /* racket.php */
 
@@ -281,6 +280,7 @@ footer {
     line-height: 100px;
 }
 
+
 /* スリック機能 */
 
 .slick01 {
@@ -289,7 +289,7 @@ footer {
     width: 100%;
 }
 
-.slick01 > li {
+.slick01>li {
     width: 200px;
     height: auto;
 }
@@ -301,34 +301,38 @@ footer {
     height: auto;
 }
 
+
 /* スリック矢印 */
 
-.slick01{
-	position: relative;
+.slick01 {
+    position: relative;
 }
-.slick01 .prev{
+
+.slick01 .prev {
     display: block;
-	position: absolute;
-	top: 80%;
-	bottom: 0;
-	left: 35%;
-	margin: auto;
-	width: 30px;
-	height: 30px;
+    position: absolute;
+    top: 80%;
+    bottom: 0;
+    left: 35%;
+    margin: auto;
+    width: 30px;
+    height: 30px;
     font-size: 40px;
-	z-index: 1;
+    z-index: 1;
 }
-.slick01 .next{
-	position: absolute;
-	top: 460px;
-	right: 600px;
-	bottom: 0;
-	margin: auto;
-	width: 30px;
-	height: 30px;
-	z-index: 1;
+
+.slick01 .next {
+    position: absolute;
+    top: 460px;
+    right: 600px;
+    bottom: 0;
+    margin: auto;
+    width: 30px;
+    height: 30px;
+    z-index: 1;
     font-size: 40px;
 }
+
 
 /* スリック点 */
 
@@ -342,9 +346,9 @@ footer {
 }
 
 .slick-dots li button {
-    background: transparent;   
-    border:0;   
-    font-size: 0pt; 
+    background: transparent;
+    border: 0;
+    font-size: 0pt;
     outline: none;
 }
 
@@ -362,9 +366,11 @@ footer {
     text-align: center;
     color: black;
     opacity: 0.25;
-  }
+}
+
 
 /* スリック機能ここまで */
+
 
 /* タブ機能 */
 
@@ -400,7 +406,6 @@ footer {
     text-decoration: none;
 }
 
-
 .tabs-menu .tab-2 a:hover {
     border-color: #f0f0f0 #f0f0f0 #999;
     background-color: #f0f0f0;
@@ -426,23 +431,25 @@ footer {
 }
 
 
-
 /* 383 */
+
 .tables {
     border-bottom: 1px solid #ededed;
     /* marginきかない */
 }
 
-.tables th, .tables td {
+.tables th,
+.tables td {
     padding: 30px 0;
 }
-
 
 .tabs-2 {
     text-align: center;
 }
 
+
 /* コメント一覧 */
+
 .comment {
     width: 1110px;
     text-align: left;
@@ -470,7 +477,9 @@ footer {
     border-bottom: 1px solid #dddddd;
 }
 
+
 /* ページネーション機能 */
+
 .figure {
     margin: 10px 20px;
 }
@@ -496,7 +505,9 @@ footer {
     margin-bottom: 40px;
 }
 
+
 /* マイページのタブ */
+
 .tabs-menu .my_page {
     display: inline-block;
     width: 300px;
@@ -530,7 +541,6 @@ footer {
 .setting_2 {
     flex-grow: 10;
     margin-top: 30px;
-    
 }
 
 .setting_3 {
@@ -541,13 +551,12 @@ footer {
     width: 200px;
 }
 
+
 /* 口コミ投稿画面 */
 
 .star1 {
     display: inline-block;
 }
-
-
 
 .tabs-3 div {
     margin: 10px 0 20px 10px;
@@ -556,8 +565,6 @@ footer {
 .evaluation {
     margin: 0 130px 0 17px;
 }
-
-
 
 .tabs-3 p {
     text-align: center;
@@ -568,6 +575,7 @@ footer {
     text-align: center;
     margin-top: 50px;
 }
+
 
 /* マイページのヘッド */
 
@@ -584,7 +592,7 @@ footer {
 
 .mypage_head p {
     position: absolute;
-    top:60px;
+    top: 60px;
     left: 770px;
     color: white;
     font-size: 50px;
@@ -604,10 +612,56 @@ footer {
     font-size: 15px;
 }
 
+
 /* お気に入り追加ボタン */
+
 #center .favorite {
     font-size: 15px;
     font-weight: 900;
     text-align: right;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
+}
+
+
+/* お気に入りの吹き出し */
+
+#center .favorites {
+    font-size: 15px;
+    width: 250px;
+    position: relative;
+    margin: 0 0 30px;
+    padding: 7px 10px;
+    min-width: 120px;
+    max-width: 100%;
+    font-size: 16px;
+    background: #FFF;
+    border: solid 3px #555;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+#center .favorites:before {
+    content: "";
+    position: absolute;
+    top: -24px;
+    left: 20%;
+    margin-left: -15px;
+    border: 12px solid transparent;
+    border-bottom: 12px solid #FFF;
+    z-index: 2;
+}
+
+#center .favorites:after {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 20%;
+    margin-left: -17px;
+    border: 14px solid transparent;
+    border-bottom: 14px solid #555;
+    z-index: 1;
+}
+
+#center .favorites p {
+    margin: 5px 0;
 }

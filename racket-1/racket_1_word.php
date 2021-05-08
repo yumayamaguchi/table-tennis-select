@@ -66,25 +66,7 @@ $posts->execute();
 
 <body>
     <header>
-        <div class="container-fluid header">
-            <div class="row">
-                <div class="head col-md-6">
-                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="../index.php">卓プロ</a></p>
-                </div>
-                <div class="head_1 col-md-6">
-                    <ul>
-                        <?php if ($login['name'] === 'success') : ?>
-                            <li><a href="../logout.php">ログアウト</a>|</li>
-                            <li><a href="../my-page/my-page.php">マイページ</a>|</li>
-                            <li><?php print($member['name']); ?>さん、こんにちは！</li>
-                        <?php else : ?>
-                            <li><a href="../create.php">会員登録</a>|</li>
-                            <li><a href="../login.php">ログイン</a>|</li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <?php require('../header_1.php') ?>
         <div class="head_image_1">
             <p>林昀儒 SUPER ZLC</p>
         </div>
@@ -109,7 +91,9 @@ $posts->execute();
                 類いまれな打球感覚を持つ中華台北の新星・林昀儒選手は、高めの振動特性を持つ威力重視のこのラケットを駆使し、鋭いチキータや質の高いカウンターを生み出しています。グリップに採用された彼の好みのカラーと、名前の頭文字で構成されたウイングマークは、若さと将来の成功を感じさせます。
             </p>
         </div>
-        <a href="../favorite.php"><div class="favorite btn btn-warning"><i class="far fa-star"></i><span>お気に入りに追加</span></div></a>
+        <a href="../favorite.php">
+            <div class="favorite btn btn-warning"><i class="far fa-star"></i><span>お気に入りに追加</span></div>
+        </a>
         <ul class="tabs-menu">
             <li class="tab tab-2"><a href="racket_1.php?number=<?php print($number); ?>">性能</a></li>
             <li class="tab tab-1"><a href="racket_1_word.php?number=<?php print($number); ?>">口コミ</a></li>
@@ -196,6 +180,8 @@ $posts->execute();
                 });
             }
         );
+
+        
     </script>
 </body>
 
