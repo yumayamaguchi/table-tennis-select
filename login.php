@@ -5,13 +5,6 @@ require('./dbconnect.php');
 //cookieにメールアドレスが入っていれば
  var_dump($_SERVER['HTTP_REFERER']);
 
-// $url = parse_url($_SERVER['HTTP_REFERER']);
-
-// var_dump($url);
-
-// $host = $url['path'];
-
-// var_dump($host);
 if ($_COOKIE['email'] !== '') {
     $email = $_COOKIE['email'];
 }
@@ -59,8 +52,13 @@ if (!empty($_POST)) {
                 setcookie('email', $_POST['email'], time() + 60 * 60 * 24 * 14);
             }
 
-                header('Location:'. $_SESSION['path']);
+            if($_SESSION['path'] === '/table_tennis_tool/thanks.php') {
+                header('Location: index.php');
                 exit();
+            } else {
+            header('Location:'. $_SESSION['path']);
+            exit();
+            }
             //アドレス、パスの該当がなければ実行
         } else {
             $error['login'] = 'failed';
@@ -69,6 +67,7 @@ if (!empty($_POST)) {
 }
 $url = parse_url($_SERVER['HTTP_REFERER']);
 $_SESSION['path'] = $url['path'];
+var_dump($_SESSION['path']);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -84,19 +83,7 @@ $_SESSION['path'] = $url['path'];
 
 <body>
     <header>
-        <div class="container-fluid header">
-            <div class="row">
-                <div class="head col-md-6">
-                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="index.php">卓球ツール</a></p>
-                </div>
-                <div class="head_1 col-md-6">
-                    <ul>
-                        <li><a href="create.php">会員登録</a></li>
-                        <li><a href="login.php">ログイン</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    <?php require('./header.php')?>
     </header>
     <div class="content">
         <p class="new">ログインする</p>
