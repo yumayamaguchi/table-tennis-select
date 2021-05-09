@@ -2,13 +2,13 @@
 session_start();
 require('../dbconnect.php');
 
-$tools = $db->query('SELECT * FROM tool WHERE number=1');
-$tool = $tools->fetch();
-$number = $tool['number'];
-$name = $tool['name'];
-$price = $tool['price'];
-$repulsion = $tool['repulsion'];
-$vibration = $tool['vibration'];
+$ruckets = $db->query('SELECT * FROM rucket WHERE number=1');
+$rucket = $ruckets->fetch();
+$number = $rucket['number'];
+$name = $rucket['name'];
+$price = $rucket['price'];
+$repulsion = $rucket['repulsion'];
+$vibration = $rucket['vibration'];
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     //時間の上書き、最後のログインから1時間

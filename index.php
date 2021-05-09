@@ -12,6 +12,22 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $members->execute(array($_SESSION['id']));
     $member = $members->fetch();
 }
+
+if ($_POST['filter'] === 'price') {
+    $sort = $db->query('SELECT * FROM rucket ORDER BY price DESC');
+    $sorts = $sort->fetchAll();
+} elseif ($_POST['filter'] === 'vibration') {
+    $sort = $db->query('SELECT * FROM rucket ORDER BY vibration DESC');
+    $sorts = $sort->fetchAll();
+} elseif ($_POST['filter'] === 'repulsion') {
+    $sort = $db->query('SELECT * FROM rucket ORDER BY repulsion DESC');
+    $sorts = $sort->fetchAll();
+} else {
+    $sort = $db->query('SELECT * FROM rucket');
+    $sorts = $sort->fetchAll();
+};
+
+
 ?>
 
 
@@ -30,7 +46,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
 <body>
     <!-- headerここから -->
     <header>
-        <?php require('./header.php')?>
+        <?php require('./header.php') ?>
         </div>
         <div class="head_image">
             <img src="images/banner_category_blade.jpg" alt="">
@@ -46,9 +62,6 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <a id="index_1" href="index_1.html">
                 <li>ラバー</li>
             </a>
-            <a href="">
-                <li>検索ツール</li>
-            </a>
         </ul>
     </div>
     <!-- main_barここまで -->
@@ -62,6 +75,15 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                 <li class="racket_4"><a href=""><i class="far fa-check-circle"></i>日本式ペン</a></li>|
                 <li class="racket_5"><a href=""><i class="far fa-check-circle"></i>中国式ペン</a></li>|
             </ul>
+            <form method="post" action="">
+                <select name="filter">
+                    <option value="select">選択してください</option>
+                    <option value="price">価格順</option>
+                    <option value="repulsion">反発性順</option>
+                    <option value="vibration">振動特性順</option>
+                </select>
+                <input type="submit" value="並び替え">
+            </form>
         </div>
         <!-- side_barここまで -->
         <!-- main_visualここから -->
@@ -70,280 +92,97 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <div class="products">
                 <p class="rackets_1">攻撃用シェーク</p>
                 <div class="row">
-                    <?php foreach ($db->query('select * from tool') as $tool) {
-                        if ($tool['number'] > 8) {
-                            break;
+                    <?php
+                    foreach ($sorts as $rucket) {
+                        if ($rucket['number'] > 8) {
+                            continue;
                         }
-                        
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $tool['number'] . '/racket_' . $tool['number'] . '.php?number='.$tool['number'].'">');
-                        print('<img src="images/racket' . $tool['number'] . '.jpg" alt="' . $tool['name'] . '" height="230" width="230">');
-                        print('<div>' . $tool['name'] . '<br>価格：' . $tool['price'] . '円(税込)<br>反発性：' . $tool['repulsion'] . '<br>振動特性：' . $tool['vibration'] . '</div>');
+                        print('<a href="./racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
+                        print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
+                        print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
                         print('</a>');
                         print('</div>');
                         print('</div>');
                     } ?>
-
-                    <!-- <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/37091.jpg" alt="オフチャロフ インナーフォース ALC" height="230" width="230">
-                                <div>オフチャロフ インナーフォース ALC<br>19,800円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/37121.jpg" alt="フランチスカ インナーフォース ZLC" height="230" width="230">
-                                <div>フランチスカ インナーフォース ZLC<br>27,500円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/35861.jpg" alt="ティモボル ALC" height="230" width="230">
-                                <div>ティモボル ALC<br>19,800円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/35831.jpg" alt="ティモボル ZLC" height="230" width="230">
-                                <div>ティモボル ZLC<br>27,500円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/35841.jpg" alt="ティモボル ZLF" height="230" width="230">
-                                <div>ティモボル ZLF<br>22,000円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/36601.jpg" alt="水谷隼 SUPER ZLC" height="230" width="230">
-                                <div>水谷隼 SUPER ZLC<br>41,800円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/36611.jpg" alt="水谷隼 ZLC" height="230" width="230">
-                                <div>水谷隼 ZLC<br>27,500円(税込)</div>
-                            </a>
-                        </div>
-                    </div> -->
-
                 </div>
             </div>
             <div class="products">
                 <p class="rackets_2">守備用シェーク</p>
                 <div class="row">
-                    <?php foreach ($db->query('select * from tool') as $tool) {
-                        if($tool['number'] < 9) {
+                    <?php
+                    foreach ($sorts as $rucket) {
+                        if ($rucket['number'] < 9 || $rucket['number'] > 10) {
                             continue;
-                        }
-                        if($tool['number'] > 10) {
-                            break;
                         }
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $tool['number'] . '/racket_' . $tool['number'] . '.php">');
-                        print('<img src="images/racket' . $tool['number'] . '.jpg" alt="' . $tool['name'] . '" height="230" width="230">');
-                        print('<div>' . $tool['name'] . '<br>価格：' . $tool['price'] . '円(税込)<br>反発性：' . $tool['repulsion'] . '<br>振動特性：' . $tool['vibration'] . '</div>');
+                        print('<a href="./racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
+                        print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
+                        print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
                         print('</a>');
                         print('</div>');
                         print('</div>');
                     } ?>
-
-                    <!-- <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/36691.jpg" alt="インナーシールド レイヤー ZLF" height="230" width="230">
-                                <div>インナーシールド レイヤー ZLF<br>19,800円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/36961.jpg" alt="ダイオードＶ" height="230" width="230">
-                                <div>ダイオードＶ<br>7,700円(税込)</div>
-                            </a>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div class="products">
                 <p class="rackets_3">合板シェーク</p>
                 <div class="row">
-                <?php foreach ($db->query('select * from tool') as $tool) {
-                        if($tool['number'] < 11) {
+                    <?php
+                    foreach ($sorts as $rucket) {
+                        if ($rucket['number'] < 11 || $rucket['number'] > 14) {
                             continue;
-                        }
-                        if($tool['number'] > 14) {
-                            break;
                         }
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $tool['number'] . '/racket_' . $tool['number'] . '.php">');
-                        print('<img src="images/racket' . $tool['number'] . '.jpg" alt="' . $tool['name'] . '" height="230" width="230">');
-                        print('<div>' . $tool['name'] . '<br>価格：' . $tool['price'] . '円(税込)<br>反発性：' . $tool['repulsion'] . '<br>振動特性：' . $tool['vibration'] . '</div>');
+                        print('<a href="./racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
+                        print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
+                        print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
                         print('</a>');
                         print('</div>');
                         print('</div>');
                     } ?>
-                    <!-- <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/37141.jpg" alt="メイス アドバンス" height="230" width="230">
-                                <div>メイス アドバンス<br>6,270円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/36681.jpg" alt="SK7クラシック" height="230" width="230">
-                                <div>SK7クラシック<br>7,480円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/30271.jpg" alt="コルベル" height="230" width="230">
-                                <div>コルベル<br>6,050円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/36931.jpg" alt="ティモボルJ" height="230" width="230">
-                                <div>ティモボルJ<br>5,280円(税込)</div>
-                            </a>
-                        </div>
-                    </div> -->
-
                 </div>
             </div>
             <div class="products">
                 <p class="rackets_4">日本式ペン</p>
                 <div class="row">
-                <?php foreach ($db->query('select * from tool') as $tool) {
-                        if($tool['number'] < 15) {
+                    <?php
+                    foreach ($sorts as $rucket) {
+                        if ($rucket['number'] < 15 || $rucket['number'] > 18) {
                             continue;
-                        }
-                        if($tool['number'] > 18) {
-                            break;
                         }
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $tool['number'] . '/racket_' . $tool['number'] . '.php">');
-                        print('<img src="images/racket' . $tool['number'] . '.jpg" alt="' . $tool['name'] . '" height="230" width="230">');
-                        print('<div>' . $tool['name'] . '<br>価格：' . $tool['price'] . '円(税込)<br>反発性：' . $tool['repulsion'] . '<br>振動特性：' . $tool['vibration'] . '</div>');
+                        print('<a href="./racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
+                        print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
+                        print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
                         print('</a>');
                         print('</div>');
                         print('</div>');
                     } ?>
-                    <!-- <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/23930.jpg" alt="サイプレスG-MAX" height="230" width="230">
-                                <div>サイプレスG-MAX<br>30,800円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/23960.jpg" alt="サイプレスV-MAX" height="230" width="230">
-                                <div>サイプレスV-MAX<br>19,800円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/23950.jpg" alt="サイプレスT-MAX" height="230" width="230">
-                                <div>サイプレスT-MAX<br>13,200円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/23820.jpg" alt="ハッドロウJPV - S" height="230" width="230">
-                                <div>ハッドロウJPV - S<br>10,450円(税込)</div>
-                            </a>
-                        </div>
-                    </div> -->
                 </div>
             </div>
 
             <div class="products">
                 <p class="rackets_5">中国式ペン</p>
                 <div class="row">
-                <?php foreach ($db->query('select * from tool') as $tool) {
-                        if($tool['number'] < 19) {
+                    <?php
+                    foreach ($sorts as $rucket) {
+                        if ($rucket['number'] < 19) {
                             continue;
                         }
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $tool['number'] . '/racket_' . $tool['number'] . '.php">');
-                        print('<img src="images/racket' . $tool['number'] . '.jpg" alt="' . $tool['name'] . '" height="230" width="230">');
-                        print('<div>' . $tool['name'] . '<br>価格：' . $tool['price'] . '円(税込)<br>反発性：' . $tool['repulsion'] . '<br>振動特性：' . $tool['vibration'] . '</div>');
+                        print('<a href="./racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
+                        print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
+                        print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
                         print('</a>');
                         print('</div>');
                         print('</div>');
                     } ?>
-                    <!-- <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/23990.jpg" alt="ティモボル CAF - CS" height="230" width="230">
-                                <div>ティモボル CAF - CS<br>8,250円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/23920.jpg" alt="SKカーボン - CS" height="230" width="230">
-                                <div>SKカーボン - CS<br>8,580円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/23910.jpg" alt="SK7クラシック - CS" height="230" width="230">
-                                <div>SK7クラシック - CS<br>7,480円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/21760.jpg" alt="吉田海偉" height="230" width="230">
-                                <div>吉田海偉<br>6,820円(税込)</div>
-                            </a>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
