@@ -665,3 +665,22 @@ footer {
 #center .favorites p {
     margin: 5px 0;
 }
+
+
+/* 並び替え機能 */
+
+#side_bar form {
+    margin-top: 50px;
+}
+
+#side_bar form select {
+    width: 250px;
+    font-size: 20px;
+    height: 40px;
+    margin: 0 120px 0 0;
+}
+
+#side_bar form input {
+    height: 40px;
+    font-size: 20px;
+}
