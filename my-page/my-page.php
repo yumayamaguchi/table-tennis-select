@@ -13,8 +13,15 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $members->execute(array($_SESSION['id']));
     $member = $members->fetch();
 
-    $favorites = $db->prepare('SELECT * FROM tool, favorite WHERE favorite.member_id=? AND tool_number = tool.number');
+    //ラケットのお気に入りを取得
+    $favorites = $db->prepare('SELECT * FROM rucket, favorite WHERE favorite.member_id=? AND tool_number = rucket.number');
     $favorites->execute(array($_SESSION['id']));
+    $favorite = $favorites->fetchAll();
+    
+    //ラバーのお気に入りを取得
+    $favorites_r = $db->prepare('SELECT * FROM rubber, favorite WHERE favorite.member_id=? AND tool_number = rubber.number');
+    $favorites_r->execute(array($_SESSION['id']));
+    $favorite_r = $favorites_r->fetchAll();
 } else {
     header('Location: login.php');
     exit();
@@ -76,12 +83,22 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <li class="tab tab-2"><a href="my-page-set.php">設定</a></li>
         </ul>
         <div class="tabs-content my_page_1">
-            <?php foreach ($favorites as $tool) {
+            <?php foreach ($favorite as $rucket) {
                 print('<div class="images col-md-3">');
                 print('<div class="image_1">');
-                print('<a href="../racket-' . $tool['number'] . '/racket_' . $tool['number'] . '.php?number=' . $tool['number'] . '">');
-                print('<img src="../images/racket' . $tool['number'] . '.jpg" alt="' . $tool['name'] . '" height="230" width="230">');
-                print('<div>' . $tool['name'] . '<br>価格：' . $tool['price'] . '円(税込)<br>反発性：' . $tool['repulsion'] . '<br>振動特性：' . $tool['vibration'] . '</div>');
+                print('<a href="../racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
+                print('<img src="../images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
+                print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
+                print('</a>');
+                print('</div>');
+                print('</div>');
+            } ?>
+            <?php foreach ($favorite_r as $rubber) {
+                print('<div class="images col-md-3">');
+                print('<div class="image_1">');
+                print('<a href="../racket-' . $rubber['number'] . '/racket_' . $rubber['number'] . '.php?number=' . $rubber['number'] . '">');
+                print('<img src="../images/racket' . $rubber['number'] . '.jpg" alt="' . $rubber['name'] . '" height="230" width="230">');
+                print('<div>' . $rubber['name'] . '<br>価格：' . $rubber['price'] . '円(税込)<br>反発性：' . $rubber['repulsion'] . '<br>振動特性：' . $rubber['vibration'] . '</div>');
                 print('</a>');
                 print('</div>');
                 print('</div>');
@@ -94,31 +111,4 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     </footer>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <!-- <script type="text/javascript">
-        const showTab = (selector) => {
-            console.log(selector);
-
-            // 一旦activeクラスの削除
-            $('.tabs-menu > li').removeClass('active');
-
-            $('.tabs-content > div').hide();
-
-            //selectorに該当するものだけactive要素を追加
-            $(`.tabs-menu a[href="${selector}"]`)
-                .parent('li')
-                .addClass('active');
-
-            // selectorに該当するものだけを表示
-            $(selector).show();
-        };
-        $('.tabs-menu a').on('click', (e) => {
-            e.preventDefault();
-
-            //クリックされたhref要素の取得
-            const selector = $(e.target).attr('href');
-            showTab(selector);
-        });
-
-        showTab('.tabs-1');
-    </script> -->
 </body>

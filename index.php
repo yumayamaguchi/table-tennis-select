@@ -99,7 +99,7 @@ if ($_POST['filter'] === 'price') {
                         }
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
+                        print('<a href="./racket/racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
                         print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
                         print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
                         print('</a>');
@@ -118,7 +118,7 @@ if ($_POST['filter'] === 'price') {
                         }
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
+                        print('<a href="./racket/racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
                         print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
                         print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
                         print('</a>');
@@ -137,7 +137,7 @@ if ($_POST['filter'] === 'price') {
                         }
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
+                        print('<a href="./racket/racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
                         print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
                         print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
                         print('</a>');
@@ -156,7 +156,7 @@ if ($_POST['filter'] === 'price') {
                         }
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
+                        print('<a href="./racket/racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
                         print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
                         print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
                         print('</a>');
@@ -176,7 +176,7 @@ if ($_POST['filter'] === 'price') {
                         }
                         print('<div class="images col-md-3">');
                         print('<div class="image_1">');
-                        print('<a href="./racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
+                        print('<a href="./racket/racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
                         print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
                         print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
                         print('</a>');
