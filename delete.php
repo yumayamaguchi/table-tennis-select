@@ -14,8 +14,9 @@ if (isset($_SESSION['id'])) {
         $del->execute(array($id));
     }
 }
-
-header('Location: ./racket-1/racket_1_word.php');
+$url = parse_url($_SERVER['HTTP_REFERER']);
+$_SESSION['paths'] = $url['path'];
+header('Location:' .$_SESSION['paths']);
 exit();
 
 ?>

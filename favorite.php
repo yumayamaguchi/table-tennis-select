@@ -13,7 +13,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $record = $favorite->fetch();
 
     if($record['cnt'] > 0) {
-        header('Location:'. $_SESSION['path'] .'?record=duplicate');
+        header('Location:'. $_SESSION['paths'] .'?record=duplicate');
         exit();
     } else {
 

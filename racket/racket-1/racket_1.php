@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('../dbconnect.php');
+require('../../dbconnect.php');
 
 $_SESSION['number'] = $_REQUEST['number'];
 $number = $_SESSION['number'];
@@ -47,7 +47,7 @@ $posts->execute();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
@@ -57,18 +57,18 @@ $posts->execute();
 
 <body>
     <header>
-        <?php require('../header_1.php') ?>
+        <?php require('../../header_1.php') ?>
         <div class="head_image_1">
             <p>林昀儒 SUPER ZLC</p>
         </div>
     </header>
     <div class="main_bar">
         <ul class="slick01">
-            <li><img alt="画像1" src="../images/racket1.jpg" /></li>
-            <li><img alt="画像2" src="../images/racket1-1.jpg" /></li>
-            <li><img alt="画像3" src="../images/racket1-2.jpg" /></li>
-            <li><img alt="画像3" src="../images/racket1-3.jpg" /></li>
-            <li><img alt="画像3" src="../images/racket1-4.jpg" /></li>
+            <li><img alt="画像1" src="../../images/racket1.jpg" /></li>
+            <li><img alt="画像2" src="../../images/racket1-1.jpg" /></li>
+            <li><img alt="画像3" src="../../images/racket1-2.jpg" /></li>
+            <li><img alt="画像3" src="../../images/racket1-3.jpg" /></li>
+            <li><img alt="画像3" src="../../images/racket1-4.jpg" /></li>
         </ul>
     </div>
     <!-- <div class="side_bar">
@@ -82,7 +82,7 @@ $posts->execute();
                 類いまれな打球感覚を持つ中華台北の新星・林昀儒選手は、高めの振動特性を持つ威力重視のこのラケットを駆使し、鋭いチキータや質の高いカウンターを生み出しています。グリップに採用された彼の好みのカラーと、名前の頭文字で構成されたウイングマークは、若さと将来の成功を感じさせます。
             </p>
         </div>
-        <a href="../favorite.php">
+        <a href="../../favorite.php">
             <div class="favorite btn btn-warning"><i class="far fa-star"></i><span>お気に入りに追加</span></div>
         </a>
         <?php if ($_REQUEST['record'] == 'duplicate') : ?>
@@ -158,9 +158,9 @@ $posts->execute();
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="../jquery.raty.js"></script>
+    <script src="../../jquery.raty.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js" integrity="sha512-RGbSeD/jDcZBWNsI1VCvdjcDULuSfWTtIva2ek5FtteXeSjLfXac4kqkDRHVGf1TwsXCAqPTF7/EYITD0/CTqw==" crossorigin="anonymous"></script>
-    <script src="../main.js"></script>
+    <script src="../../main.js"></script>
 </body>
 
 </html>

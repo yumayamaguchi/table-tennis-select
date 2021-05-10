@@ -19,10 +19,17 @@ $page = min($page, $max_page);
 
 $start = ($page - 1) * 3;
 
-$posts = $db->prepare('SELECT * FROM posts, tool WHERE member_id=? AND posts.number = tool.number ORDER BY posts.created DESC LIMIT ?,3');
+//ラケットの投稿を取得
+$posts = $db->prepare('SELECT * FROM posts, rucket WHERE member_id=? AND posts.number = rucket.number ORDER BY posts.created DESC LIMIT ?,3');
 $posts->bindValue(1, $_SESSION['id']);
 $posts->bindParam(2, $start, PDO::PARAM_INT);
 $posts->execute();
+
+//ラバーの投稿を取得
+$posts_r = $db->prepare('SELECT * FROM posts, rubber WHERE member_id=? AND posts.number = rubber.number ORDER BY posts.created DESC LIMIT ?,3');
+$posts_r->bindValue(1, $_SESSION['id']);
+$posts_r->bindParam(2, $start, PDO::PARAM_INT);
+$posts_r->execute();
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     //時間の上書き、最後のログインから1時間
@@ -96,7 +103,31 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                         <th>投稿された日付</th>
                         <th></th>
                     </tr>
+                    <!-- ラケットの投稿一覧 -->
                     <?php foreach ($posts as $post) : ?>
+                        <tr class="line-1">
+                            <td width="200px">
+                                <div class="tool">
+                                    <img src="../images/racket<?php print(htmlspecialchars($post['number'], ENT_QUOTES)); ?>.jpg" alt="林昀儒 SUPER ZLC" height="100" width="100">
+                                    <div><?php print(htmlspecialchars($post['name'], ENT_QUOTES)); ?></div>
+                                </div>
+                            </td>
+                            <td width="200px">
+                                <div class="star2" data-score="<?php echo $post['score']; ?>">
+                                </div>
+                            </td>
+                            <td width="360px"><?php print(htmlspecialchars($post['title'], ENT_QUOTES)); ?></td>
+                            <td width="250px"><?php print(htmlspecialchars($post['created'], ENT_QUOTES)); ?></td>
+
+                            <td width="100px"><a class="btn btn-danger" href="../delete.php?id=<?php print(htmlspecialchars($post['id'])); ?>">削除</a></td>
+                        </tr>
+                        <tr class="comment_2">
+                            <td></td>
+                            <td colspan="3"><?php print(htmlspecialchars($post['message'], ENT_QUOTES)); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    <!-- ラバーの投稿一覧 -->
+                    <?php foreach ($posts_r as $post) : ?>
                         <tr class="line-1">
                             <td width="200px">
                                 <div class="tool">
