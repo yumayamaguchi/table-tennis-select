@@ -14,7 +14,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $member = $members->fetch();
 
     //ラケットのお気に入りを取得
-    $favorites = $db->prepare('SELECT * FROM rucket, favorite WHERE favorite.member_id=? AND tool_number = rucket.number');
+    $favorites = $db->prepare('SELECT * FROM racket, favorite WHERE favorite.member_id=? AND tool_number = racket.number');
     $favorites->execute(array($_SESSION['id']));
     $favorite = $favorites->fetchAll();
     
@@ -83,12 +83,12 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <li class="tab tab-2"><a href="my-page-set.php">設定</a></li>
         </ul>
         <div class="tabs-content my_page_1">
-            <?php foreach ($favorite as $rucket) {
+            <?php foreach ($favorite as $racket) {
                 print('<div class="images col-md-3">');
                 print('<div class="image_1">');
-                print('<a href="../racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
-                print('<img src="../images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
-                print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
+                print('<a href="../racket/racket-' . $racket['number'] . '/racket_' . $racket['number'] . '.php?number=' . $racket['number'] . '">');
+                print('<img src="../images/racket' . $racket['number'] . '.jpg" alt="' . $racket['name'] . '" height="230" width="230">');
+                print('<div>' . $racket['name'] . '<br>価格：' . $racket['price'] . '円(税込)<br>反発性：' . $racket['repulsion'] . '<br>振動特性：' . $racket['vibration'] . '</div>');
                 print('</a>');
                 print('</div>');
                 print('</div>');
@@ -96,7 +96,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <?php foreach ($favorite_r as $rubber) {
                 print('<div class="images col-md-3">');
                 print('<div class="image_1">');
-                print('<a href="../racket-' . $rubber['number'] . '/racket_' . $rubber['number'] . '.php?number=' . $rubber['number'] . '">');
+                print('<a href="../rubber/rubber-' . $rubber['number'] . '/rubber_' . $rubber['number'] . '.php?number=' . $rubber['number'] . '">');
                 print('<img src="../images/racket' . $rubber['number'] . '.jpg" alt="' . $rubber['name'] . '" height="230" width="230">');
                 print('<div>' . $rubber['name'] . '<br>価格：' . $rubber['price'] . '円(税込)<br>反発性：' . $rubber['repulsion'] . '<br>振動特性：' . $rubber['vibration'] . '</div>');
                 print('</a>');

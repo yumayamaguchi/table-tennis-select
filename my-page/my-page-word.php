@@ -2,6 +2,22 @@
 session_start();
 require('../dbconnect.php');
 
+if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+    //時間の上書き、最後のログインから1時間
+    $_SESSION['time'] = time();
+
+    $login['name'] = 'success';
+
+    //ログインしているユーザーの情報を引き出す
+    $members = $db->prepare('SELECT * FROM members WHERE id=?');
+    $members->execute(array($_SESSION['id']));
+    $member = $members->fetch();
+} else {
+    header('Location: ../login.php');
+    exit();
+}
+
+
 //ページネーション
 $page = $_REQUEST['page'];
 if ($page == '') {
@@ -31,20 +47,6 @@ $posts_r->bindValue(1, $_SESSION['id']);
 $posts_r->bindParam(2, $start, PDO::PARAM_INT);
 $posts_r->execute();
 
-if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
-    //時間の上書き、最後のログインから1時間
-    $_SESSION['time'] = time();
-
-    $login['name'] = 'success';
-
-    //ログインしているユーザーの情報を引き出す
-    $members = $db->prepare('SELECT * FROM members WHERE id=?');
-    $members->execute(array($_SESSION['id']));
-    $member = $members->fetch();
-} else {
-    header('Location: login.php');
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -194,31 +196,4 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             }
         );
     </script>
-    <!-- <script type="text/javascript">
-        const showTab = (selector) => {
-            console.log(selector);
-
-            // 一旦activeクラスの削除
-            $('.tabs-menu > li').removeClass('active');
-
-            $('.tabs-content > div').hide();
-
-            //selectorに該当するものだけactive要素を追加
-            $(`.tabs-menu a[href="${selector}"]`)
-                .parent('li')
-                .addClass('active');
-
-            // selectorに該当するものだけを表示
-            $(selector).show();
-        };
-        $('.tabs-menu a').on('click', (e) => {
-            e.preventDefault();
-
-            //クリックされたhref要素の取得
-            const selector = $(e.target).attr('href');
-            showTab(selector);
-        });
-
-        showTab('.tabs-1');
-    </script> -->
 </body>
