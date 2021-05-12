@@ -14,16 +14,16 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
 }
 
 if ($_POST['filter'] === 'price') {
-    $sort = $db->query('SELECT * FROM rucket ORDER BY price DESC');
+    $sort = $db->query('SELECT * FROM racket ORDER BY price DESC');
     $sorts = $sort->fetchAll();
 } elseif ($_POST['filter'] === 'vibration') {
-    $sort = $db->query('SELECT * FROM rucket ORDER BY vibration DESC');
+    $sort = $db->query('SELECT * FROM racket ORDER BY vibration DESC');
     $sorts = $sort->fetchAll();
 } elseif ($_POST['filter'] === 'repulsion') {
-    $sort = $db->query('SELECT * FROM rucket ORDER BY repulsion DESC');
+    $sort = $db->query('SELECT * FROM racket ORDER BY repulsion DESC');
     $sorts = $sort->fetchAll();
 } else {
-    $sort = $db->query('SELECT * FROM rucket');
+    $sort = $db->query('SELECT * FROM racket');
     $sorts = $sort->fetchAll();
 };
 
@@ -93,18 +93,11 @@ if ($_POST['filter'] === 'price') {
                 <p class="rackets_1">攻撃用シェーク</p>
                 <div class="row">
                     <?php
-                    foreach ($sorts as $rucket) {
-                        if ($rucket['number'] > 8) {
+                    foreach ($sorts as $racket) {
+                        if ($racket['number'] > 8) {
                             continue;
                         }
-                        print('<div class="images col-md-3">');
-                        print('<div class="image_1">');
-                        print('<a href="./racket/racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
-                        print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
-                        print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
-                        print('</a>');
-                        print('</div>');
-                        print('</div>');
+                        require('racket.php');
                     } ?>
                 </div>
             </div>
@@ -112,18 +105,11 @@ if ($_POST['filter'] === 'price') {
                 <p class="rackets_2">守備用シェーク</p>
                 <div class="row">
                     <?php
-                    foreach ($sorts as $rucket) {
-                        if ($rucket['number'] < 9 || $rucket['number'] > 10) {
+                    foreach ($sorts as $racket) {
+                        if ($racket['number'] < 9 || $racket['number'] > 10) {
                             continue;
                         }
-                        print('<div class="images col-md-3">');
-                        print('<div class="image_1">');
-                        print('<a href="./racket/racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
-                        print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
-                        print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
-                        print('</a>');
-                        print('</div>');
-                        print('</div>');
+                        require('racket.php');
                     } ?>
                 </div>
             </div>
@@ -131,18 +117,11 @@ if ($_POST['filter'] === 'price') {
                 <p class="rackets_3">合板シェーク</p>
                 <div class="row">
                     <?php
-                    foreach ($sorts as $rucket) {
-                        if ($rucket['number'] < 11 || $rucket['number'] > 14) {
+                    foreach ($sorts as $racket) {
+                        if ($racket['number'] < 11 || $racket['number'] > 14) {
                             continue;
                         }
-                        print('<div class="images col-md-3">');
-                        print('<div class="image_1">');
-                        print('<a href="./racket/racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
-                        print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
-                        print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
-                        print('</a>');
-                        print('</div>');
-                        print('</div>');
+                        require('racket.php');
                     } ?>
                 </div>
             </div>
@@ -150,18 +129,11 @@ if ($_POST['filter'] === 'price') {
                 <p class="rackets_4">日本式ペン</p>
                 <div class="row">
                     <?php
-                    foreach ($sorts as $rucket) {
-                        if ($rucket['number'] < 15 || $rucket['number'] > 18) {
+                    foreach ($sorts as $racket) {
+                        if ($racket['number'] < 15 || $racket['number'] > 18) {
                             continue;
                         }
-                        print('<div class="images col-md-3">');
-                        print('<div class="image_1">');
-                        print('<a href="./racket/racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
-                        print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
-                        print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
-                        print('</a>');
-                        print('</div>');
-                        print('</div>');
+                        require('racket.php');
                     } ?>
                 </div>
             </div>
@@ -170,18 +142,11 @@ if ($_POST['filter'] === 'price') {
                 <p class="rackets_5">中国式ペン</p>
                 <div class="row">
                     <?php
-                    foreach ($sorts as $rucket) {
-                        if ($rucket['number'] < 19) {
+                    foreach ($sorts as $racket) {
+                        if ($racket['number'] < 19) {
                             continue;
                         }
-                        print('<div class="images col-md-3">');
-                        print('<div class="image_1">');
-                        print('<a href="./racket/racket-' . $rucket['number'] . '/racket_' . $rucket['number'] . '.php?number=' . $rucket['number'] . '">');
-                        print('<img src="images/racket' . $rucket['number'] . '.jpg" alt="' . $rucket['name'] . '" height="230" width="230">');
-                        print('<div>' . $rucket['name'] . '<br>価格：' . $rucket['price'] . '円(税込)<br>反発性：' . $rucket['repulsion'] . '<br>振動特性：' . $rucket['vibration'] . '</div>');
-                        print('</a>');
-                        print('</div>');
-                        print('</div>');
+                        require('racket.php');
                     } ?>
                 </div>
             </div>

@@ -2,8 +2,8 @@
 session_start();
 //DBへ接続
 require('./dbconnect.php');
+ini_set('display_errors', 1);
 //cookieにメールアドレスが入っていれば
- var_dump($_SERVER['HTTP_REFERER']);
 
 if ($_COOKIE['email'] !== '') {
     $email = $_COOKIE['email'];
@@ -52,12 +52,12 @@ if (!empty($_POST)) {
                 setcookie('email', $_POST['email'], time() + 60 * 60 * 24 * 14);
             }
 
-            if($_SESSION['path'] === '/table_tennis_tool/thanks.php') {
+            if ($_SESSION['path'] === '/table_tennis_tool/thanks.php' || $_SESSION['path'] === '/table_tennis_tool/login.php') {
                 header('Location: index.php');
                 exit();
             } else {
-            header('Location:'. $_SESSION['path']);
-            exit();
+                header('Location:' . $_SESSION['path']);
+                exit();
             }
             //アドレス、パスの該当がなければ実行
         } else {
@@ -67,10 +67,9 @@ if (!empty($_POST)) {
 }
 $url = parse_url($_SERVER['HTTP_REFERER']);
 $_SESSION['path'] = $url['path'];
-var_dump($_SESSION['path']);
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -83,15 +82,28 @@ var_dump($_SESSION['path']);
 
 <body>
     <header>
-    <?php require('./header.php')?>
+        <div class="container-fluid header">
+            <div class="row">
+                <div class="head col-md-6">
+                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="./index.php">卓プロ</a></p>
+                </div>
+                <div class="head_1 col-md-6">
+                    <ul>
+                        <?php if ($login->name === 'success') : ?>
+                            <li><a href="./logout.php">ログアウト</a>|</li>
+                            <li><a href="./my-page/my-page.php">マイページ</a>|</li>
+                            <li><?php print($member->name); ?>さん、こんにちは！</li>
+                        <?php else : ?>
+                            <li><a href="./create.php">会員登録</a>|</li>
+                            <li><a href="./login.php">ログイン</a></li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </header>
     <div class="content">
         <p class="new">ログインする</p>
-        <!-- <div id="lead">
-                <p>メールアドレスとパスワードを記入してログインしてください。</p>
-                <p>入会手続きがまだの方はこちらからどうぞ。</p>
-                <p>&raquo;<a href="join/">入会手続きをする</a></p>
-            </div> -->
         <form action="" method="post">
             <div class="entry">
                 <div class="type">
@@ -127,9 +139,7 @@ var_dump($_SESSION['path']);
                     <input type="submit" value="ログインする" />
                 </div>
             </div>
-    </div>
-    </form>
-
+        </form>
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
