@@ -5,7 +5,7 @@ session_start();
 require('./dbconnect.php');
 
 if (!empty($_POST)) {
-    $statement = $db->prepare('INSERT INTO members SET name=?, email=?, password=?, created=NOW()');
+    $statement = $db->prepare('INSERT INTO members SET name=?, email=?, password=?, created_at=NOW()');
     echo $statement->execute(array($_SESSION['join']['name'], $_SESSION['join']['email'], sha1($_SESSION['join']['password'])));
     unset($_SESSION['join']);
 

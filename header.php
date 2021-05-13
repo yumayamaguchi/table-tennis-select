@@ -1,7 +1,7 @@
 <div class="container-fluid header">
     <div class="row">
         <div class="head col-md-6">
-            <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="./index.php">卓プロ</a></p>
+            <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="./index.php">卓球セレクト</a></p>
         </div>
         <div class="head_1 col-md-6">
             <ul>

@@ -4,6 +4,12 @@
 session_start();
 require('./dbconnect.php');
 if (!empty($_POST)) {
+
+   $pattern = "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
+
+    if (!preg_match($pattern, $_POST['email'])) {
+        $error['email'] = 'mismatch';
+    }
     if ($_POST['name'] === '') {
         $error['name'] = 'blank';
     }
@@ -30,10 +36,7 @@ if (!empty($_POST)) {
 
 
     if (empty($error)) {
-        $image = date('YmdHis') . $_FILES['image']['name'];
-        move_uploaded_file($_FILES['image']['tmp_name'], 'member_picture/' . $image);
         $_SESSION['join'] = $_POST;
-        $_SESSION['join']['image'] = $image;
         header('Location: check.php');
         exit();
     }
@@ -78,6 +81,9 @@ if ($_REQUEST['action'] == 'rewrite' && isset($_SESSION['join'])) {
                     <div>
                         <p class="title">メールアドレス</p>
                         <input type="text" name="email" size="35" maxlength="255" value="<?php print(htmlspecialchars($_POST['email'], ENT_QUOTES)); ?>" placeholder="xxx@example.com">
+                        <?php if ($error['email'] === 'mismatch') : ?>
+                            <p class="error">メールアドレスの形式が正しくありません</p>
+                        <?php endif; ?>
                         <?php if ($error['email'] === 'blank') : ?>
                             <p class="error">メールアドレスを入力してください</p>
                         <?php endif; ?>

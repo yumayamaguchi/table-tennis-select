@@ -22,7 +22,7 @@ if (!empty($_POST)) {
         $members->execute(array($_SESSION['id']));
         $member = $members->fetch();
 
-        $message = $db->prepare('INSERT INTO posts SET title=?, member_id=?, number=?, message=?, score=?, created=NOW()');
+        $message = $db->prepare('INSERT INTO posts SET title=?, member_id=?, number=?, message=?, score=?, created_at=NOW()');
         $message->execute(array($_POST['title'], $member['id'], $_SESSION['number'], $_POST['message'], $_POST['score']));
         header('Location: ./racket_1_word.php');
     }
@@ -43,7 +43,7 @@ $page = min($page, $max_page);
 $start = ($page - 1) * 3;
 
 //LIMIT句、1の場合2件目から数える
-$posts = $db->prepare('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.member_id ORDER BY p.created DESC LIMIT ?,3');
+$posts = $db->prepare('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.member_id ORDER BY p.created_at DESC LIMIT ?,3');
 //1は?の位置を指定、$startはバインドする変数を指定
 $posts->bindParam(1, $start, PDO::PARAM_INT);
 $posts->execute();
@@ -119,7 +119,7 @@ $posts->execute();
                                 </div>
                             </td>
                             <td width="360px"><?php print(htmlspecialchars($post['title'], ENT_QUOTES)); ?></td>
-                            <td width="250px"><?php print(htmlspecialchars($post['created'], ENT_QUOTES)); ?></td>
+                            <td width="250px"><?php print(htmlspecialchars($post['created_at'], ENT_QUOTES)); ?></td>
                             <?php if ($_SESSION['id'] == $post['member_id']) : ?>
                                 <td width="100px"><a class="btn btn-danger" href="../../delete.php?id=<?php print(htmlspecialchars($post['id'])); ?>">削除</a></td>
                             <?php endif; ?>

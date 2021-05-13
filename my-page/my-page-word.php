@@ -2,6 +2,7 @@
 session_start();
 require('../dbconnect.php');
 
+
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     //時間の上書き、最後のログインから1時間
     $_SESSION['time'] = time();
@@ -36,13 +37,13 @@ $page = min($page, $max_page);
 $start = ($page - 1) * 3;
 
 //ラケットの投稿を取得
-$posts = $db->prepare('SELECT * FROM posts, rucket WHERE member_id=? AND posts.number = rucket.number ORDER BY posts.created DESC LIMIT ?,3');
+$posts = $db->prepare('SELECT * FROM posts, rackets WHERE member_id=? AND posts.tool_number = rackets.number ORDER BY posts.created_at DESC LIMIT ?,3');
 $posts->bindValue(1, $_SESSION['id']);
 $posts->bindParam(2, $start, PDO::PARAM_INT);
 $posts->execute();
 
 //ラバーの投稿を取得
-$posts_r = $db->prepare('SELECT * FROM posts, rubber WHERE member_id=? AND posts.number = rubber.number ORDER BY posts.created DESC LIMIT ?,3');
+$posts_r = $db->prepare('SELECT * FROM posts, rubbers WHERE member_id=? AND posts.tool_number = rubbers.number ORDER BY posts.created_at DESC LIMIT ?,3');
 $posts_r->bindValue(1, $_SESSION['id']);
 $posts_r->bindParam(2, $start, PDO::PARAM_INT);
 $posts_r->execute();
@@ -68,7 +69,7 @@ $posts_r->execute();
         <div class="container-fluid header">
             <div class="row">
                 <div class="head col-md-6">
-                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="../index.php">卓プロ</a></p>
+                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="../index.php">卓球セレクト</a></p>
                 </div>
                 <div class="head_1 col-md-6">
                     <ul>
@@ -91,7 +92,7 @@ $posts_r->execute();
     </header>
     <div id="center">
         <ul class="tabs-menu">
-            <li class="tab tab-2"><a href="my-page.php">トップ</a></li>
+            <li class="tab tab-2"><a href="my-page.php">お気に入り</a></li>
             <li class="tab tab-1"><a href="my-page-word.php">口コミ</a></li>
             <li class="tab tab-2"><a href="my-page-set.php">設定</a></li>
         </ul>
@@ -119,7 +120,7 @@ $posts_r->execute();
                                 </div>
                             </td>
                             <td width="360px"><?php print(htmlspecialchars($post['title'], ENT_QUOTES)); ?></td>
-                            <td width="250px"><?php print(htmlspecialchars($post['created'], ENT_QUOTES)); ?></td>
+                            <td width="250px"><?php print(htmlspecialchars($post['created_at'], ENT_QUOTES)); ?></td>
 
                             <td width="100px"><a class="btn btn-danger" href="../delete.php?id=<?php print(htmlspecialchars($post['id'])); ?>">削除</a></td>
                         </tr>
@@ -142,7 +143,7 @@ $posts_r->execute();
                                 </div>
                             </td>
                             <td width="360px"><?php print(htmlspecialchars($post['title'], ENT_QUOTES)); ?></td>
-                            <td width="250px"><?php print(htmlspecialchars($post['created'], ENT_QUOTES)); ?></td>
+                            <td width="250px"><?php print(htmlspecialchars($post['created_at'], ENT_QUOTES)); ?></td>
 
                             <td width="100px"><a class="btn btn-danger" href="../delete.php?id=<?php print(htmlspecialchars($post['id'])); ?>">削除</a></td>
                         </tr>

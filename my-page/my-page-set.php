@@ -13,35 +13,43 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $members->execute(array($_SESSION['id']));
     $member = $members->fetch();
 
-// エラーチェック
+    // エラーチェック
 
-if (!empty($_POST)) {
-    if ($_POST['name'] === '') {
-        $error['name'] = 'blank';
-    }
-    if ($_POST['email'] === '') {
-        $error['email'] = 'blank';
-    }
-    //文字数長さチェック
-    if (strlen($_POST['new-pass']) < 4) {
-        $error['new-pass'] = 'length';
-    }
-    if ($_POST['new-pass'] === '') {
-        $error['new-pass'] = 'blank';
-    }
-    if (sha1($_POST['pass']) != $member['password']) {
-        $error['pass'] = 'fail';
-    }
-    if ($_POST['pass'] === '') {
-        $error['pass'] = 'blank';
-    }
+    if (!empty($_POST)) {
 
-    if (empty($error)) {
-        $_SESSION['join'] = $_POST;
-        header('Location: ../update.php');
-        exit();
+        // バリデーションに使う正規表現
+        $pattern = "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
+
+        if (!preg_match($pattern, $_POST['email'])) {
+            $error['email'] = 'mismatch';
+        }
+
+
+        if ($_POST['name'] === '') {
+            $error['name'] = 'blank';
+        }
+        if ($_POST['email'] === '') {
+            $error['email'] = 'blank';
+        }
+        //文字数長さチェック
+        if (strlen($_POST['new-pass']) < 4) {
+            $error['new-pass'] = 'length';
+        }
+        if ($_POST['new-pass'] === '') {
+            $error['new-pass'] = 'blank';
+        }
+        if (sha1($_POST['pass']) != $member['password']) {
+            $error['pass'] = 'fail';
+        }
+        if ($_POST['pass'] === '') {
+            $error['pass'] = 'blank';
+        }
+
+        if (empty($error)) {
+            header('Location: ../update.php');
+            exit();
+        }
     }
-} 
 } else {
     header('Location: ../login.php');
     exit();
@@ -70,7 +78,7 @@ if (!empty($_POST)) {
         <div class="container-fluid header">
             <div class="row">
                 <div class="head col-md-6">
-                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="../index.php">卓プロ</a></p>
+                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="../index.php">卓球セレクト</a></p>
                 </div>
                 <div class="head_1 col-md-6">
                     <ul>
@@ -92,16 +100,8 @@ if (!empty($_POST)) {
         </div>
     </header>
     <div id="center">
-        <!-- ユーザー画像と名前 -->
-        <!-- <ul class="tabs-menu">
-            <img src="">
-            <div class="user_name">ユーザーネーム</div>
-            <li class="my_page"><a href=".tabs-1">トップ</a></li>
-            <li class="my_page"><a href=".tabs-2">口コミ</a></li>
-            <li class="my_page"><a href=".tabs-3">設定</a></li>
-        </ul> -->
         <ul class="tabs-menu">
-            <li class="tab tab-2"><a href="my-page.php">トップ</a></li>
+            <li class="tab tab-2"><a href="my-page.php">お気に入り</a></li>
             <li class="tab tab-2"><a href="my-page-word.php">口コミ</a></li>
             <li class="tab tab-1"><a href="my-page-set.php">設定</a></li>
         </ul>
@@ -110,39 +110,42 @@ if (!empty($_POST)) {
                 <div class="setting_1"><i class="fas fa-user-cog"></i>設定</div>
                 <div class="setting_2">
                     <form action="" method="post">
-                    <input type="hidden" name="action" value="submit" />
+                        <input type="hidden" name="action" value="submit" />
                         <div class="setting_3 row">
                             <label class="col-3">ニックネーム：</label>
-                            <input class="form-control col-9" type="text" name="name" size="30" maxlength="30" value="<?php print(htmlspecialchars($member['name'])); ?>">
+                            <input class="form-control col-9" type="text" name="name" size="30" maxlength="30" value="<?php print(htmlspecialchars($_POST['name'])); ?>">
                             <?php if ($error['name'] === 'blank') : ?>
-                                <p class="error">ニックネームを入力してください</p>
+                                <label class="col-3"></label><p class="error col-9">ニックネームを入力してください</p>
                             <?php endif; ?>
                         </div>
                         <div class="setting_3 row">
                             <label class="col-3">メールアドレス：</label>
-                            <input class="form-control col-9" type="text" name="email" size="30" value="<?php print(htmlspecialchars($member['email'])); ?>">
+                            <input class="form-control col-9" type="text" name="email" size="30" value="<?php print(htmlspecialchars($_POST['email'])); ?>">
                             <?php if ($error['email'] === 'blank') : ?>
-                                <p class="error">メールアドレスを入力してください</p>
+                                <label class="col-3"></label><p class="error col-9">メールアドレスを入力してください</p>
+                            <?php endif; ?>
+                            <?php if ($error['email'] === 'mismatch') : ?>
+                                <label class="col-3"></label><p class="error col-9">メールアドレスの形式が正しくありません</p>
                             <?php endif; ?>
                         </div>
                         <div class="setting_3 row">
                             <label class="col-3">新しいパスワード：</label>
-                            <input class="form-control col-9" type="password" name="new-pass">
+                            <input class="form-control col-9" type="password" name="new-pass" value="<?php print(htmlspecialchars($_POST['new-pass'])); ?>">
                             <?php if ($error['new-pass'] === 'length') : ?>
-                                <p class="error">パスワードは4文字以上で入力してください。</p>
+                                <label class="col-3"></label><p class="error col-9">パスワードは4文字以上で入力してください。</p>
                             <?php endif; ?>
                             <?php if ($error['new-pass'] === 'blank') : ?>
-                                <p class="error">パスワードを入力してください</p>
+                                <label class="col-3"></label><p class="error col-9">パスワードを入力してください</p>
                             <?php endif; ?>
                         </div>
                         <div class="setting_3 row">
                             <label class="col-3">現在のパスワード：</label>
-                            <input class="form-control col-9" type="password" name="pass">
+                            <input class="form-control col-9" type="password" name="pass" value="<?php print(htmlspecialchars($_POST['pass'])); ?>">
                             <?php if ($error['pass'] === 'fail') : ?>
-                                <p class="error">パスワードに誤りがあります</p>
+                                <label class="col-3"></label><p class="error col-9">パスワードに誤りがあります</p>
                             <?php endif; ?>
                             <?php if ($error['pass'] === 'blank') : ?>
-                                <p class="error">パスワードを入力してください</p>
+                                <label class="col-3"></label><p class="error col-9">パスワードを入力してください</p>
                             <?php endif; ?>
                         </div>
                         <div class="button">

@@ -244,6 +244,13 @@ footer {
     margin-bottom: 0;
 }
 
+.setting_3 .error {
+    font-size: 15px;
+    color: red;
+    margin: 5px 0 0 0;
+    text-align: left;
+}
+
 
 /* check.php */
 
@@ -683,4 +690,8 @@ footer {
 #side_bar form input {
     height: 40px;
     font-size: 20px;
+}
+
+.guest {
+    margin-top: 20px;
 }
