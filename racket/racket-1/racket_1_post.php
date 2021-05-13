@@ -84,7 +84,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                     </div>
                     <div class="row">
                         <label class="view col-3">レビュー：</label>
-                        <textarea class="form-control col-9" name="message" rows="7" cols="80" maxlength="200" placeholder="口コミを入れてください"></textarea>
+                        <textarea class="form-control col-9" name="message" rows="7" cols="80" maxlength="255" placeholder="口コミを入れてください"></textarea>
                     </div>
                     <p>
                         <input class="btn btn-primary" type="submit" value="投稿する" />

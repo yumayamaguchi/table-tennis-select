@@ -16,28 +16,6 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $members->execute(array($_SESSION['id']));
     $member = $members->fetch();
 }
-
-
-
-//ページネーション
-$page = $_REQUEST['page'];
-if ($page == '') {
-    $page = 1;
-}
-$page = max($page, 1);
-
-$counts = $db->query('SELECT COUNT(*) AS cnt FROM posts');
-$cnt = $counts->fetch();
-$max_page = ceil($cnt['cnt'] / 3);
-$page = min($page, $max_page);
-
-$start = ($page - 1) * 3;
-
-//LIMIT句、1の場合2件目から数える
-$posts = $db->prepare('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.member_id ORDER BY p.created DESC LIMIT ?,3');
-//1は?の位置を指定、$startはバインドする変数を指定
-$posts->bindParam(1, $start, PDO::PARAM_INT);
-$posts->execute();
 ?>
 
 <!DOCTYPE html>

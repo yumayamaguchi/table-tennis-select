@@ -14,12 +14,12 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $member = $members->fetch();
 
     //ラケットのお気に入りを取得
-    $favorites = $db->prepare('SELECT * FROM racket, favorite WHERE favorite.member_id=? AND tool_number = racket.number');
+    $favorites = $db->prepare('SELECT * FROM rackets, favorites WHERE favorites.member_id=? AND tool_number = rackets.number');
     $favorites->execute(array($_SESSION['id']));
     $favorite = $favorites->fetchAll();
-    
+
     //ラバーのお気に入りを取得
-    $favorites_r = $db->prepare('SELECT * FROM rubber, favorite WHERE favorite.member_id=? AND tool_number = rubber.number');
+    $favorites_r = $db->prepare('SELECT * FROM rubbers, favorites WHERE favorites.member_id=? AND tool_number = rubbers.number');
     $favorites_r->execute(array($_SESSION['id']));
     $favorite_r = $favorites_r->fetchAll();
 } else {
@@ -47,7 +47,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         <div class="container-fluid header">
             <div class="row">
                 <div class="head col-md-6">
-                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="../index.php">卓プロ</a></p>
+                    <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="../index.php">卓球セレクト</a></p>
                 </div>
                 <div class="head_1 col-md-6">
                     <ul>
@@ -69,21 +69,14 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         </div>
     </header>
     <div id="center">
-        <!-- ユーザー画像と名前 -->
-        <!-- <ul class="tabs-menu">
-            <img src="">
-            <div class="user_name">ユーザーネーム</div>
-            <li class="my_page"><a href=".tabs-1">トップ</a></li>
-            <li class="my_page"><a href=".tabs-2">口コミ</a></li>
-            <li class="my_page"><a href=".tabs-3">設定</a></li>
-        </ul> -->
         <ul class="tabs-menu">
-            <li class="tab tab-1"><a href="my-page.php">トップ</a></li>
+            <li class="tab tab-1"><a href="my-page.php">お気に入り</a></li>
             <li class="tab tab-2"><a href="my-page-word.php">口コミ</a></li>
             <li class="tab tab-2"><a href="my-page-set.php">設定</a></li>
         </ul>
         <div class="tabs-content my_page_1">
             <?php foreach ($favorite as $racket) {
+
                 print('<div class="images col-md-3">');
                 print('<div class="image_1">');
                 print('<a href="../racket/racket-' . $racket['number'] . '/racket_' . $racket['number'] . '.php?number=' . $racket['number'] . '">');

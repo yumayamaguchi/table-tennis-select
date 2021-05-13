@@ -2,13 +2,13 @@
 session_start();
 require('../../dbconnect.php');
 
-$ruckets = $db->query('SELECT * FROM rucket WHERE number=1');
-$rucket = $ruckets->fetch();
-$number = $rucket['number'];
-$name = $rucket['name'];
-$price = $rucket['price'];
-$repulsion = $rucket['repulsion'];
-$vibration = $rucket['vibration'];
+$rackets = $db->query('SELECT * FROM rackets WHERE number=1');
+$racket = $rackets->fetch();
+$number = $racket['number'];
+$name = $racket['name'];
+$price = $racket['price'];
+$repulsion = $racket['repulsion'];
+$vibration = $racket['vibration'];
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     //時間の上書き、最後のログインから1時間
@@ -83,7 +83,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                     </div>
                     <div class="tabs-3-1">
                         <?php
-                        $rubbers = $db->query('SELECT * FROM rubber WHERE number=50');
+                        $rubbers = $db->query('SELECT * FROM rubbers WHERE number=50');
                         $rubber = $rubbers->fetch();
 
                         print('<img src="../../images/rubber' . $rubber['number'] . '.jpg" alt="' . $rubber['name'] . '" height="200" width="200">');
@@ -92,7 +92,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                     </div>
                     <div class="tabs-3-1">
                         <?php
-                        $rubbers = $db->query('SELECT * FROM rubber WHERE number=51');
+                        $rubbers = $db->query('SELECT * FROM rubbers WHERE number=51');
                         $rubber = $rubbers->fetch();
 
                         print('<img src="../../images/rubber' . $rubber['number'] . '.jpg" alt="' . $rubber['name'] . '" height="200" width="200">');
@@ -118,7 +118,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                     </div>
                     <div class="chart">
                         <?php
-                        $rubbers = $db->query('SELECT * FROM rubber WHERE number=51');
+                        $rubbers = $db->query('SELECT * FROM rubbers WHERE number=51');
                         $rubber = $rubbers->fetch();
                         
 

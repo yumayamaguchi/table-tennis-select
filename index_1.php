@@ -235,46 +235,6 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="main.js"></script>
-        <script type="text/javascript">
-            //非同期通信
-            rubber = document.getElementById('index_1');
-
-            rubber.addEventListener('click', (e) => {
-                e.preventDefault();
-                var ajax = new XMLHttpRequest();
-                ajax.open('GET', 'index_1.json', true);
-                ajax.onload = function(e) {
-                    if (ajax.readyState === 4) {
-                        if (ajax.status === 200) {
-                            var json = ajax.responseText;
-                            //jsonをjavascriptオブジェクトに変換
-                            //html() html要素の上書き
-                            $('#center').html(createListHtml(JSON.parse(json)));
-
-                        }
-                    }
-                };
-                ajax.send(null);
-
-            });
-
-            function createListHtml(list) {
-
-                var result = $('<div class="product-list">');
-                for (var i = 0; i < list.length; i++) {
-                    //jsonの配列を代入
-                    var product = list[i];
-                    var element = $('#product-template').find('.images-1').clone();
-                    //.product-nameにjsonのnameを入力
-                    element.find('.product-name').text(product.name);
-                    element.find('.product-price').text(product.price);
-                    element.find('.product-image').attr('src', product.image);
-                    //選手の名前を追加
-                    result.append(element);
-                }
-                return result;
-            }
-        </script>
 </body>
 
 </html>

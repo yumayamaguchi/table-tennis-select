@@ -2,7 +2,6 @@
 session_start();
 //DBへ接続
 require('./dbconnect.php');
-ini_set('display_errors', 1);
 //cookieにメールアドレスが入っていれば
 
 if ($_COOKIE['email'] !== '') {
@@ -104,8 +103,9 @@ $_SESSION['path'] = $url['path'];
     </header>
     <div class="content">
         <p class="new">ログインする</p>
-        <form action="" method="post">
-            <div class="entry">
+
+        <div class="entry">
+            <form action="" method="post">
                 <div class="type">
                     <div>
                         <p class="title">メールアドレス</p>
@@ -138,8 +138,14 @@ $_SESSION['path'] = $url['path'];
                 <div>
                     <input type="submit" value="ログインする" />
                 </div>
-            </div>
-        </form>
+            </form>
+
+            <form class="guest" action="" method="post">
+                <input type="hidden" name="email" value="bbbb@example.jp">
+                <input type="hidden" name="password" value="bbbb">
+                <input type="submit" value="ゲストログイン">
+            </form>
+        </div>
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>

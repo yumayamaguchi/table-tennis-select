@@ -8,7 +8,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $url = parse_url($_SERVER['HTTP_REFERER']);
     $_SESSION['paths'] = $url['path'];
 
-    $favorite = $db->prepare('SELECT COUNT(*) AS cnt FROM favorite WHERE member_id=? AND tool_number=?');
+    $favorite = $db->prepare('SELECT COUNT(*) AS cnt FROM favorites WHERE member_id=? AND tool_number=?');
     $favorite->execute(array($_SESSION['id'], $_SESSION['number']));
     $record = $favorite->fetch();
 
@@ -17,7 +17,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         exit();
     } else {
 
-    $sql = $db->prepare('INSERT INTO favorite SET member_id=?, tool_number=?, created=NOW()');
+    $sql = $db->prepare('INSERT INTO favorites SET member_id=?, tool_number=?, created_at=NOW()');
     $sql->execute(array($_SESSION['id'], $_SESSION['number']));
 
     //元ページの取得
