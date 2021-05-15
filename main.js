@@ -63,34 +63,6 @@ $('.slick01').slick({
 });
 
 
-// racket.phpのタブに関するプログラム
-
-// const showTab = (selector) => {
-//   console.log(selector);
-
-//   // 一旦activeクラスの削除
-//   $('.tabs-menu > li').removeClass('active');
-
-//   // $('.tabs-content > div').hide();
-
-//   //selectorに該当するものだけactive要素を追加
-//   $(`.tabs-menu a[href="${selector}"]`)
-//     .parent('li')
-//     .addClass('active');
-
-//   // selectorに該当するものだけを表示
-//   // $(selector).show();
-// };
-// $('.tabs-menu a').on('click', (e) => {
-//   // e.preventDefault();
-
-//   //クリックされたhref要素の取得
-//   const selector = $(e.target).attr('href');
-//   // showTab(selector);
-// });
-
-// // showTab('.tabs-1');
-
 $('.star1').raty({
     click: function(score, evt) {
         $.post('racket_1_post.php', { score: score, url: evt.currentTarget.baseURI });
