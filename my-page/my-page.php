@@ -14,12 +14,12 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $member = $members->fetch();
 
     //ラケットのお気に入りを取得
-    $favorites = $db->prepare('SELECT * FROM rackets, favorites WHERE favorites.member_id=? AND tool_number = rackets.number');
+    $favorites = $db->prepare('SELECT * FROM rackets, favorites WHERE favorites.member_id=? AND racket_rubber_choice=1 AND racket_rubber_id = rackets.id');
     $favorites->execute(array($_SESSION['id']));
     $favorite = $favorites->fetchAll();
 
     //ラバーのお気に入りを取得
-    $favorites_r = $db->prepare('SELECT * FROM rubbers, favorites WHERE favorites.member_id=? AND tool_number = rubbers.number');
+    $favorites_r = $db->prepare('SELECT * FROM rubbers, favorites WHERE favorites.member_id=? AND racket_rubber_choice=2 AND racket_rubber_id = rubbers.id');
     $favorites_r->execute(array($_SESSION['id']));
     $favorite_r = $favorites_r->fetchAll();
 } else {
@@ -74,28 +74,32 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <li class="tab tab-2"><a href="my-page-word.php">口コミ</a></li>
             <li class="tab tab-2"><a href="my-page-set.php">設定</a></li>
         </ul>
-        <div class="tabs-content my_page_1">
+        <div class="tabs-content my_page_1 container-fluid">
+            <div class="row">
             <?php foreach ($favorite as $racket) {
 
                 print('<div class="images col-md-3">');
                 print('<div class="image_1">');
-                print('<a href="../racket/racket-' . $racket['number'] . '/racket_' . $racket['number'] . '.php?number=' . $racket['number'] . '">');
-                print('<img src="../images/racket' . $racket['number'] . '.jpg" alt="' . $racket['name'] . '" height="230" width="230">');
+                print('<a href="../racket/racket_detail.php?id=' . $racket['racket_rubber_id'] . '">');
+                print('<img src="../images/racket-' . $racket['racket_rubber_id'] . '/racket1.jpg" alt="' . $racket['name'] . '" height="230" width="230">');
                 print('<div>' . $racket['name'] . '<br>価格：' . $racket['price'] . '円(税込)<br>反発性：' . $racket['repulsion'] . '<br>振動特性：' . $racket['vibration'] . '</div>');
                 print('</a>');
                 print('</div>');
                 print('</div>');
             } ?>
+            </div>
+            <div class="row">
             <?php foreach ($favorite_r as $rubber) {
                 print('<div class="images col-md-3">');
                 print('<div class="image_1">');
-                print('<a href="../rubber/rubber-' . $rubber['number'] . '/rubber_' . $rubber['number'] . '.php?number=' . $rubber['number'] . '">');
-                print('<img src="../images/racket' . $rubber['number'] . '.jpg" alt="' . $rubber['name'] . '" height="230" width="230">');
+                print('<a href="../rubber/rubber-' . $rubber['id'] . '/rubber_' . $rubber['id'] . '.php?id=' . $rubber['id'] . '">');
+                print('<img src="../images/racket' . $rubber['id'] . '.jpg" alt="' . $rubber['name'] . '" height="230" width="230">');
                 print('<div>' . $rubber['name'] . '<br>価格：' . $rubber['price'] . '円(税込)<br>反発性：' . $rubber['repulsion'] . '<br>振動特性：' . $rubber['vibration'] . '</div>');
                 print('</a>');
                 print('</div>');
                 print('</div>');
             } ?>
+            </div>
         </div>
     </div>
     <!-- フッターここから -->

@@ -12,6 +12,22 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $members->execute(array($_SESSION['id']));
     $member = $members->fetch();
 }
+
+if ($_POST['filter'] === 'price') {
+    $sort = $db->query('SELECT * FROM rubbers ORDER BY price DESC');
+    $sorts = $sort->fetchAll();
+} elseif ($_POST['filter'] === 'speed') {
+    $sort = $db->query('SELECT * FROM rubbers ORDER BY speed DESC');
+    $sorts = $sort->fetchAll();
+} elseif ($_POST['filter'] === 'spin') {
+    $sort = $db->query('SELECT * FROM rubbers ORDER BY spin DESC');
+    $sorts = $sort->fetchAll();
+} else {
+    $sort = $db->query('SELECT * FROM rubbers');
+    $sorts = $sort->fetchAll();
+};
+
+
 ?>
 
 
@@ -19,7 +35,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
 <html lang="ja">
 
 <head>
-    <title>racket</title>
+    <title>rubber</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -30,9 +46,10 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
 <body>
     <!-- headerここから -->
     <header>
-    <?php require('./header.php')?>
+        <?php require('./header.php') ?>
+        </div>
         <div class="head_image">
-            <img src="images/banner_category_blade.jpg" alt="">
+            <img src="images/header_rubber_lg.jpg" alt="">
         </div>
     </header>
     <!-- headerここまで -->
@@ -42,11 +59,8 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <a class="index" href="index.php">
                 <li>ラケット</li>
             </a>
-            <a id="index_1" href="index_1.html">
+            <a class="index_1" href="index_1.php">
                 <li>ラバー</li>
-            </a>
-            <a href="">
-                <li>検索ツール</li>
             </a>
         </ul>
     </div>
@@ -55,186 +69,73 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     <div>
         <div id="side_bar">
             <ul>
-                <li class="racket_1"><a href=""><i class="far fa-check-circle"></i>攻撃用シェーク</a></li>|
-                <li class="racket_2"><a href=""><i class="far fa-check-circle"></i>守備用シェーク</a></li>|
-                <li class="racket_3"><a href=""><i class="far fa-check-circle"></i>合板シェーク</a></li>|
-                <li class="racket_4"><a href=""><i class="far fa-check-circle"></i>日本式ペン</a></li>|
-                <li class="racket_5"><a href=""><i class="far fa-check-circle"></i>中国式ペン</a></li>|
+                <li class="racket_1"><a href=""><i class="far fa-check-circle"></i>ハイテンション裏ラバー</a></li>|
+                <li class="racket_2"><a href=""><i class="far fa-check-circle"></i>裏ラバー</a></li>|
+                <li class="racket_3"><a href=""><i class="far fa-check-circle"></i>粘着性ラバー</a></li>|
             </ul>
+            <form method="post" action="">
+                <select name="filter">
+                    <option value="select">選択してください</option>
+                    <option value="price">価格順</option>
+                    <option value="repulsion">スピード順</option>
+                    <option value="vibration">スピン順</option>
+                </select>
+                <input type="submit" value="並び替え">
+            </form>
         </div>
         <!-- side_barここまで -->
         <!-- main_visualここから -->
-        <!-- main_visualここから -->
         <div id="center" class="main_visual container-fluid">
+
             <div class="products">
                 <p class="rackets_1">ハイテンション裏ラバー</p>
                 <div class="row">
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/06090.jpg" alt="テナジー19" height="230" width="230">
-                                <div>テナジー19<br>円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/06040.jpg" alt="ディグニクス05" height="230" width="230">
-                                <div>ディグニクス05<br>円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/06050.jpg" alt="ディグニクス80" height="230" width="230">
-                                <div>ディグニクス80<br>円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/06060.jpg" alt="ディグニクス64" height="230" width="230">
-                                <div>ディグニクス64<br>円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/05800.jpg" alt="テナジー05" height="230" width="230">
-                                <div>テナジー05<br>円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/05930.jpg" alt="テナジー80" height="230" width="230">
-                                <div>テナジー80<br>円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/05820.jpg" alt="テナジー64" height="230" width="230">
-                                <div>テナジー64<br>円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/05810.jpg" alt="テナジー25" height="230" width="230">
-                                <div>テナジー25<br>円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-
+                    <!-- 1だと攻撃型、2は守備型のDBに変更 -->
+                    <?php
+                    foreach ($sorts as $rubber) {
+                        if ($rubber['type_id'] != 1) {
+                            continue;
+                        }
+                        require('rubber.php');
+                    } ?>
                 </div>
             </div>
             <div class="products">
                 <p class="rackets_2">裏ラバー</p>
                 <div class="row">
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/05050.jpg" alt="スレイバー" height="230" width="230">
-                                <div>スレイバー<br>3,520円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/05380.jpg" alt="スレイバーEL" height="230" width="230">
-                                <div>スレイバーEL<br>3,520円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/05540.jpg" alt="サフィーラ" height="230" width="230">
-                                <div>サフィーラ<br>2,750円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/05210.jpg" alt="フレクストラ" height="230" width="230">
-                                <div>フレクストラ<br>2,200円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
+                    <?php
+                    foreach ($sorts as $rubber) {
+                        if ($rubber['type_id'] != 2) {
+                            continue;
+                        }
+                        require('rubber.php');
+                    } ?>
                 </div>
             </div>
-
             <div class="products">
-                <p class="rackets_3">粘着性裏ラバー</p>
+                <p class="rackets_3">粘着性ラバー</p>
                 <div class="row">
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/06080.jpg" alt="アイビス" height="230" width="230">
-                                <div>アイビス<br>5,500円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/05330.jpg" alt="タキファイア ドライブ" height="230" width="230">
-                                <div>タキファイア ドライブ<br>3,300円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/05410.jpg" alt="タキネス ドライブ" height="230" width="230">
-                                <div>タキネス ドライブ<br>3,080円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="images col-md-3">
-                        <div class="image_1">
-                            <a href="">
-                                <img src="images/05450.jpg" alt="タキネス チョップ" height="230" width="230">
-                                <div>タキネス チョップ<br>3,080円(税込)</div>
-                            </a>
-                        </div>
-                    </div>
+                    <?php
+                    foreach ($sorts as $rubber) {
+                        if ($rubber['type_id'] != 3) {
+                            continue;
+                        }
+                        require('rubber.php');
+                    } ?>
                 </div>
             </div>
         </div>
-        <!-- main_visualここまで -->
-        <!-- main_visualここまで -->
-        <!-- フッターここから -->
-        <footer>
-            <p class="page_top"><a href="">PAGE TOP</a></p>
-        </footer>
-        <!-- フッターここまで -->
-
-        <div id="product-template" style="display: none;">
-            <div class="images-1">
-                <div class="image_1">
-                    <a href="">
-                        <img class="product-image" src="" alt="吉田海偉" height="230" width="230">
-                        <p><span class="product-name"></span><br><span class="product-price"></span></p>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="main.js"></script>
+    </div>
+    <!-- main_visualここまで -->
+    <!-- フッターここから -->
+    <footer>
+        <p class="page_top"><a href="">PAGE TOP</a></p>
+    </footer>
+    <!-- フッターここまで -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>

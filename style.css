@@ -275,7 +275,7 @@ footer {
     margin: 10px auto;
     text-align: center;
     height: 100px;
-    width: 400px;
+    width: 600px;
     font-size: 30px;
     color: black;
     border-radius: 3px;
@@ -445,9 +445,13 @@ footer {
     /* marginきかない */
 }
 
-.tables th,
+.tables th {
+    padding: 30px 0;
+}
+
 .tables td {
     padding: 30px 0;
+    font-size: 16px;
 }
 
 .tabs-2 {
