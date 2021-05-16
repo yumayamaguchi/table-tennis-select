@@ -65,7 +65,7 @@ $('.slick01').slick({
 
 $('.star1').raty({
     click: function(score, evt) {
-        $.post('racket_1_post.php', { score: score, url: evt.currentTarget.baseURI });
+        $.post('racket_post.php', { score: score, url: evt.currentTarget.baseURI });
     }
 });
 
@@ -73,75 +73,9 @@ $('.star1').raty({
 
 // グラフchart.jsに関するプログラム
 
-// const ctx = document.getElementById('myChart').getContext('2d');
+const ctx = document.getElementById('myChart').getContext('2d');
 
-// const myRadarChart = new Chart(ctx, {
-//     type: 'radar',
-//     data: {
-//         labels: ['スピード', 'スピン', '安定', '価格'],
-//         datasets: [{
-//                 label: 'フォア',
-//                 data: [100, 13, 14, 15],
-//                 borderColor: 'red',
-//                 backgroundColor: 'rgba(255,0,0,0.2)',
-//                 borderWidth: '1px',
-//             },
-//             {
-//                 label: 'バック',
-//                 data: [100, 90, 90, 90],
-//                 borderColor: 'blue',
-//                 backgroundColor: 'rgba(12,77,162,0.2)',
-//                 borderWidth: '1px',
-//             }
-//         ]
-//     },
-//     options: {
-//         title: {
-//             display: true,
-//             text: '線グラフの例'
-//         }
-//     }
-// });
-
-// ----------------------------------------------------------------------
-//  bar_graph.js
-//
-//                  May/16/2017
-// ----------------------------------------------------------------------
-jQuery(function() {
-    const config = {
-        type: 'radar',
-        data: barChartData,
-        responsive: true
-    }
-
-    const context = jQuery("#myChart")
-    const chart = new Chart(context, config)
-})
-
-// ----------------------------------------------------------------------
-const barChartData = {
-    labels: ['スピード', 'スピン', '安定', '価格'],
-    datasets: [{
-            label: "フォア",
-            backgroundColor: "rgba(179,181,198,0.5)",
-            data: [$(element).data('score')],
-            //dataの数値をhtml側から取得し、反映させたい
-        },
-        {
-            label: "バック",
-            backgroundColor: "rgba(255,99,132,0.5)",
-            data: [10, 54, 77, 32]
-        }
-    ]
-}
-
-// ----------------------------------------------------------------------
-
-
-const ctx_1 = document.getElementById('myChart-1').getContext('2d');
-
-const myRadarChart_1 = new Chart(ctx_1, {
+const myRadarChart = new Chart(ctx, {
     type: 'radar',
     data: {
         labels: ['スピード', 'スピン', '安定', '価格'],
@@ -155,6 +89,73 @@ const myRadarChart_1 = new Chart(ctx_1, {
             {
                 label: 'バック',
                 data: [100, 90, 90, 90],
+                borderColor: 'blue',
+                backgroundColor: 'rgba(12,77,162,0.2)',
+                borderWidth: '1px',
+            }
+        ]
+    },
+    options: {
+        title: {
+            display: true,
+            text: '線グラフの例'
+        }
+    }
+});
+
+// ----------------------------------------------------------------------
+//  bar_graph.js
+//
+//                  May/16/2017
+// ----------------------------------------------------------------------
+// jQuery(function() {
+//     const config = {
+//         type: 'radar',
+//         data: barChartData,
+//         responsive: true
+//     }
+
+//     const context = jQuery("#myChart")
+//     const chart = new Chart(context, config)
+// })
+
+// // ----------------------------------------------------------------------
+// const barChartData = {
+//     labels: ['スピード', 'スピン', '安定', '価格'],
+//     datasets: [{
+//             label: "フォア",
+//             backgroundColor: "rgba(179,181,198,0.5)",
+//             data: [$(element).data('score')],
+//             //dataの数値をhtml側から取得し、反映させたい
+//         },
+//         {
+//             label: "バック",
+//             backgroundColor: "rgba(255,99,132,0.5)",
+//             data: [10, 54, 77, 32]
+//         }
+//     ]
+// }
+
+// ----------------------------------------------------------------------
+
+
+const ctx_1 = document.getElementById('myChart-1').getContext('2d');
+const myChart1Element = document.getElementById('myChart-1');
+
+const myRadarChart_1 = new Chart(ctx_1, {
+    type: 'radar',
+    data: {
+        labels: ['スピード', 'スピン', '安定', '価格'],
+        datasets: [{
+                label: 'フォア',
+                data: [myChart1Element.getAttribute("data-four-speed"), myChart1Element.getAttribute("data-four-spin"), myChart1Element.getAttribute("data-four-stable"), myChart1Element.getAttribute("data-four-price")],
+                borderColor: 'red',
+                backgroundColor: 'rgba(255,0,0,0.2)',
+                borderWidth: '1px',
+            },
+            {
+                label: 'バック',
+                data: [myChart1Element.getAttribute("data-back-speed"), myChart1Element.getAttribute("data-back-spin"), myChart1Element.getAttribute("data-back-stable"), myChart1Element.getAttribute("data-back-price")],
                 borderColor: 'blue',
                 backgroundColor: 'rgba(12,77,162,0.2)',
                 borderWidth: '1px',

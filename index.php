@@ -59,7 +59,7 @@ if ($_POST['filter'] === 'price') {
             <a class="index" href="index.php">
                 <li>ラケット</li>
             </a>
-            <a id="index_1" href="index_1.html">
+            <a class="index_1" href="index_1.php">
                 <li>ラバー</li>
             </a>
         </ul>
@@ -92,9 +92,10 @@ if ($_POST['filter'] === 'price') {
             <div class="products">
                 <p class="rackets_1">攻撃用シェーク</p>
                 <div class="row">
+                    <!-- 1だと攻撃型、2は守備型のDBに変更 -->
                     <?php
                     foreach ($sorts as $racket) {
-                        if ($racket['number'] > 8) {
+                        if ($racket['type_id'] != 1) {
                             continue;
                         }
                         require('racket.php');
@@ -106,7 +107,7 @@ if ($_POST['filter'] === 'price') {
                 <div class="row">
                     <?php
                     foreach ($sorts as $racket) {
-                        if ($racket['number'] < 9 || $racket['number'] > 10) {
+                        if ($racket['type_id'] != 2) {
                             continue;
                         }
                         require('racket.php');
@@ -118,7 +119,7 @@ if ($_POST['filter'] === 'price') {
                 <div class="row">
                     <?php
                     foreach ($sorts as $racket) {
-                        if ($racket['number'] < 11 || $racket['number'] > 14) {
+                        if ($racket['type_id'] != 3) {
                             continue;
                         }
                         require('racket.php');
@@ -130,7 +131,7 @@ if ($_POST['filter'] === 'price') {
                 <div class="row">
                     <?php
                     foreach ($sorts as $racket) {
-                        if ($racket['number'] < 15 || $racket['number'] > 18) {
+                        if ($racket['type_id'] != 4) {
                             continue;
                         }
                         require('racket.php');
@@ -143,7 +144,7 @@ if ($_POST['filter'] === 'price') {
                 <div class="row">
                     <?php
                     foreach ($sorts as $racket) {
-                        if ($racket['number'] < 19) {
+                        if ($racket['type_id'] != 5) {
                             continue;
                         }
                         require('racket.php');
@@ -158,18 +159,6 @@ if ($_POST['filter'] === 'price') {
         <p class="page_top"><a href="">PAGE TOP</a></p>
     </footer>
     <!-- フッターここまで -->
-
-    <div id="product-template" style="display: none;">
-        <div class="images-1">
-            <div class="image_1">
-                <a href="">
-                    <img class="product-image" src="" alt="吉田海偉" height="230" width="230">
-                    <p><span class="product-name"></span><br><span class="product-price"></span></p>
-                </a>
-            </div>
-        </div>
-    </div>
-
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
