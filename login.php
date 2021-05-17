@@ -127,8 +127,8 @@ var_dump($id);
             </form>
 
             <form class="guest" action="" method="post">
-                <input type="hidden" name="email" value="bbbb@example.jp">
-                <input type="hidden" name="password" value="bbbb">
+                <input type="hidden" name="email" value="guest@example.jp">
+                <input type="hidden" name="password" value="guest">
                 <input type="submit" value="ゲストログイン">
             </form>
         </div>

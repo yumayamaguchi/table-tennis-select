@@ -1,8 +1,12 @@
 <?php
 session_start();
-require('../../dbconnect.php');
+require('../dbconnect.php');
 
 $id  = $_REQUEST['id'];
+
+$rackets = $db->prepare('SELECT * FROM rackets WHERE id=?');
+$rackets->execute(array($id));
+$racket = $rackets->fetch();
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     //時間の上書き、最後のログインから1時間
@@ -24,9 +28,9 @@ if (!empty($_POST)) {
         $members->execute(array($_SESSION['id']));
         $member = $members->fetch();
 
-        $message = $db->prepare('INSERT INTO posts SET title=?, member_id=?, id=?, message=?, score=?, created_at=NOW()');
-        $message->execute(array($_POST['title'], $member['id'], $_REQUEST['id'], $_POST['message'], $_POST['score']));
-        header('Location: ./racket_word.php');
+        $message = $db->prepare('INSERT INTO posts SET member_id=?, racker_rubber_choice=1, racket_rubber_id=?, title=?, message=?, score=?, created_at=NOW()');
+        $message->execute(array($member['id'], $_REQUEST['id'], $_POST['title'], $_POST['message'], $_POST['score']));
+        header('Location:racket_word.php?id='.$_REQUEST['id']);
     }
 }
 
@@ -58,42 +62,35 @@ $posts->execute();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <title>林昀儒 SUPER ZLC｜卓球製品情報｜バタフライ卓球用品</title>
+    <title><?php print($racket['name']); ?></title>
 </head>
 
 <body>
     <header>
-        <?php require('../../header_1.php') ?>
+        <?php require('../header_1.php') ?>
         <div class="head_image_1">
-            <p>林昀儒 SUPER ZLC</p>
+            <p><?php print($racket['name']); ?></p>
         </div>
     </header>
     <div class="main_bar">
         <ul class="slick01">
-            <li><img alt="画像1" src="../../images/racket1.jpg" /></li>
-            <li><img alt="画像2" src="../../images/racket1-1.jpg" /></li>
-            <li><img alt="画像3" src="../../images/racket1-2.jpg" /></li>
-            <li><img alt="画像3" src="../../images/racket1-3.jpg" /></li>
-            <li><img alt="画像3" src="../../images/racket1-4.jpg" /></li>
+            <li><img alt="画像1" src="../images/racket-<?php print($id); ?>/racket1.jpg" /></li>
+            <li><img alt="画像2" src="../images/racket-<?php print($id); ?>/racket2.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket-<?php print($id); ?>/racket3.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket-<?php print($id); ?>/racket4.jpg" /></li>
+            <li><img alt="画像3" src="../images/racket-<?php print($id); ?>/racket5.jpg" /></li>
         </ul>
     </div>
     <!-- <div class="side_bar">
     </div> -->
 
     <div id="center">
-        <div class="version">
-            <h3>林昀儒選手の使用モデル</h3>
-            <p>
-                カーボンとZLファイバーを高密度に編み込んだスーパーZLカーボン搭載ラケットは、打球の威力を引き出す弾みの良さと、広い高反発エリアによる安定性が特徴です。
-                類いまれな打球感覚を持つ中華台北の新星・林昀儒選手は、高めの振動特性を持つ威力重視のこのラケットを駆使し、鋭いチキータや質の高いカウンターを生み出しています。グリップに採用された彼の好みのカラーと、名前の頭文字で構成されたウイングマークは、若さと将来の成功を感じさせます。
-            </p>
-        </div>
-        <a href="../../favorite.php">
+        <a href="../favorite.php">
             <div class="favorite btn btn-warning"><i class="far fa-star"></i><span>お気に入りに追加</span></div>
         </a>
         <ul class="tabs-menu">
@@ -123,7 +120,7 @@ $posts->execute();
                             <td width="360px"><?php print(htmlspecialchars($post['title'], ENT_QUOTES)); ?></td>
                             <td width="250px"><?php print(htmlspecialchars($post['created_at'], ENT_QUOTES)); ?></td>
                             <?php if ($_SESSION['id'] == $post['member_id']) : ?>
-                                <td width="100px"><a class="btn btn-danger" href="../../delete.php?id=<?php print(htmlspecialchars($post['id'])); ?>">削除</a></td>
+                                <td width="100px"><a class="btn btn-danger" href="../delete.php?id=<?php print($post['id']); ?>">削除</a></td>
                             <?php endif; ?>
                         </tr>
                         <tr class="comment_2">
@@ -155,7 +152,7 @@ $posts->execute();
                 }
                 ?>
                 <p>
-                    <a class="btn btn-primary" href="racket_post.php">投稿する</a>
+                    <a class="btn btn-primary" href="racket_post.php?id=<?php print($id); ?>">投稿する</a>
                 </p>
             </div>
             <!-- 口コミここまで -->
@@ -169,9 +166,9 @@ $posts->execute();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="../../jquery.raty.js"></script>
+    <script src="../jquery.raty.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js" integrity="sha512-RGbSeD/jDcZBWNsI1VCvdjcDULuSfWTtIva2ek5FtteXeSjLfXac4kqkDRHVGf1TwsXCAqPTF7/EYITD0/CTqw==" crossorigin="anonymous"></script>
-    <script src="../../main.js"></script>
+    <script src="../main.js"></script>
     <script>
         $('.star2').each(
             function(index, element) {
@@ -182,8 +179,6 @@ $posts->execute();
                 });
             }
         );
-
-        
     </script>
 </body>
 

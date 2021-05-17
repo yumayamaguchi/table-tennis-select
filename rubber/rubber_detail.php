@@ -17,9 +17,9 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $member = $members->fetch();
 }
 
-$rackets = $db->prepare('SELECT * FROM rackets WHERE id=?');
-$rackets->execute(array($id));
-$racket = $rackets->fetch();
+$rubbers = $db->prepare('SELECT * FROM rubbers WHERE id=?');
+$rubbers->execute(array($id));
+$rubber = $rubbers->fetch();
 ?>
 
 <!DOCTYPE html>
@@ -34,23 +34,21 @@ $racket = $rackets->fetch();
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <title><?php print($racket['name']); ?></title>
+    <title><?php print($rubber['name']); ?></title>
 </head>
 
 <body>
     <header>
         <?php require('../header_1.php') ?>
         <div class="head_image_1">
-            <p><?php print($racket['name']); ?></p>
+            <p><?php print($rubber['name']); ?></p>
         </div>
     </header>
     <div class="main_bar">
         <ul class="slick01">
-            <li><img alt="画像1" src="../images/racket-<?php print($id); ?>/racket1.jpg" /></li>
-            <li><img alt="画像2" src="../images/racket-<?php print($id); ?>/racket2.jpg" /></li>
-            <li><img alt="画像3" src="../images/racket-<?php print($id); ?>/racket3.jpg" /></li>
-            <li><img alt="画像3" src="../images/racket-<?php print($id); ?>/racket4.jpg" /></li>
-            <li><img alt="画像3" src="../images/racket-<?php print($id); ?>/racket5.jpg" /></li>
+            <li><img alt="画像1" src="../images/rubber-<?php print($id); ?>/rubber1.jpg" /></li>
+            <li><img alt="画像2" src="../images/rubber-<?php print($id); ?>/rubber2.jpg" /></li>
+            <li><img alt="画像3" src="../images/rubber-<?php print($id); ?>/rubber3.jpg" /></li>
         </ul>
     </div>
 
@@ -73,9 +71,9 @@ $racket = $rackets->fetch();
             </div>
         <?php endif; ?>
         <ul class="tabs-menu">
-            <li class="tab tab-1"><a href="racket_detail.php?id=<?php print($id); ?>">性能</a></li>
-            <li class="tab tab-2"><a href="racket_word.php?id=<?php print($id); ?>">口コミ</a></li>
-            <li class="tab tab-2"><a href="racket_comb.php?id=<?php print($id); ?>">お勧め組み合わせラバー</a></li>
+            <li class="tab tab-1"><a href="rubber_detail.php?id=<?php print($id); ?>">性能</a></li>
+            <li class="tab tab-2"><a href="rubber_word.php?id=<?php print($id); ?>">口コミ</a></li>
+            <li class="tab tab-2"><a href="rubber_comb.php?id=<?php print($id); ?>">お勧め組み合わせラバー</a></li>
         </ul>
         <div class="tabs-content">
 
@@ -85,45 +83,45 @@ $racket = $rackets->fetch();
                     <table class="col-md-6">
                         <tr class="tables">
                             <th>商品名</th>
-                            <td><?php print($racket['name']); ?></td>
+                            <td><?php print($rubber['name']); ?></td>
                         </tr>
                         <tr class="tables">
                             <th>価格</th>
-                            <td><?php print($racket['price']); ?>円（税込）</td>
+                            <td><?php print($rubber['price']); ?>円（税込）</td>
                         </tr>
                         <tr class="tables">
                             <th>発売日</th>
-                            <td><?php print($racket['release_day']); ?></td>
+                            <td><?php print($rubber['release_day']); ?></td>
                         </tr>
                         <tr class="tables">
                             <th>タイプ</th>
-                            <td><?php print($racket['type']); ?></td>
+                            <td><?php print($rubber['type']); ?></td>
                         </tr>
                         <tr class="tables">
-                            <th>反発特性</th>
-                            <td><?php print($racket['repulsion']); ?></td>
+                            <th>テクノロジー</th>
+                            <td><?php print($rubber['technology']); ?></td>
                         </tr>
                     </table>
                     <table class="col-md-6">
                         <tr class="tables">
-                            <th>振動特性</th>
-                            <td><?php print($racket['vibration']); ?></td>
+                            <th>スピード</th>
+                            <td><?php print($rubber['speed']); ?></td>
                         </tr>
                         <tr class="tables">
-                            <th>ブレード構成</th>
-                            <td><?php print($racket['constitution']); ?></td>
+                            <th>スピン</th>
+                            <td><?php print($rubber['spin']); ?></td>
                         </tr>
                         <tr class="tables">
-                            <th>ブレードサイズ</th>
-                            <td><?php print($racket['size']); ?></td>
+                            <th>スポンジ硬度</th>
+                            <td><?php print($rubber['sponge_hardness']); ?></td>
                         </tr>
                         <tr class="tables">
-                            <th>ブレード厚</th>
-                            <td><?php print($racket['thickness']); ?>mm</td>
+                            <th>シートカラー</th>
+                            <td><?php print($rubber['seat_color']); ?></td>
                         </tr>
                         <tr class="tables">
-                            <th>平均重量</th>
-                            <td><?php print($racket['weight']); ?>g</td>
+                            <th>スポンジ厚</th>
+                            <td><?php print($rubber['sponge_thickness']); ?></td>
                         </tr>
                     </table>
                 </div>
