@@ -73,36 +73,6 @@ $('.star1').raty({
 
 // グラフchart.jsに関するプログラム
 
-const ctx = document.getElementById('myChart').getContext('2d');
-
-const myRadarChart = new Chart(ctx, {
-    type: 'radar',
-    data: {
-        labels: ['スピード', 'スピン', '安定', '価格'],
-        datasets: [{
-                label: 'フォア',
-                data: [100, 13, 14, 15],
-                borderColor: 'red',
-                backgroundColor: 'rgba(255,0,0,0.2)',
-                borderWidth: '1px',
-            },
-            {
-                label: 'バック',
-                data: [100, 90, 90, 90],
-                borderColor: 'blue',
-                backgroundColor: 'rgba(12,77,162,0.2)',
-                borderWidth: '1px',
-            }
-        ]
-    },
-    options: {
-        title: {
-            display: true,
-            text: '線グラフの例'
-        }
-    }
-});
-
 // ----------------------------------------------------------------------
 //  bar_graph.js
 //

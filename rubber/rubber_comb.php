@@ -2,18 +2,10 @@
 session_start();
 require('../dbconnect.php');
 
-$rackets = $db->prepare('SELECT * FROM rackets_rubbers, rackets WHERE racket_id=? AND racket_id=rackets.id');
-$rackets->execute(array($_REQUEST['id']));
-$racket = $rackets->fetch();
+$rubbers = $db->prepare('SELECT * FROM rubbers WHERE id=?');
+$rubbers->execute(array($_REQUEST['id']));
+$rubber = $rubbers->fetch();
 
-$id = $racket['id'];
-$name = $racket['name'];
-
-$rubbers = $db->prepare('SELECT * FROM rackets_rubbers, rubbers WHERE racket_id=? AND rubber_four_id=rubbers.id 
-                         UNION 
-                         SELECT * FROM rackets_rubbers, rubbers WHERE racket_id=? AND rubber_back_id=rubbers.id');
-$rubbers->execute(array($_REQUEST['id'],$_REQUEST['id']));
-$rubber = $rubbers->fetchAll();
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     //時間の上書き、最後のログインから1時間
@@ -40,14 +32,14 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <title><?php print($name); ?></title>
+    <title><?php print($rubber['name']); ?></title>
 </head>
 
 <body>
     <header>
         <?php require('../header_1.php') ?>
         <div class="head_image_1">
-            <p><?php print($name); ?></p>
+            <p><?php print($rubber['name']); ?></p>
         </div>
     </header>
     <div class="main_bar">
@@ -59,37 +51,47 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <li><img alt="画像3" src="../images/racket-<?php print($id); ?>/racket5.jpg" /></li>
         </ul>
     </div>
+    <!-- <div class="side_bar">
+    </div> -->
+
     <div id="center">
         <a href="../favorite.php">
             <div class="favorite btn btn-warning"><i class="far fa-star"></i><span>お気に入りに追加</span></div>
         </a>
         <ul class="tabs-menu">
-            <li class="tab tab-2"><a href="racket_detail.php?id=<?php print($id); ?>">性能</a></li>
-            <li class="tab tab-2"><a href="racket_word.php?id=<?php print($id); ?>">口コミ</a></li>
-            <li class="tab tab-1"><a href="racket_comb.php?id=<?php print($id); ?>">お勧め組み合わせラバー</a></li>
+            <li class="tab tab-2"><a href="racket_detail.php?id=<?php print($_REQUEST['id']); ?>">性能</a></li>
+            <li class="tab tab-2"><a href="racket_word.php?id=<?php print($_REQUEST['id']); ?>">口コミ</a></li>
+            <li class="tab tab-1"><a href="racket_comb.php?id=<?php print($_REQUEST['id']); ?>">お勧め組み合わせラバー</a></li>
         </ul>
         <div class="tabs-content">
             <!-- 組み合わせ -->
             <div class="tabs-3">
                 <div class="tabs-3-2">
                     <div class="tabs-3-1">
-                        <img src="../images/racket-<?php print($racket['racket_id']); ?>/racket1.jpg" alt="<?php print($racket['racket_id']); ?>" height="200" width="200">
-                        <div><?php print($racket['name']); ?><br><?php print($racket['price']); ?>円（税込）<br>反発特性：<?php print($racket['repulsion']); ?><br>振動特性：<?php print($racket['vibration']); ?></div>
+                        <img src="../images/racket<?php print($id); ?>.jpg" alt="<?php print($name); ?>" height="200" width="200">
+                        <div><?php print($name); ?><br><?php print($price); ?>円（税込）<br>反発特性：<?php print($repulsion); ?><br>振動特性：<?php print($vibration); ?></div>
                     </div>
                     <div class="tabs-3-1">
                         <?php
-                        print('<img src="../images/rubber-' . $rubber[0]['rubber_four_id'] . '/rubber1.jpg" alt="' . $rubber[0]['name'] . '" height="200" width="200">');
-                        print('<div>' . $rubber[0]['name'] . '<br>' . $rubber[0]['price'] . '円(税込)<br>スピード：' . $rubber[0]['speed'] . '<br>スピン：' . $rubber[0]['spin'] . '</div>');
+                        $rubbers = $db->query('SELECT * FROM rubbers WHERE rubber_four_id=?');
+                        $rubber = $rubbers->fetch();
+
+                        print('<img src="../images/rubber' . $rubber['id'] . '.jpg" alt="' . $rubber['name'] . '" height="200" width="200">');
+                        print('<div>' . $rubber['name'] . '<br>' . $rubber['price'] . '円(税込)<br>スピード：' . $rubber['speed'] . '<br>スピン：' . $rubber['spin'] . '</div>');
                         ?>
                     </div>
                     <div class="tabs-3-1">
                         <?php
-                        print('<img src="../images/rubber-' . $rubber[1]['rubber_back_id'] . '/rubber1.jpg" alt="' . $rubber[1]['name'] . '" height="200" width="200">');
-                        print('<div>' . $rubber[1]['name'] . '<br>' . $rubber[1]['price'] . '円(税込)<br>スピード：' . $rubber[1]['speed'] . '<br>スピン：' . $rubber[1]['spin'] . '</div>');
+                        $rubbers = $db->query('SELECT * FROM rubbers WHERE rubber_back_id=?');
+                        $rubber = $rubbers->fetch();
+
+                        print('<img src="../images/rubber' . $rubber['id'] . '.jpg" alt="' . $rubber['name'] . '" height="200" width="200">');
+                        print('<div>' . $rubber['name'] . '<br>' . $rubber['price'] . '円(税込)<br>スピード：' . $rubber['speed'] . '<br>スピン：' . $rubber['spin'] . '</div>');
                         ?>
                     </div>
                     <div class="chart">
                         <canvas id="myChart-1" data-four-speed="10" data-four-spin="20" data-four-stable="30" data-four-price="40" data-back-speed="10" data-back-spin="20" data-back-stable="30" data-back-price="40"></canvas>
+                        <canvas id="myChart"></canvas>
                     </div>
                 </div>
             </div>
