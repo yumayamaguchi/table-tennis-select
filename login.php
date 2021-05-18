@@ -2,6 +2,11 @@
 session_start();
 //DBへ接続
 require('./dbconnect.php');
+
+
+if($_REQUEST) {
+    $id = $_REQUEST['id'];
+}
 //cookieにメールアドレスが入っていれば
 
 if ($_COOKIE['email'] !== '') {
@@ -51,13 +56,9 @@ if (!empty($_POST)) {
                 setcookie('email', $_POST['email'], time() + 60 * 60 * 24 * 14);
             }
 
-            if ($_SESSION['path'] === '/table_tennis_tool/racket/racket_detail.php') {
-                header('Location:' . $_SESSION['path'] . '?id=' . $_REQUEST['id']);
-                exit();
-            } else {
                 header('Location:index.php');
                 exit();
-            }
+            
             //アドレス、パスの該当がなければ実行
         } else {
             $error['login'] = 'failed';
@@ -67,8 +68,8 @@ if (!empty($_POST)) {
 $url = parse_url($_SERVER['HTTP_REFERER']);
 $_SESSION['path'] = $url['path'];
 
-var_dump($url['path']);
-var_dump($id);
+
+
 
 ?>
 <!DOCTYPE html>
@@ -85,7 +86,25 @@ var_dump($id);
 
 <body>
     <header>
-        <?php require('./header.php') ?>
+    <div class="container-fluid header">
+    <div class="row">
+        <div class="head col-md-6">
+            <p><i class="fas fa-table-tennis fa-lg tt"></i><a href="./index.php">卓球セレクト</a></p>
+        </div>
+        <div class="head_1 col-md-6">
+            <ul>
+                <?php if ($login->name === 'success') : ?>
+                    <li><a href="./logout.php">ログアウト</a>|</li>
+                    <li><a href="./my-page/my-page.php">マイページ</a>|</li>
+                    <li><?php print($member->name); ?>さん、こんにちは！</li>
+                <?php else : ?>
+                    <li><a href="./create.php">会員登録</a>|</li>
+                    <li><a href="./login.php">ログイン</a></li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
+</div>
     </header>
     <div class="content">
         <p class="new">ログインする</p>

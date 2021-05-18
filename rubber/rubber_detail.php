@@ -57,7 +57,7 @@ $rubber = $rubbers->fetch();
     <!-- 性能など、すべてPHPに登録 -->
 
     <div id="center">
-        <a href="../favorite.php?racket_rubber=1&id=<?php print($id); ?>">
+        <a href="../favorite.php?racket_rubber=2&id=<?php print($id); ?>">
             <div class="favorite btn btn-warning"><i class="far fa-star"></i><span>お気に入りに追加</span></div>
         </a>
         <?php if ($_REQUEST['record'] == 'duplicate') : ?>
