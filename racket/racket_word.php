@@ -28,9 +28,10 @@ if (!empty($_POST)) {
         $members->execute(array($_SESSION['id']));
         $member = $members->fetch();
 
-        $message = $db->prepare('INSERT INTO posts SET member_id=?, racker_rubber_choice=1, racket_rubber_id=?, title=?, message=?, score=?, created_at=NOW()');
+        $message = $db->prepare('INSERT INTO posts SET member_id=?, racket_rubber_choice=1, racket_rubber_id=?, title=?, message=?, score=?, created_at=NOW()');
         $message->execute(array($member['id'], $_REQUEST['id'], $_POST['title'], $_POST['message'], $_POST['score']));
-        header('Location:racket_word.php?id='.$_REQUEST['id']);
+        header('Location:racket_word.php?id=' . $_REQUEST['id']);
+        exit();
     }
 }
 
@@ -41,7 +42,8 @@ if ($page == '') {
 }
 $page = max($page, 1);
 
-$counts = $db->query('SELECT COUNT(*) AS cnt FROM posts');
+$counts = $db->prepare('SELECT COUNT(*) AS cnt FROM posts WHERE racket_rubber_choice=1 AND racket_rubber_id=?');
+$counts->execute(array($id));
 $cnt = $counts->fetch();
 $max_page = ceil($cnt['cnt'] / 3);
 $page = min($page, $max_page);
@@ -49,9 +51,10 @@ $page = min($page, $max_page);
 $start = ($page - 1) * 3;
 
 //LIMIT句、1の場合2件目から数える
-$posts = $db->prepare('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.member_id ORDER BY p.created_at DESC LIMIT ?,3');
+$posts = $db->prepare('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.member_id AND racket_rubber_choice=1 AND racket_rubber_id=? ORDER BY p.created_at DESC LIMIT ?,3');
 //1は?の位置を指定、$startはバインドする変数を指定
-$posts->bindParam(1, $start, PDO::PARAM_INT);
+$posts->bindParam(1, $id);
+$posts->bindParam(2, $start, PDO::PARAM_INT);
 $posts->execute();
 ?>
 
@@ -90,9 +93,19 @@ $posts->execute();
     </div> -->
 
     <div id="center">
-        <a href="../favorite.php">
+        <a href="../favorite.php?racket_rubber=1&id=<?php print($id); ?>">
             <div class="favorite btn btn-warning"><i class="far fa-star"></i><span>お気に入りに追加</span></div>
         </a>
+        <?php if ($_REQUEST['record'] == 'duplicate') : ?>
+            <div class="favorites">
+                <p>すでにお気に入り登録済です！</p>
+            </div>
+        <?php elseif ($_REQUEST['record'] == 'success') : ?>
+            <div class="favorites">
+                <p>お気に入りに登録しました！</p>
+                <?php ini_set('display_errors', "On"); ?>
+            </div>
+        <?php endif; ?>
         <ul class="tabs-menu">
             <li class="tab tab-2"><a href="racket_detail.php?id=<?php print($id); ?>">性能</a></li>
             <li class="tab tab-1"><a href="racket_word.php?id=<?php print($id); ?>">口コミ</a></li>
@@ -120,7 +133,7 @@ $posts->execute();
                             <td width="360px"><?php print(htmlspecialchars($post['title'], ENT_QUOTES)); ?></td>
                             <td width="250px"><?php print(htmlspecialchars($post['created_at'], ENT_QUOTES)); ?></td>
                             <?php if ($_SESSION['id'] == $post['member_id']) : ?>
-                                <td width="100px"><a class="btn btn-danger" href="../delete.php?id=<?php print($post['id']); ?>">削除</a></td>
+                                <td width="100px"><a class="btn btn-danger" href="../delete.php?id=<?php print($id); ?>&number=<?php print($post['id']); ?>">削除</a></td>
                             <?php endif; ?>
                         </tr>
                         <tr class="comment_2">
@@ -132,7 +145,7 @@ $posts->execute();
                 </table>
                 <?php
                 if ($page > 1) {
-                    print('<a class="figure" href="racket_word.php?page=' . ($page - 1) . '">前へ</a>');
+                    print('<a class="figure" href="racket_word.php?id=' . $id . '&page=' . ($page - 1) . '">前へ</a>');
                 } else {
                     print('<span class="figure">前へ</span>');
                 }
@@ -141,12 +154,12 @@ $posts->execute();
                     if ($i == $page) {
                         print('<span class="figure">' . $page . '</span>');
                     } else {
-                        print('<a class="figure" href="racket_word.php?page=' . $i . '">' . $i . '</a>');
+                        print('<a class="figure" href="racket_word.php?id=' . $id . '&page=' . $i . '">' . $i . '</a>');
                     }
                 }
 
                 if ($page < $max_page) {
-                    print('<a class="figure" href="racket_word.php?page=' . ($page + 1) . '">次へ</a>');
+                    print('<a class="figure" href="racket_word.php?$id=' . $id . '&page=' . ($page + 1) . '">次へ</a>');
                 } else {
                     print('<span class="figure">次へ</span>');
                 }

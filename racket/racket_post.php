@@ -18,7 +18,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $members->execute(array($_SESSION['id']));
     $member = $members->fetch();
 } else {
-    header('Location: ../login.php');
+    header('Location: ../login.php?id=' . $id);
     exit();
 }
 ?>
@@ -61,9 +61,19 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     </div> -->
 
     <div id="center">
-        <a href="../favorite.php">
+        <a href="../favorite.php?racket_rubber=1&id=<?php print($id); ?>">
             <div class="favorite btn btn-warning"><i class="far fa-star"></i><span>お気に入りに追加</span></div>
         </a>
+        <?php if ($_REQUEST['record'] == 'duplicate') : ?>
+            <div class="favorites">
+                <p>すでにお気に入り登録済です！</p>
+            </div>
+        <?php elseif ($_REQUEST['record'] == 'success') : ?>
+            <div class="favorites">
+                <p>お気に入りに登録しました！</p>
+                <?php ini_set('display_errors', "On"); ?>
+            </div>
+        <?php endif; ?>
         <ul class="tabs-menu">
             <li class="tab tab-2"><a href="racket_detail.php?id=<?php print($id); ?>">性能</a></li>
             <li class="tab tab-1"><a href="racket_word.php?id=<?php print($id); ?>">口コミ</a></li>

@@ -49,7 +49,7 @@ if ($_POST['filter'] === 'price') {
         <?php require('./header.php') ?>
         </div>
         <div class="head_image">
-            <img src="images/banner_category_blade.jpg" alt="">
+            <img src="images/banner_category_blade.jpg" alt="racket">
         </div>
     </header>
     <!-- headerここまで -->

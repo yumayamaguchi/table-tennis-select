@@ -48,8 +48,10 @@ if ($_POST['filter'] === 'price') {
     <header>
         <?php require('./header.php') ?>
         </div>
-        <div class="head_image">
-            <img src="images/header_rubber_lg.jpg" alt="">
+        <div class="head_image_2">
+            <img src="images/header_rubber_lg.jpg" alt="rubber" height="175px" width="750px">
+            <p class="rubber">ラバー</p>
+            <p class="rubbers">RUBBER</p>
         </div>
     </header>
     <!-- headerここまで -->

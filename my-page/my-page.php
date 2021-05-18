@@ -77,7 +77,6 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
         <div class="tabs-content my_page_1 container-fluid">
             <div class="row">
             <?php foreach ($favorite as $racket) {
-
                 print('<div class="images col-md-3">');
                 print('<div class="image_1">');
                 print('<a href="../racket/racket_detail.php?id=' . $racket['racket_rubber_id'] . '">');
@@ -87,14 +86,13 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                 print('</div>');
                 print('</div>');
             } ?>
-            </div>
-            <div class="row">
+            
             <?php foreach ($favorite_r as $rubber) {
                 print('<div class="images col-md-3">');
                 print('<div class="image_1">');
-                print('<a href="../rubber/rubber-' . $rubber['id'] . '/rubber_' . $rubber['id'] . '.php?id=' . $rubber['id'] . '">');
-                print('<img src="../images/racket' . $rubber['id'] . '.jpg" alt="' . $rubber['name'] . '" height="230" width="230">');
-                print('<div>' . $rubber['name'] . '<br>価格：' . $rubber['price'] . '円(税込)<br>反発性：' . $rubber['repulsion'] . '<br>振動特性：' . $rubber['vibration'] . '</div>');
+                print('<a href="../rubber/rubber_detail.php?id=' . $rubber['racket_rubber_id'] . '">');
+                print('<img src="../images/rubber-' . $rubber['racket_rubber_id'] . '/rubber1.jpg" alt="' . $rubber['name'] . '" height="230" width="230">');
+                print('<div>' . $rubber['name'] . '<br>価格：' . $rubber['price'] . '円(税込)<br> スピード：' . $rubber['speed'] . '<br>スピン：' . $rubber['spin'] . '</div>');
                 print('</a>');
                 print('</div>');
                 print('</div>');

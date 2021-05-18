@@ -61,6 +61,28 @@ header ul li a:hover {
     margin-top: 50px;
 }
 
+.head_image_2 {
+    text-align: center;
+    margin-top: 50px;
+    position: relative;
+}
+
+.head_image_2 .rubber {
+    position: absolute;
+    bottom: 65px;
+    left: 800px;
+    font-size: 50px;
+    color: white;
+}
+
+.head_image_2 .rubbers {
+    position: absolute;
+    bottom: 20px;
+    left: 830px;
+    font-size: 25px;
+    color: white;
+}
+
 #center {
     width: 1149px;
     margin: 0 auto;
