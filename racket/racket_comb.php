@@ -99,7 +99,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                         ?>
                     </div>
                     <div class="chart">
-                        <canvas id="myChart-1" data-four-speed="10" data-four-spin="20" data-four-stable="30" data-four-price="40" data-back-speed="10" data-back-spin="20" data-back-stable="30" data-back-price="40"></canvas>
+                        <canvas id="myChart-1" data-four-speed='<?php print($racket['four_speed']) ?>' data-four-spin='<?php print($racket['four_spin']) ?>' data-four-stable='<?php print($racket['four_stable']) ?>' data-four-price='<?php print($racket['four_price']) ?>' data-back-speed='<?php print($racket['back_speed']) ?>' data-back-spin='<?php print($racket['back_spin']) ?>' data-back-stable='<?php print($racket['back_stable']) ?>' data-back-price='<?php print($racket['back_price']) ?>'></canvas>
                     </div>
                 </div>
             </div>
