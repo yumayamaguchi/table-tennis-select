@@ -79,8 +79,8 @@ if ($_POST['filter'] === 'price') {
                 <select name="filter">
                     <option value="select">選択してください</option>
                     <option value="price">価格順</option>
-                    <option value="repulsion">スピード順</option>
-                    <option value="vibration">スピン順</option>
+                    <option value="speed">スピード順</option>
+                    <option value="spin">スピン順</option>
                 </select>
                 <input type="submit" value="並び替え">
             </form>
