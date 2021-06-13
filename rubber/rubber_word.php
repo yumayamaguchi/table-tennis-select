@@ -30,13 +30,13 @@ if (!empty($_POST)) {
 
         $message = $db->prepare('INSERT INTO posts SET member_id=?, racket_rubber_choice=2, racket_rubber_id=?, title=?, message=?, score=?, created_at=NOW()');
         $message->execute(array($member['id'], $_REQUEST['id'], $_POST['title'], $_POST['message'], $_POST['score']));
-        header('Location:rubber_word.php?id='.$_REQUEST['id']);
+        header('Location:rubber_word.php?id=' . $_REQUEST['id']);
         exit();
     }
 }
 
 //ページネーション
-if(isset($_REQUEST['page']) && is_numeric($_REQUEST['page'])) {
+if (isset($_REQUEST['page']) && is_numeric($_REQUEST['page'])) {
     $page = $_REQUEST['page'];
 } else {
     $page = 1;
@@ -47,18 +47,18 @@ $counts = $db->prepare('SELECT COUNT(*) AS cnt FROM posts WHERE racket_rubber_ch
 $counts->execute(array($id));
 $cnt = $counts->fetch();
 
-if($cnt['cnt'] > 0) {
-$max_page = ceil($cnt['cnt'] / 3);
-$page = min($page, $max_page);
+if ($cnt['cnt'] > 0) {
+    $max_page = ceil($cnt['cnt'] / 3);
+    $page = min($page, $max_page);
 
-$start = ($page - 1) * 3;
+    $start = ($page - 1) * 3;
 
-//LIMIT句、1の場合2件目から数える
-$posts = $db->prepare('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.member_id AND racket_rubber_choice=2 AND racket_rubber_id=? ORDER BY p.created_at DESC LIMIT ?,3');
-//1は?の位置を指定、$startはバインドする変数を指定
-$posts->bindParam(1, $id);
-$posts->bindParam(2, $start, PDO::PARAM_INT);
-$posts->execute();
+    //LIMIT句、1の場合2件目から数える
+    $posts = $db->prepare('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.member_id AND racket_rubber_choice=2 AND racket_rubber_id=? ORDER BY p.created_at DESC LIMIT ?,3');
+    //1は?の位置を指定、$startはバインドする変数を指定
+    $posts->bindParam(1, $id);
+    $posts->bindParam(2, $start, PDO::PARAM_INT);
+    $posts->execute();
 }
 ?>
 
@@ -95,7 +95,7 @@ $posts->execute();
     </div> -->
 
     <div id="center">
-        <a href="../favorite.php">
+        <a href="../favorite.php?racket_rubber=2&id=<?php print($id); ?>">
             <div class="favorite btn btn-warning"><i class="far fa-star"></i><span>お気に入りに追加</span></div>
         </a>
         <ul class="tabs-menu">
@@ -137,7 +137,7 @@ $posts->execute();
                 </table>
                 <?php
                 if ($page > 1) {
-                    print('<a class="figure" href="rubber_word.php?id='.$id .'&page=' . ($page - 1) . '">前へ</a>');
+                    print('<a class="figure" href="rubber_word.php?id=' . $id . '&page=' . ($page - 1) . '">前へ</a>');
                 } else {
                     print('<span class="figure">前へ</span>');
                 }
@@ -146,12 +146,12 @@ $posts->execute();
                     if ($i == $page) {
                         print('<span class="figure">' . $page . '</span>');
                     } else {
-                        print('<a class="figure" href="rubber_word.php?id='.$id .'&page=' . $i . '">' . $i . '</a>');
+                        print('<a class="figure" href="rubber_word.php?id=' . $id . '&page=' . $i . '">' . $i . '</a>');
                     }
                 }
 
                 if ($page < $max_page) {
-                    print('<a class="figure" href="rubber_word.php?$id='.$id. '&page=' . ($page + 1) . '">次へ</a>');
+                    print('<a class="figure" href="rubber_word.php?$id=' . $id . '&page=' . ($page + 1) . '">次へ</a>');
                 } else {
                     print('<span class="figure">次へ</span>');
                 }
