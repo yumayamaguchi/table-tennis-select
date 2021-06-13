@@ -46,6 +46,8 @@ $page = max($page, 1);
 
 $counts = $db->prepare('SELECT COUNT(*) AS cnt FROM posts WHERE racket_rubber_choice=1 AND racket_rubber_id=?');
 $counts->execute(array($id));
+
+if($counts > 0) {
 $cnt = $counts->fetch();
 $max_page = ceil($cnt['cnt'] / 3);
 $page = min($page, $max_page);
@@ -58,6 +60,7 @@ $posts = $db->prepare('SELECT m.name, p.* FROM members m, posts p WHERE m.id=p.m
 $posts->bindParam(1, $id);
 $posts->bindParam(2, $start, PDO::PARAM_INT);
 $posts->execute();
+}
 ?>
 
 <!DOCTYPE html>
