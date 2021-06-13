@@ -98,6 +98,16 @@ if ($cnt['cnt'] > 0) {
         <a href="../favorite.php?racket_rubber=2&id=<?php print($id); ?>">
             <div class="favorite btn btn-warning"><i class="far fa-star"></i><span>お気に入りに追加</span></div>
         </a>
+        <?php if ($_REQUEST['record'] == 'duplicate') : ?>
+            <div class="favorites">
+                <p>すでにお気に入り登録済です！</p>
+            </div>
+        <?php elseif ($_REQUEST['record'] == 'success') : ?>
+            <div class="favorites">
+                <p>お気に入りに登録しました！</p>
+                <?php ini_set('display_errors', "On"); ?>
+            </div>
+        <?php endif; ?>
         <ul class="tabs-menu">
             <li class="tab tab-2"><a href="rubber_detail.php?id=<?php print($id); ?>">性能</a></li>
             <li class="tab tab-1"><a href="rubber_word.php?id=<?php print($id); ?>">口コミ</a></li>
