@@ -22,10 +22,12 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
 
 
 //ページネーション
-$page = $_REQUEST['page'];
-if ($page == '') {
+if(isset($_REQUEST['page']) && is_numeric($_REQUEST['page'])) {
+    $page = $_REQUEST['page'];
+} else {
     $page = 1;
 }
+
 //$pageが1より小さければ、1になる
 $page = max($page, 1);
 
@@ -33,19 +35,20 @@ $counts = $db->prepare('SELECT COUNT(*) AS cnt FROM posts WHERE member_id=?');
 $counts->execute(array($_SESSION['id']));
 $cnt = $counts->fetch();
 
-$max_page = ceil($cnt['cnt'] / 3);
+$max_page = ceil($cnt['cnt'] / 4);
 $page = min($page, $max_page);
 
+//1ページ目は0番目から3件、2ページ目は3番目から3件
 $start = ($page - 1) * 3;
 
 //ラケットの投稿を取得
-$posts = $db->prepare('SELECT * FROM posts, rackets WHERE member_id=? AND racket_rubber_choice=1 AND posts.racket_rubber_id = rackets.id ORDER BY posts.created_at DESC LIMIT ?,3');
+$posts = $db->prepare('SELECT * FROM posts, rackets WHERE member_id=? AND racket_rubber_choice=1 AND posts.racket_rubber_id = rackets.id ORDER BY posts.created_at DESC LIMIT ?,2');
 $posts->bindValue(1, $_SESSION['id']);
 $posts->bindParam(2, $start, PDO::PARAM_INT);
 $posts->execute();
 
 //ラバーの投稿を取得
-$posts_r = $db->prepare('SELECT * FROM posts, rubbers WHERE member_id=? AND racket_rubber_choice=2 AND posts.racket_rubber_id = rubbers.id ORDER BY posts.created_at DESC LIMIT ?,3');
+$posts_r = $db->prepare('SELECT * FROM posts, rubbers WHERE member_id=? AND racket_rubber_choice=2 AND posts.racket_rubber_id = rubbers.id ORDER BY posts.created_at DESC LIMIT ?,2');
 $posts_r->bindValue(1, $_SESSION['id']);
 $posts_r->bindParam(2, $start, PDO::PARAM_INT);
 $posts_r->execute();
@@ -113,7 +116,7 @@ $posts_r->execute();
                         <tr class="line-1">
                             <td width="200px">
                                 <div class="tool">
-                                    <img src="../images/racket-<?php print(htmlspecialchars($post['id'], ENT_QUOTES)); ?>/racket1.jpg" alt="林昀儒 SUPER ZLC" height="100" width="100">
+                                    <img src="../images/racket-<?php print(htmlspecialchars($post['id'], ENT_QUOTES)); ?>/racket1.jpg" alt="<?php print($post['name']) ?>" height="100" width="100">
                                     <div><?php print(htmlspecialchars($post['name'], ENT_QUOTES)); ?></div>
                                 </div>
                             </td>
@@ -136,7 +139,7 @@ $posts_r->execute();
                         <tr class="line-1">
                             <td width="200px">
                                 <div class="tool">
-                                    <img src="../images/racket<?php print(htmlspecialchars($post['id'], ENT_QUOTES)); ?>.jpg" alt="林昀儒 SUPER ZLC" height="100" width="100">
+                                    <img src="../images/rubber-<?php print(htmlspecialchars($post['id'], ENT_QUOTES)); ?>/rubber1.jpg" alt="<?php print($post['name']) ?>" height="100" width="100">
                                     <div><?php print(htmlspecialchars($post['name'], ENT_QUOTES)); ?></div>
                                 </div>
                             </td>

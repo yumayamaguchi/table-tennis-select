@@ -38,8 +38,9 @@ if (!empty($_POST)) {
 }
 
 //ページネーション
-$page = $_REQUEST['page'];
-if ($page == '') {
+if(isset($_REQUEST['page']) && is_numeric($_REQUEST['page'])) {
+    $page = $_REQUEST['page'];
+} else {
     $page = 1;
 }
 $page = max($page, 1);
