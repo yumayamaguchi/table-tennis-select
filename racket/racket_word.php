@@ -46,9 +46,9 @@ $page = max($page, 1);
 
 $counts = $db->prepare('SELECT COUNT(*) AS cnt FROM posts WHERE racket_rubber_choice=1 AND racket_rubber_id=?');
 $counts->execute(array($id));
-
-if($counts > 0) {
 $cnt = $counts->fetch();
+
+if($cnt['cnt'] > 0) {
 $max_page = ceil($cnt['cnt'] / 3);
 $page = min($page, $max_page);
 
