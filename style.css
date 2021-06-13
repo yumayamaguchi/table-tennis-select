@@ -340,9 +340,8 @@ footer {
 .slick01 .prev {
     display: block;
     position: absolute;
-    top: 80%;
-    bottom: 0;
-    left: 35%;
+    top: 30%;
+    left: 0;
     margin: auto;
     width: 30px;
     height: 30px;
@@ -352,9 +351,8 @@ footer {
 
 .slick01 .next {
     position: absolute;
-    top: 460px;
-    right: 600px;
-    bottom: 0;
+    top: 30%;
+    right: 0;
     margin: auto;
     width: 30px;
     height: 30px;

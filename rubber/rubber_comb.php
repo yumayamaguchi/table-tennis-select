@@ -9,9 +9,10 @@ $rubber = $rubbers->fetch();
 $id = $rubber['id'];
 $name = $rubber['name'];
 
-$rackets_rubbers = $db->prepare('SELECT * FROM rackets_rubbers, rackets WHERE rubber_four_id=? AND racket_id=rackets.id 
-                         UNION 
-                         SELECT * FROM rackets_rubbers, rubbers WHERE rubber_four_id=? AND rubber_back_id=rubbers.id');
+$rackets_rubbers = $db->prepare('SELECT * FROM rackets_rubbers, rackets WHERE rubber_four_id=? AND racket_id=rackets.id
+UNION
+SELECT * FROM rackets_rubbers, rubbers WHERE rubber_four_id=? AND rubber_back_id=rubbers.id');
+
 $rackets_rubbers->execute(array($_REQUEST['id'], $_REQUEST['id']));
 $racket_rubber = $rackets_rubbers->fetchAll();
 
