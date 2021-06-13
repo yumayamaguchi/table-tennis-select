@@ -39,7 +39,7 @@ $max_page = ceil($cnt['cnt'] / 4);
 $page = min($page, $max_page);
 
 //1ページ目は0番目から3件、2ページ目は3番目から3件
-$start = ($page - 1) * 3;
+$start = ($page - 1) * 2;
 
 //ラケットの投稿を取得
 $posts = $db->prepare('SELECT * FROM posts, rackets WHERE member_id=? AND racket_rubber_choice=1 AND posts.racket_rubber_id = rackets.id ORDER BY posts.created_at DESC LIMIT ?,2');
