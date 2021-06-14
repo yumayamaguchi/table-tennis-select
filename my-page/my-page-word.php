@@ -152,7 +152,8 @@ $posts_r->execute();
                             <td width="360px"><?php print(htmlspecialchars($post['title'], ENT_QUOTES)); ?></td>
                             <td width="250px"><?php print(htmlspecialchars($post['created_at'], ENT_QUOTES)); ?></td>
 
-                            <td width="100px"><a class="btn btn-danger" href="../delete.php?id=<?php print($id); ?>&number=<?php print($post['id']); ?>">削除</a></td>
+                            <!-- $post['id']はラバーのナンバーid -->
+                            <td width="100px"><a class="btn btn-danger" href="../delete.php?number=<?php print($post['posts']['id']); ?>">削除</a></td>
                         </tr>
                         <tr class="comment_2">
                             <td></td>
