@@ -1,11 +1,6 @@
 <?php
 session_start();
 require('../dbconnect.php');
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
-
-$id  = $_REQUEST['id'];
-
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     //時間の上書き、最後のログインから1時間
@@ -44,18 +39,19 @@ $page = min($page, $max_page);
 $start = ($page - 1) * 2;
 
 //ラケットの投稿を取得
-$posts = $db->prepare('SELECT * FROM posts, rackets WHERE member_id=? AND racket_rubber_choice=1 AND posts.racket_rubber_id = rackets.id ORDER BY posts.created_at DESC LIMIT ?,2');
+$posts = $db->prepare('SELECT p.*, r.name FROM posts p, rackets r WHERE member_id=? AND racket_rubber_choice=1 AND p.racket_rubber_id = r.id ORDER BY p.created_at DESC LIMIT ?,2');
 $posts->bindValue(1, $_SESSION['id']);
 $posts->bindParam(2, $start, PDO::PARAM_INT);
 $posts->execute();
 
-var_dump($post);
 
 //ラバーの投稿を取得
-$posts_r = $db->prepare('SELECT * FROM posts, rubbers WHERE member_id=? AND racket_rubber_choice=2 AND posts.racket_rubber_id = rubbers.id ORDER BY posts.created_at DESC LIMIT ?,2');
+$posts_r = $db->prepare('SELECT p.*, r.name FROM posts p, rubbers r WHERE member_id=? AND racket_rubber_choice=2 AND p.racket_rubber_id = r.id ORDER BY p.created_at DESC LIMIT ?,2');
 $posts_r->bindValue(1, $_SESSION['id']);
 $posts_r->bindParam(2, $start, PDO::PARAM_INT);
 $posts_r->execute();
+
+
 
 ?>
 
@@ -120,7 +116,7 @@ $posts_r->execute();
                         <tr class="line-1">
                             <td width="200px">
                                 <div class="tool">
-                                    <img src="../images/racket-<?php print(htmlspecialchars($post['id'], ENT_QUOTES)); ?>/racket1.jpg" alt="<?php print($post['name']) ?>" height="100" width="100">
+                                    <img src="../images/racket-<?php print(htmlspecialchars($post['racket_rubber_id'], ENT_QUOTES)); ?>/racket1.jpg" alt="<?php print($post['name']) ?>" height="100" width="100">
                                     <div><?php print(htmlspecialchars($post['name'], ENT_QUOTES)); ?></div>
                                 </div>
                             </td>
@@ -131,7 +127,7 @@ $posts_r->execute();
                             <td width="360px"><?php print(htmlspecialchars($post['title'], ENT_QUOTES)); ?></td>
                             <td width="250px"><?php print(htmlspecialchars($post['created_at'], ENT_QUOTES)); ?></td>
 
-                            <td width="100px"><a class="btn btn-danger" href="../delete.php?id=<?php print(htmlspecialchars($post['id'])); ?>">削除</a></td>
+                            <td width="100px"><a class="btn btn-danger" href="../delete.php?number=<?php print($post['id']); ?>">削除</a></td>
                         </tr>
                         <tr class="comment_2">
                             <td></td>
@@ -143,7 +139,7 @@ $posts_r->execute();
                         <tr class="line-1">
                             <td width="200px">
                                 <div class="tool">
-                                    <img src="../images/rubber-<?php print(htmlspecialchars($post['id'], ENT_QUOTES)); ?>/rubber1.jpg" alt="<?php print($post['name']) ?>" height="100" width="100">
+                                    <img src="../images/rubber-<?php print(htmlspecialchars($post['racket_rubber_id'], ENT_QUOTES)); ?>/rubber1.jpg" alt="<?php print($post['name']) ?>" height="100" width="100">
                                     <div><?php print(htmlspecialchars($post['name'], ENT_QUOTES)); ?></div>
                                 </div>
                             </td>
@@ -154,7 +150,7 @@ $posts_r->execute();
                             <td width="360px"><?php print(htmlspecialchars($post['title'], ENT_QUOTES)); ?></td>
                             <td width="250px"><?php print(htmlspecialchars($post['created_at'], ENT_QUOTES)); ?></td>
 
-                            <!-- $post['id']はラバーのナンバーid -->
+
                             <td width="100px"><a class="btn btn-danger" href="../delete.php?number=<?php print($post['id']); ?>">削除</a></td>
                         </tr>
                         <tr class="comment_2">
