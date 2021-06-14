@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+ini_set('display_errors', "On");
 //セッションの中身を空にする
 $_SESSION = array();
 if(ini_set('session.use_cookies')) {
