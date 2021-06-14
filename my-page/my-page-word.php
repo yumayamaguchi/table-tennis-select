@@ -4,6 +4,8 @@ require('../dbconnect.php');
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 
+$id  = $_REQUEST['id'];
+
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     //時間の上書き、最後のログインから1時間
