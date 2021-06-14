@@ -49,6 +49,8 @@ $posts->bindValue(1, $_SESSION['id']);
 $posts->bindParam(2, $start, PDO::PARAM_INT);
 $posts->execute();
 
+var_dump($post);
+
 //ラバーの投稿を取得
 $posts_r = $db->prepare('SELECT * FROM posts, rubbers WHERE member_id=? AND racket_rubber_choice=2 AND posts.racket_rubber_id = rubbers.id ORDER BY posts.created_at DESC LIMIT ?,2');
 $posts_r->bindValue(1, $_SESSION['id']);
@@ -153,7 +155,7 @@ $posts_r->execute();
                             <td width="250px"><?php print(htmlspecialchars($post['created_at'], ENT_QUOTES)); ?></td>
 
                             <!-- $post['id']はラバーのナンバーid -->
-                            <td width="100px"><a class="btn btn-danger" href="../delete.php?number=<?php print($post['posts']['id']); ?>">削除</a></td>
+                            <td width="100px"><a class="btn btn-danger" href="../delete.php?number=<?php print($post['id']); ?>">削除</a></td>
                         </tr>
                         <tr class="comment_2">
                             <td></td>
