@@ -2,6 +2,7 @@
 session_start();
 require('../dbconnect.php');
 
+//フォア側のラバーの情報取得
 $rubbers = $db->prepare('SELECT * FROM rackets_rubbers, rubbers WHERE rubber_four_id=? AND rubber_four_id=rubbers.id');
 $rubbers->execute(array($_REQUEST['id']));
 $rubber = $rubbers->fetch();
@@ -9,11 +10,16 @@ $rubber = $rubbers->fetch();
 $id = $rubber['id'];
 $name = $rubber['name'];
 
-$rackets_rubbers = $db->prepare('SELECT * FROM rackets_rubbers, rackets WHERE rubber_four_id=? AND racket_id=rackets.id
-UNION
-SELECT * FROM rackets_rubbers, rubbers WHERE rubber_four_id=? AND rubber_back_id=rubbers.id');
+//バック側のラバーの情報取得
+$rubbers_back = $db->prepare('SELECT * FROM rackets_rubbers, rubbers WHERE rubber_four_id=? AND rubber_back_id=rubbers.id');
+$rubbers_back->execute(array($_REQUEST['id']));
+$rubber_back = $rubbers_back->fetchAll();
 
-$rackets_rubbers->execute(array($_REQUEST['id'], $_REQUEST['id']));
+//ラケットの情報取得
+$rackets_rubbers = $db->prepare('SELECT * FROM rackets_rubbers, rackets WHERE rubber_four_id=? AND racket_id=rackets.id');
+// -- UNION
+// -- SELECT * FROM rackets_rubbers, rubbers WHERE rubber_four_id=? AND rubber_back_id=rubbers.id
+$rackets_rubbers->execute(array($_REQUEST['id']));
 $racket_rubber = $rackets_rubbers->fetchAll();
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
@@ -82,8 +88,8 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
             <div class="tabs-3">
                 <div class="tabs-3-2">
                     <div class="tabs-3-1">
-                        <img src="../images/racket-<?php print($racket_rubber[0]['racket_id']); ?>/racket1.jpg" alt="<?php print($racket_rubber[0]['racket_id']); ?>" height="200" width="200">
-                        <div><?php print($racket_rubber[0]['name']); ?><br><?php print($racket_rubber[0]['price']); ?>円（税込）<br>反発特性：<?php print($racket_rubber[0]['repulsion']); ?><br>振動特性：<?php print($racket_rubber[0]['vibration']); ?></div>
+                        <img src="../images/racket-<?php print($racket_rubber['racket_id']); ?>/racket1.jpg" alt="<?php print($racket_rubber['racket_id']); ?>" height="200" width="200">
+                        <div><?php print($racket_rubber['name']); ?><br><?php print($racket_rubber['price']); ?>円（税込）<br>反発特性：<?php print($racket_rubber['repulsion']); ?><br>振動特性：<?php print($racket_rubber['vibration']); ?></div>
                     </div>
                     <div class="tabs-3-1">
                         <?php
@@ -93,12 +99,12 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
                     </div>
                     <div class="tabs-3-1">
                         <?php
-                        print('<img src="../images/rubber-' . $racket_rubber[1]['rubber_back_id'] . '/rubber1.jpg" alt="' . $racket_rubber[1]['name'] . '" height="200" width="200">');
-                        print('<div>' . $racket_rubber[1]['name'] . '<br>' . $racket_rubber[1]['price'] . '円(税込)<br>スピード：' . $racket_rubber[1]['speed'] . '<br>スピン：' . $racket_rubber[1]['spin'] . '</div>');
+                        print('<img src="../images/rubber-' . $rubber_back['rubber_back_id'] . '/rubber1.jpg" alt="' . $rubber_back['name'] . '" height="200" width="200">');
+                        print('<div>' . $rubber_back['name'] . '<br>' . $rubber_back['price'] . '円(税込)<br>スピード：' . $rubber_back['speed'] . '<br>スピン：' . $rubber_back['spin'] . '</div>');
                         ?>
                     </div>
                     <div class="chart">
-                        <canvas id="myChart-1" data-four-speed="10" data-four-spin="20" data-four-stable="30" data-four-price="40" data-back-speed="10" data-back-spin="20" data-back-stable="30" data-back-price="40"></canvas>
+                    <canvas id="myChart-1" data-four-speed='<?php print($racket_rubber['four_speed']) ?>' data-four-spin='<?php print($racket_rubber['four_spin']) ?>' data-four-stable='<?php print($racket_rubber['four_stable']) ?>' data-four-price='<?php print($racket_rubber['four_price']) ?>' data-back-speed='<?php print($racket_rubber['back_speed']) ?>' data-back-spin='<?php print($racket_rubber['back_spin']) ?>' data-back-stable='<?php print($racket_rubber['back_stable']) ?>' data-back-price='<?php print($racket_rubber['back_price']) ?>'></canvas>
                     </div>
                 </div>
             </div>
