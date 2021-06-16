@@ -1,12 +1,12 @@
 <?php
 session_start();
 require('../dbconnect.php');
+ini_set('display_errors', "On");
 
 //フォア側のラバーの情報取得
 $rubbers = $db->prepare('SELECT * FROM rackets_rubbers, rubbers WHERE rubber_four_id=? AND rubber_four_id=rubbers.id');
 $rubbers->execute(array($_REQUEST['id']));
 $rubber = $rubbers->fetch();
-
 $id = $rubber['id'];
 $name = $rubber['name'];
 
@@ -17,8 +17,6 @@ $rubber_back = $rubbers_back->fetchAll();
 
 //ラケットの情報取得
 $rackets_rubbers = $db->prepare('SELECT * FROM rackets_rubbers, rackets WHERE rubber_four_id=? AND racket_id=rackets.id');
-// -- UNION
-// -- SELECT * FROM rackets_rubbers, rubbers WHERE rubber_four_id=? AND rubber_back_id=rubbers.id
 $rackets_rubbers->execute(array($_REQUEST['id']));
 $racket_rubber = $rackets_rubbers->fetchAll();
 
