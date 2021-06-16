@@ -13,12 +13,12 @@ $name = $rubber['name'];
 //バック側のラバーの情報取得
 $rubbers_back = $db->prepare('SELECT * FROM rackets_rubbers, rubbers WHERE rubber_four_id=? AND rubber_back_id=rubbers.id');
 $rubbers_back->execute(array($_REQUEST['id']));
-$rubber_back = $rubbers_back->fetchAll();
+$rubber_back = $rubbers_back->fetch();
 
 //ラケットの情報取得
 $rackets_rubbers = $db->prepare('SELECT * FROM rackets_rubbers, rackets WHERE rubber_four_id=? AND racket_id=rackets.id');
 $rackets_rubbers->execute(array($_REQUEST['id']));
-$racket_rubber = $rackets_rubbers->fetchAll();
+$racket_rubber = $rackets_rubbers->fetch();
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     //時間の上書き、最後のログインから1時間
